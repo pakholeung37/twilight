@@ -11,9 +11,17 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [{ "mode": "auto" }],
-  "[javascript]": { "editor.formatOnSave": false },
-  "[typescript]": { "editor.formatOnSave": false },
-  "editor.codeActionsOnSave": { "source.fixAll": true },
+  "eslint.workingDirectories": [{
+    "mode": "auto"
+  }],
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "editor.codeActionsOnSaveTimeout": 4000
 }
