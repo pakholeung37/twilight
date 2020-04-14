@@ -3,11 +3,11 @@
     "react-app"
   ],
   "plugins": [
-    "babel-plugin-styled-components",
+    // 配置antd 获取less配置, 以使生效
     ["import", {
       "libraryName": "antd",
       "libraryDirectory": "es",
-      "style": "css" // `style: true` 会加载 less 文件
+      "style": true // `style: true` 会加载 less 文件
     }]
   ]
 }

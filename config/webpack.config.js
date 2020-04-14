@@ -76,7 +76,9 @@ module.exports = function(webpackEnv) {
         // css is located in `static/css`, use '../../' to locate index.html folder
         // in production `paths.publicUrlOrPath` can be a relative path
         options: paths.publicUrlOrPath.startsWith(".")
-          ? { publicPath: "../../" }
+          ? {
+              publicPath: "../../"
+            }
           : {}
       },
       {
@@ -253,7 +255,14 @@ module.exports = function(webpackEnv) {
               : false
           },
           cssProcessorPluginOptions: {
-            preset: ["default", { minifyFontValues: { removeQuotes: false } }]
+            preset: [
+              "default",
+              {
+                minifyFontValues: {
+                  removeQuotes: false
+                }
+              }
+            ]
           }
         })
       ],
@@ -322,7 +331,11 @@ module.exports = function(webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
+        {
+          parser: {
+            requireEnsure: false
+          }
+        },
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
@@ -404,7 +417,9 @@ module.exports = function(webpackEnv) {
                 presets: [
                   [
                     require.resolve("babel-preset-react-app/dependencies"),
-                    { helpers: true }
+                    {
+                      helpers: true
+                    }
                   ]
                 ],
                 cacheDirectory: true,
@@ -483,6 +498,27 @@ module.exports = function(webpackEnv) {
                 },
                 "sass-loader"
               )
+            },
+            // add support for less
+            {
+              test: /\.less$/,
+              use: [
+                {
+                  loader: "style-loader"
+                },
+                {
+                  loader: "css-loader"
+                },
+                {
+                  loader: "less-loader",
+                  options: {
+                    modifyVars: {
+                      ...require("../src/styles/antdVariables")
+                    },
+                    javascriptEnabled: true
+                  }
+                }
+              ]
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
