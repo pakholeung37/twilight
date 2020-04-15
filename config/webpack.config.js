@@ -294,9 +294,12 @@ module.exports = function(webpackEnv) {
       // https://github.com/facebook/create-react-app/issues/290
       // `web` extension prefixes have been added for better support
       // for React Native Web.
-      extensions: paths.moduleFileExtensions
-        .map(ext => `.${ext}`)
-        .filter(ext => useTypeScript || !ext.includes("ts")),
+      extensions: [
+        ...paths.moduleFileExtensions
+          .map(ext => `.${ext}`)
+          .filter(ext => useTypeScript || !ext.includes("ts")),
+        "svelte"
+      ],
       alias: {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -306,7 +309,9 @@ module.exports = function(webpackEnv) {
           "react-dom$": "react-dom/profiling",
           "scheduler/tracing": "scheduler/tracing-profiling"
         }),
-        ...(modules.webpackAliases || {})
+        ...(modules.webpackAliases || {}),
+        // add svelte
+        svelte: path.resolve("node_modules", "svelte")
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -431,6 +436,17 @@ module.exports = function(webpackEnv) {
                 // show incorrect code and set breakpoints on the wrong lines.
                 sourceMaps: shouldUseSourceMap,
                 inputSourceMap: shouldUseSourceMap
+              }
+            },
+            // svelte config
+            {
+              test: /\.(html|svelte)$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "svelte-loader",
+                options: {
+                  emitCss: true
+                }
               }
             },
             // "postcss" loader applies autoprefixer to our CSS.
