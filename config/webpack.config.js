@@ -409,6 +409,17 @@ module.exports = function(webpackEnv) {
                 compact: isEnvProduction
               }
             },
+            // svelte config
+            {
+              test: /\.(svelte)$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "svelte-loader",
+                options: {
+                  emitCss: true
+                }
+              }
+            },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
             {
@@ -436,17 +447,6 @@ module.exports = function(webpackEnv) {
                 // show incorrect code and set breakpoints on the wrong lines.
                 sourceMaps: shouldUseSourceMap,
                 inputSourceMap: shouldUseSourceMap
-              }
-            },
-            // svelte config
-            {
-              test: /\.(html|svelte)$/,
-              exclude: /node_modules/,
-              use: {
-                loader: "svelte-loader",
-                options: {
-                  emitCss: true
-                }
               }
             },
             // "postcss" loader applies autoprefixer to our CSS.
