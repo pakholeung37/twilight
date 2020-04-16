@@ -24,6 +24,7 @@ const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
+const { sass } = require("svelte-preprocess-sass");
 
 const postcssNormalize = require("postcss-normalize");
 
@@ -414,10 +415,14 @@ module.exports = function(webpackEnv) {
               test: /\.(svelte)$/,
               exclude: /node_modules/,
               use: {
-                loader: "svelte-loader",
-                options: {
-                  emitCss: true
-                }
+                loader: "svelte-loader"
+                // dont write css code in .svelte, just use css/scss/less files;
+                // options: {
+                //   preprocess: {
+                //     style: sass()
+                //   },
+                //   emitCss: true
+                // }
               }
             },
             // Process any JS outside of the app with Babel.

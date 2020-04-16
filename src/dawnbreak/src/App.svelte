@@ -5,6 +5,9 @@
 <style type="text/scss">
   .test {
     color: red;
+    & .haha {
+      color: blue;
+    }
   }
 </style>
 

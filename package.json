@@ -114,7 +114,8 @@
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "svelte": "^3.20.1",
-    "svelte-loader": "^2.13.6"
+    "svelte-loader": "^2.13.6",
+    "svelte-preprocess-sass": "^0.2.0"
   },
   "jest": {
     "roots": [
