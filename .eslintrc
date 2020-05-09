@@ -11,16 +11,23 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-ignore": "off"
   },
-  "overrides": [{
-    "files": ["**/*.tsx"],
-    "rules": {
-      "react/prop-types": "off"
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
     }
-  }],
+  ],
   "settings": {
     "react": {
       "version": "detect"
     }
   },
-  "ignorePatterns": ["coverage/", "node_modules/", "src/serviceWorker.ts"]
+  "ignorePatterns": [
+    "coverage/",
+    "node_modules/",
+    "src/serviceWorker.ts",
+    "src/dawnbreak/"
+  ]
 }

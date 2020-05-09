@@ -344,22 +344,23 @@ module.exports = function(webpackEnv) {
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
-        {
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
-          enforce: "pre",
-          use: [
-            {
-              options: {
-                cache: true,
-                formatter: require.resolve("react-dev-utils/eslintFormatter"),
-                eslintPath: require.resolve("eslint"),
-                resolvePluginsRelativeTo: __dirname
-              },
-              loader: require.resolve("eslint-loader")
-            }
-          ],
-          include: paths.appSrc
-        },
+        // disabled lint in complie time
+        // {
+        //   test: /\.(js|mjs|jsx|ts|tsx)$/,
+        //   enforce: "pre",
+        //   use: [
+        //     {
+        //       options: {
+        //         cache: true,
+        //         formatter: require.resolve("react-dev-utils/eslintFormatter"),
+        //         eslintPath: require.resolve("eslint"),
+        //         resolvePluginsRelativeTo: __dirname
+        //       },
+        //       loader: require.resolve("eslint-loader")
+        //     }
+        //   ],
+        //   include: paths.appSrc
+        // },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -414,14 +415,12 @@ module.exports = function(webpackEnv) {
               test: /\.(svelte)$/,
               exclude: /node_modules/,
               use: {
-                loader: "svelte-loader"
-                // dont write css code in .svelte, just use css/scss/less files;
-                // options: {
-                //   preprocess: {
-                //     style: sass()
-                //   },
-                //   emitCss: true
-                // }
+                loader: "svelte-loader",
+                options: {
+                  preprocess: require("svelte-preprocess")({
+                    /* options */
+                  })
+                }
               }
             },
             // Process any JS outside of the app with Babel.
