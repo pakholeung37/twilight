@@ -1,10 +1,16 @@
 <script>
-  import Article from "./Article.svelte";
+  import Article from './Article.svelte';
   /**
    * articles = Article[]
    */
   export let articles = [];
 </script>
+
+<ul class="article-list">
+  {#each articles as article}
+    <Article {...article} />
+  {/each}
+</ul>
 
 <style lang="scss">
   .article-list {
@@ -12,9 +18,3 @@
     padding: 10px;
   }
 </style>
-
-<ul class="article-list">
-  {#each articles as article}
-    <Article {...article} />
-  {/each}
-</ul>

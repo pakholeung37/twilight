@@ -418,7 +418,12 @@ module.exports = function(webpackEnv) {
                 loader: "svelte-loader",
                 options: {
                   preprocess: require("svelte-preprocess")({
-                    /* options */
+                    scss: {
+                      includePaths: ["src"]
+                    },
+                    postcss: {
+                      plugins: [require("autoprefixer")]
+                    }
                   })
                 }
               }

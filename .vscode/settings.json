@@ -11,9 +11,11 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [{
-    "mode": "auto"
-  }],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
   "[javascript]": {
     "editor.formatOnSave": false
   },

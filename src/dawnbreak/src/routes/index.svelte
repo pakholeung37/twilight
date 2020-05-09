@@ -72,22 +72,4 @@
   ];
 </script>
 
-<Serializer {model}/>
-<style lang="scss">
-  .slide {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    &-1 {
-      background: red;
-    }
-    &-2 {
-      background: blue;
-    }
-    &-3 {
-      background: green;
-    }
-  }
-</style>
+<Serializer {model} />
