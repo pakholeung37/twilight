@@ -48,8 +48,8 @@ export default class Siema {
       'mouseupHandler',
       'mouseleaveHandler',
       'mousemoveHandler',
-      'clickHandler',
-    ].forEach((method) => {
+      'clickHandler'
+    ].forEach(method => {
       this[method] = this[method].bind(this);
     });
 
@@ -77,7 +77,7 @@ export default class Siema {
       loop: false,
       rtl: false,
       onInit: () => {},
-      onChange: () => {},
+      onChange: () => {}
     };
 
     const userSttings = options;
@@ -117,7 +117,7 @@ export default class Siema {
         endX: 0,
         startY: 0,
         letItGo: null,
-        preventClick: false,
+        preventClick: false
       };
 
       // Touch events
@@ -286,9 +286,8 @@ export default class Siema {
           ? this.drag.endX - this.drag.startX
           : 0;
 
-        this.sliderFrame.style[this.transformProperty] = `translate3d(${
-          offset + dragDistance
-        }px, 0, 0)`;
+        this.sliderFrame.style[this.transformProperty] = `translate3d(${offset +
+          dragDistance}px, 0, 0)`;
         this.currentSlide = mirrorSlideIndex - howManySlides;
       } else {
         this.currentSlide = this.currentSlide - howManySlides;
@@ -337,9 +336,8 @@ export default class Siema {
           ? this.drag.endX - this.drag.startX
           : 0;
 
-        this.sliderFrame.style[this.transformProperty] = `translate3d(${
-          offset + dragDistance
-        }px, 0, 0)`;
+        this.sliderFrame.style[this.transformProperty] = `translate3d(${offset +
+          dragDistance}px, 0, 0)`;
         this.currentSlide = mirrorSlideIndex + howManySlides;
       } else {
         this.currentSlide = this.currentSlide + howManySlides;
@@ -519,7 +517,7 @@ export default class Siema {
       endX: 0,
       startY: 0,
       letItGo: null,
-      preventClick: this.drag.preventClick,
+      preventClick: this.drag.preventClick
     };
   }
 
@@ -586,9 +584,10 @@ export default class Siema {
       const offset = this.config.rtl
         ? currentOffset + dragOffset
         : currentOffset - dragOffset;
-      this.sliderFrame.style[this.transformProperty] = `translate3d(${
-        (this.config.rtl ? 1 : -1) * offset
-      }px, 0, 0)`;
+      this.sliderFrame.style[this.transformProperty] = `translate3d(${(this
+        .config.rtl
+        ? 1
+        : -1) * offset}px, 0, 0)`;
     }
   }
 
@@ -655,9 +654,10 @@ export default class Siema {
       const offset = this.config.rtl
         ? currentOffset + dragOffset
         : currentOffset - dragOffset;
-      this.sliderFrame.style[this.transformProperty] = `translate3d(${
-        (this.config.rtl ? 1 : -1) * offset
-      }px, 0, 0)`;
+      this.sliderFrame.style[this.transformProperty] = `translate3d(${(this
+        .config.rtl
+        ? 1
+        : -1) * offset}px, 0, 0)`;
     }
   }
 
