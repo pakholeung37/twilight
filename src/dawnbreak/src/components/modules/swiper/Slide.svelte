@@ -1,5 +1,5 @@
 <script>
-  export let color = '';
+  export let color = "";
 </script>
 
 <div class="slide-container">
@@ -10,7 +10,7 @@
   {:else if color == 'green'}
     <div class="slide slide-3">green</div>
   {/if}
-  <div></div>
+  <div />
 </div>
 
 <style lang="scss">

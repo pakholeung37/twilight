@@ -1,5 +1,6 @@
 import React from "react";
 import DawnBreak from "dawnbreak";
+import styles from "./preview.module.scss";
 
 export default class Preview extends React.Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ export default class Preview extends React.Component {
     }
   }
   render() {
-    return <div id="preview-app"></div>;
+    return <div id="preview-app" className={styles.preview}></div>;
   }
 }
 

@@ -9,9 +9,9 @@
    * }
    */
 
-  export let title = '';
-  export let summary = '';
-  export let cover = { src: '', alt: '' };
+  export let title = "";
+  export let summary = "";
+  export let cover = { src: "", alt: "" };
 </script>
 
 <div class="article">

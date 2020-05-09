@@ -12,13 +12,13 @@ export default class Siema {
 
     // Resolve selector's type
     this.selector =
-      typeof this.config.selector === 'string'
+      typeof this.config.selector === "string"
         ? document.querySelector(this.config.selector)
         : this.config.selector;
 
     // Early throw if selector doesn't exists
     if (this.selector === null) {
-      throw new Error('Something wrong with your selector 😭');
+      throw new Error("Something wrong with your selector 😭");
     }
 
     // update perPage number dependable of user value
@@ -40,15 +40,15 @@ export default class Siema {
 
     // Bind all event handlers for referencability
     [
-      'resizeHandler',
-      'touchstartHandler',
-      'touchendHandler',
-      'touchmoveHandler',
-      'mousedownHandler',
-      'mouseupHandler',
-      'mouseleaveHandler',
-      'mousemoveHandler',
-      'clickHandler'
+      "resizeHandler",
+      "touchstartHandler",
+      "touchendHandler",
+      "touchmoveHandler",
+      "mousedownHandler",
+      "mouseupHandler",
+      "mouseleaveHandler",
+      "mousemoveHandler",
+      "clickHandler"
     ].forEach(method => {
       this[method] = this[method].bind(this);
     });
@@ -64,11 +64,11 @@ export default class Siema {
    */
   static mergeSettings(options) {
     const settings = {
-      selector: '.siema',
+      selector: ".siema",
       autoPlay: false,
       speed: 500,
       duration: 200,
-      easing: 'ease-out',
+      easing: "ease-out",
       perPage: 1,
       startIndex: 0,
       draggable: true,
@@ -95,10 +95,10 @@ export default class Siema {
    */
   static webkitOrNot() {
     const style = document.documentElement.style;
-    if (typeof style.transform === 'string') {
-      return 'transform';
+    if (typeof style.transform === "string") {
+      return "transform";
     }
-    return 'WebkitTransform';
+    return "WebkitTransform";
   }
 
   /**
@@ -106,7 +106,7 @@ export default class Siema {
    */
   attachEvents() {
     // Resize element on window resize
-    window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener("resize", this.resizeHandler);
 
     // If element is draggable / swipable, add event handlers
     if (this.config.draggable) {
@@ -121,18 +121,18 @@ export default class Siema {
       };
 
       // Touch events
-      this.selector.addEventListener('touchstart', this.touchstartHandler);
-      this.selector.addEventListener('touchend', this.touchendHandler);
-      this.selector.addEventListener('touchmove', this.touchmoveHandler);
+      this.selector.addEventListener("touchstart", this.touchstartHandler);
+      this.selector.addEventListener("touchend", this.touchendHandler);
+      this.selector.addEventListener("touchmove", this.touchmoveHandler);
 
       // Mouse events
-      this.selector.addEventListener('mousedown', this.mousedownHandler);
-      this.selector.addEventListener('mouseup', this.mouseupHandler);
-      this.selector.addEventListener('mouseleave', this.mouseleaveHandler);
-      this.selector.addEventListener('mousemove', this.mousemoveHandler);
+      this.selector.addEventListener("mousedown", this.mousedownHandler);
+      this.selector.addEventListener("mouseup", this.mouseupHandler);
+      this.selector.addEventListener("mouseleave", this.mouseleaveHandler);
+      this.selector.addEventListener("mousemove", this.mousemoveHandler);
 
       // Click
-      this.selector.addEventListener('click', this.clickHandler);
+      this.selector.addEventListener("click", this.clickHandler);
     }
   }
 
@@ -140,15 +140,15 @@ export default class Siema {
    * Detaches listeners from required events.
    */
   detachEvents() {
-    window.removeEventListener('resize', this.resizeHandler);
-    this.selector.removeEventListener('touchstart', this.touchstartHandler);
-    this.selector.removeEventListener('touchend', this.touchendHandler);
-    this.selector.removeEventListener('touchmove', this.touchmoveHandler);
-    this.selector.removeEventListener('mousedown', this.mousedownHandler);
-    this.selector.removeEventListener('mouseup', this.mouseupHandler);
-    this.selector.removeEventListener('mouseleave', this.mouseleaveHandler);
-    this.selector.removeEventListener('mousemove', this.mousemoveHandler);
-    this.selector.removeEventListener('click', this.clickHandler);
+    window.removeEventListener("resize", this.resizeHandler);
+    this.selector.removeEventListener("touchstart", this.touchstartHandler);
+    this.selector.removeEventListener("touchend", this.touchendHandler);
+    this.selector.removeEventListener("touchmove", this.touchmoveHandler);
+    this.selector.removeEventListener("mousedown", this.mousedownHandler);
+    this.selector.removeEventListener("mouseup", this.mouseupHandler);
+    this.selector.removeEventListener("mouseleave", this.mouseleaveHandler);
+    this.selector.removeEventListener("mousemove", this.mousemoveHandler);
+    this.selector.removeEventListener("click", this.clickHandler);
   }
 
   /**
@@ -158,10 +158,10 @@ export default class Siema {
     this.attachEvents();
 
     // hide everything out of selector's boundaries
-    this.selector.style.overflow = 'hidden';
+    this.selector.style.overflow = "hidden";
 
     // rtl or ltr
-    this.selector.style.direction = this.config.rtl ? 'rtl' : 'ltr';
+    this.selector.style.direction = this.config.rtl ? "rtl" : "ltr";
 
     // build a frame and slide to a currentSlide
     if (this.config.autoPlay) this.start(this.config.speed);
@@ -178,13 +178,13 @@ export default class Siema {
       : this.innerElements.length;
 
     // Create frame and apply styling
-    this.sliderFrame = document.createElement('div');
+    this.sliderFrame = document.createElement("div");
     this.sliderFrame.style.width = `${widthItem * itemsToBuild}px`;
-    this.sliderFrame.style.height = '100%';
+    this.sliderFrame.style.height = "100%";
     this.enableTransition();
 
     if (this.config.draggable) {
-      this.selector.style.cursor = '-webkit-grab';
+      this.selector.style.cursor = "-webkit-grab";
     }
 
     // Create a document fragment to put slides into it
@@ -220,7 +220,7 @@ export default class Siema {
     this.sliderFrame.appendChild(docFragment);
 
     // Clear selector (just in case something is there) and insert a frame
-    this.selector.innerHTML = '';
+    this.selector.innerHTML = "";
     this.selector.appendChild(this.sliderFrame);
 
     // Go to currently active slide after initial build
@@ -228,15 +228,15 @@ export default class Siema {
   }
 
   buildSliderFrameItem(elm) {
-    const elementContainer = document.createElement('div');
-    elementContainer.style.cssFloat = this.config.rtl ? 'right' : 'left';
-    elementContainer.style.float = this.config.rtl ? 'right' : 'left';
+    const elementContainer = document.createElement("div");
+    elementContainer.style.cssFloat = this.config.rtl ? "right" : "left";
+    elementContainer.style.float = this.config.rtl ? "right" : "left";
     elementContainer.style.width = `${
       this.config.loop
         ? 100 / (this.innerElements.length + this.perPage * 2)
         : 100 / this.innerElements.length
     }%`;
-    elementContainer.style.height = '100%';
+    elementContainer.style.height = "100%";
     elementContainer.appendChild(elm);
     return elementContainer;
   }
@@ -245,9 +245,9 @@ export default class Siema {
    * Determinates slides number accordingly to clients viewport.
    */
   resolveSlidesNumber() {
-    if (typeof this.config.perPage === 'number') {
+    if (typeof this.config.perPage === "number") {
       this.perPage = this.config.perPage;
-    } else if (typeof this.config.perPage === 'object') {
+    } else if (typeof this.config.perPage === "object") {
       this.perPage = 1;
       for (const viewport in this.config.perPage) {
         if (window.innerWidth >= viewport) {
@@ -527,7 +527,7 @@ export default class Siema {
   touchstartHandler(e) {
     // Prevent dragging / swiping on inputs, selects and textareas
     const ignoreSiema =
-      ['TEXTAREA', 'OPTION', 'INPUT', 'SELECT'].indexOf(e.target.nodeName) !==
+      ["TEXTAREA", "OPTION", "INPUT", "SELECT"].indexOf(e.target.nodeName) !==
       -1;
     if (ignoreSiema) {
       return;
@@ -597,7 +597,7 @@ export default class Siema {
   mousedownHandler(e) {
     // Prevent dragging / swiping on inputs, selects and textareas
     const ignoreSiema =
-      ['TEXTAREA', 'OPTION', 'INPUT', 'SELECT'].indexOf(e.target.nodeName) !==
+      ["TEXTAREA", "OPTION", "INPUT", "SELECT"].indexOf(e.target.nodeName) !==
       -1;
     if (ignoreSiema) {
       return;
@@ -617,7 +617,7 @@ export default class Siema {
   mouseupHandler(e) {
     e.stopPropagation();
     this.pointerDown = false;
-    this.selector.style.cursor = '-webkit-grab';
+    this.selector.style.cursor = "-webkit-grab";
     this.enableTransition();
     if (this.drag.endX) {
       this.updateAfterDrag();
@@ -637,12 +637,12 @@ export default class Siema {
       // if dragged element is a link
       // mark preventClick prop as a true
       // to detemine about browser redirection later on
-      if (e.target.nodeName === 'A') {
+      if (e.target.nodeName === "A") {
         this.drag.preventClick = true;
       }
 
       this.drag.endX = e.pageX;
-      this.selector.style.cursor = '-webkit-grabbing';
+      this.selector.style.cursor = "-webkit-grabbing";
       this.sliderFrame.style.webkitTransition = `all 0ms ${this.config.easing}`;
       this.sliderFrame.style.transition = `all 0ms ${this.config.easing}`;
 
@@ -667,7 +667,7 @@ export default class Siema {
   mouseleaveHandler(e) {
     if (this.pointerDown) {
       this.pointerDown = false;
-      this.selector.style.cursor = '-webkit-grab';
+      this.selector.style.cursor = "-webkit-grab";
       this.drag.endX = e.pageX;
       this.drag.preventClick = false;
       this.enableTransition();
@@ -726,10 +726,10 @@ export default class Siema {
    */
   insert(item, index, callback) {
     if (index < 0 || index > this.innerElements.length + 1) {
-      throw new Error('Unable to inset it at this index 😭');
+      throw new Error("Unable to inset it at this index 😭");
     }
     if (this.innerElements.indexOf(item) !== -1) {
-      throw new Error('The same item in a carousel? Really? Nope 😭');
+      throw new Error("The same item in a carousel? Really? Nope 😭");
     }
 
     // Avoid shifting content
@@ -781,16 +781,16 @@ export default class Siema {
   destroy(restoreMarkup = false, callback) {
     this.detachEvents();
 
-    this.selector.style.cursor = 'auto';
+    this.selector.style.cursor = "auto";
 
     if (restoreMarkup) {
       const slides = document.createDocumentFragment();
       for (let i = 0; i < this.innerElements.length; i++) {
         slides.appendChild(this.innerElements[i]);
       }
-      this.selector.innerHTML = '';
+      this.selector.innerHTML = "";
       this.selector.appendChild(slides);
-      this.selector.removeAttribute('style');
+      this.selector.removeAttribute("style");
     }
 
     // clear auto play timer

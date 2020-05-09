@@ -1,7 +1,7 @@
 <script>
-  import ArticleList from '../../modules/article-list/ArticleList.svelte';
-  import Swiper from '../../modules/swiper/Swiper.svelte';
-  import Slide from '../../modules/swiper/Slide.svelte';
+  import ArticleList from "../../modules/article-list/ArticleList.svelte";
+  import Swiper from "../../modules/swiper/Swiper.svelte";
+  import Slide from "../../modules/swiper/Slide.svelte";
 
   /**
    * interface Node = {

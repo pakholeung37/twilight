@@ -12,8 +12,8 @@
 </script>
 
 <script>
-  import Swiper from './core.js';
-  import { onMount, createEventDispatcher } from 'svelte';
+  import Swiper from "./core.js";
+  import { onMount, createEventDispatcher } from "svelte";
   export let autoPlay = true;
   export let speed = 2500;
   export let duration = 500;
@@ -30,15 +30,15 @@
 
   function swiperable(el, options) {
     instance = new Swiper({ selector: el, ...options });
-    dispatch('init');
+    dispatch("init");
     return {
       update(options) {
         instance && instance.destroy();
         instance = new Swiper({ selector: el, ...options });
-        dispatch('update');
+        dispatch("update");
       },
       destroy() {
-        instance && instance.destroy() && dispatch('destroy');
+        instance && instance.destroy() && dispatch("destroy");
       }
     };
   }
