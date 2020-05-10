@@ -1,0 +1,23 @@
+@import "src/styles/variables.scss";
+
+.application {
+  height: 75px;
+  width: 75px;
+  display: flex;
+  background: $emphasis-background-color;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  flex-direction: column;
+  cursor: default;
+
+  transition: all ease-in 0s;
+  &:hover {
+    background: rgba($color: $primary-color, $alpha: 0.8);
+    color: #fff;
+  }
+}
+
+.name {
+  font-size: 12px;
+}

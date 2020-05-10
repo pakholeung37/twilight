@@ -1,0 +1,19 @@
+@import "src/styles/variables.scss";
+
+.content {
+  width: 274px;
+  padding: 15px;
+}
+
+.page-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.page-button-container {
+  width: 100%;
+  & ~ .page-button-container {
+    margin-top: $standard-gap;
+  }
+}

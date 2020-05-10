@@ -1,19 +1,21 @@
 import React, { useState, ReactNode } from "react";
 import LeftPannel from "./LeftPannel";
-
+import PageContent from "./content/PageContent";
+import ModuleContent from "./content/ModuleContent";
 export interface TabData {
   name: string;
   content?: ReactNode;
+  tabContent?: ReactNode;
 }
 
 const data: { tabs: TabData[]; activeItemIndex: number } = {
   tabs: [
-    { name: "page", content: <div>😁</div> },
-    { name: "module", content: <div>🤑</div> },
-    { name: "function", content: <div>🥵</div> },
-    { name: "module-pack", content: <div>🥶</div> },
+    { name: "page", tabContent: <div>😁</div>, content: <PageContent /> },
+    { name: "module", tabContent: <div>🤑</div>, content: <ModuleContent /> },
+    { name: "function", tabContent: <div>🥵</div> },
+    { name: "module-pack", tabContent: <div>🥶</div> },
   ],
-  activeItemIndex: -1,
+  activeItemIndex: 0,
 };
 
 export default function LeftPannelContainer() {

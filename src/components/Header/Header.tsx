@@ -6,15 +6,15 @@ import {
   CloudUploadOutlined,
 } from "@ant-design/icons";
 import Logo from "./Logo";
-import styles from "./header.module.scss";
+import s from "./header.module.scss";
 
 export default function Header() {
   return (
-    <div className={styles.header}>
-      <div className={styles["logo-wrapper"]}>
+    <div className={s.header}>
+      <div className={s["logo-wrapper"]}>
         <Logo />
       </div>
-      <div className={styles["button-group"]}>
+      <div className={s["button-group"]}>
         <Button type="link" icon={<EyeOutlined />}>
           预览
         </Button>

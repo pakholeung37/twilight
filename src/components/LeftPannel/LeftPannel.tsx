@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./left-pannel.module.scss";
+import s from "./left-pannel.module.scss";
 import Tab from "./Tab";
-import TabItem, { TabItemProps } from "./TabItem";
+import TabItem from "./TabItem";
 import { TabData } from "./LeftPannelContainer";
 
 export interface LeftPannelProps {
@@ -16,8 +16,8 @@ export default function LeftPannel({
   setActiveItem,
 }: LeftPannelProps) {
   return (
-    <div className={styles["left-pannel"]}>
-      <div className={styles["tab-container"]}>
+    <div className={s["left-pannel"]}>
+      <div className={s["tab-container"]}>
         <Tab>
           {tabsData.map((tabData, index) => (
             <TabItem
@@ -26,12 +26,24 @@ export default function LeftPannel({
               title={tabData.name}
               key={index}
             >
-              {tabData.content}
+              {tabData.tabContent}
             </TabItem>
           ))}
         </Tab>
       </div>
-      <div className={styles["content-container"]}></div>
+      <div className={s["contents"]}>
+        {tabsData.map((tabData, index) => (
+          <div
+            className={[
+              s["content-container"],
+              index === activeItemIndex ? s["active"] : "",
+            ].join(" ")}
+            key={index}
+          >
+            {tabData.content}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

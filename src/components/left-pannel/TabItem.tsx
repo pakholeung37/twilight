@@ -1,5 +1,5 @@
 import React, { MouseEvent } from "react";
-import styles from "./left-pannel.module.scss";
+import s from "./left-pannel.module.scss";
 
 export interface TabItemProps {
   active?: boolean;
@@ -15,7 +15,7 @@ const TabItem: React.FC<TabItemProps> = ({
 }) => {
   return (
     <div
-      className={[styles["tab-item"], active ? styles["active"] : ""].join(" ")}
+      className={[s["tab-item"], active ? s["active"] : ""].join(" ")}
       onClick={onClick}
       title={title}
     >
