@@ -1,7 +1,13 @@
-@import 'variables';
-@import 'mixins';
-@import 'normalize';
+@import "variables";
+@import "mixins";
+@import "normalize";
 
-@import 'layout';
+@import "layout";
 
-@import './components/index';
+@import "./components/index";
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
