@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import pageBriefs from "./pageBriefs";
+import app from "././app";
 import modules from "./modules";
 
 const rootReducer = combineReducers({
-  pageBriefs,
+  app,
   modules,
 });
 
