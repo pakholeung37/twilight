@@ -6,7 +6,7 @@ import s from "./page-content.module.scss";
 
 const pageContent: React.FC<{}> = () => {
   const { pages } = useSelector((state: RootState) => ({
-    pages: state.pageBriefs.pages,
+    pages: state.app.pages,
   }));
   return (
     <div className={s["content"]}>

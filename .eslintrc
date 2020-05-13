@@ -3,9 +3,9 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    // "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:react-hooks/recommended"
+    "prettier/@typescript-eslint"
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
