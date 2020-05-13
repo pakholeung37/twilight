@@ -20,8 +20,8 @@
   };
 
   function getComponent(node) {
-    const token = node.token;
-    const component = componentMap[token];
+    const type = node.type;
+    const component = componentMap[type];
     if (!component)
       throw new Error(`[serializer] invaild node type: ${node.type}`);
     return component;
