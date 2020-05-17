@@ -1,54 +1,17 @@
-export interface NodeSchema {
-  type: string;
-  children?: string;
-  group?: string;
-  enter?: (node: Node, parent: Node | null) => void;
-  exit?: (node: Node, parent: Node | null) => void;
-}
-export interface Schema {
-  nodes: { [key: string]: NodeSchema | undefined };
-  rules?: ((node: Node) => void)[];
-}
+import NodeSchema, { NodeSchemaSpec } from "./NodeSchema";
+import { Schema, Node } from "./types";
 
-export interface Node {
-  type: string;
-  props: any[];
-  children: Node[];
-}
-
-const ArticleList: NodeSchema = {
-  type: "ArticleList",
-  children: "Article*",
-};
-
-const Article: NodeSchema = {
-  type: "Article",
-  group: "atom",
-};
-
-const Swiper: NodeSchema = {
-  type: "Swiper",
-  children: "Slide*",
-};
-
-const Slide: NodeSchema = {
-  type: "Slide",
-  children: "container+",
-};
-
-function createSchema(schemas: NodeSchema[]) {
+export function createSchema(schemas: NodeSchemaSpec[]): Schema {
   return {
     nodes: schemas.reduce(
       (acc, cur) => ({
         ...acc,
-        [cur.type]: cur,
+        [cur.type]: new NodeSchema(cur),
       }),
       {}
     ),
   };
 }
-
-const schema: Schema = createSchema([ArticleList, Article]);
 
 export default class Compiler {
   constructor(schema: Schema) {
