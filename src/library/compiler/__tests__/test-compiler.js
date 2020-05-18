@@ -1,6 +1,6 @@
 import Compiler, { createSchema } from "../compiler";
 import NodeSchema from "../NodeSchema";
-import { TokenStream, parseExpr } from "../pattern";
+import TokenStream, { parseExpr } from "../TokenStream";
 
 const ArticleList = {
   type: "ArticleList",
@@ -76,8 +76,6 @@ describe("TokenStream methods", () => {
   });
 });
 
-const testContent = "Article* (Container|Swiper)+";
-const stream = new TokenStream(testContent, schema);
 describe("parseExpr", () => {
   test("Article*", () => {
     const testContent = "Article*";

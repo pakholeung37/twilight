@@ -1,8 +1,10 @@
 import { Expression, NameExpression } from "./types";
 import { Schema } from "./types";
 import NodeSchema from "./NodeSchema";
-
-export class TokenStream {
+/**
+ * Tokenizer
+ */
+export default class TokenStream {
   private string: string;
   public schema: Schema;
   private tokens: string[];
