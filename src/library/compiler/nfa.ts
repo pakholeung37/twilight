@@ -4,7 +4,7 @@ export type Term = any;
 
 export interface State {
   term: Term;
-  to?: number | null;
+  to: number | null;
 }
 
 export type NFA = Array<Array<State>>;
@@ -26,7 +26,11 @@ export default function nfa(expr: Expression): NFA {
    * @param to to which state sequence
    * @param term extra payload
    */
-  function edge(from: number, to?: State["to"], term?: State["term"]): State {
+  function edge(
+    from: number,
+    to: State["to"] = null,
+    term?: State["term"]
+  ): State {
     const edge: State = { term, to };
     nfa[from].push(edge);
     return edge;

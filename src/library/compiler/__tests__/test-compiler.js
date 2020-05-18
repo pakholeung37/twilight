@@ -1,10 +1,11 @@
 import Compiler, { createSchema } from "../compiler";
 import NodeSchema from "../NodeSchema";
-import TokenStream, { parseExpr } from "../TokenStream";
+import TokenStream from "../TokenStream";
+import PatternMatch, { parseExpr } from "../PatternMatch";
 
 const ArticleList = {
   type: "ArticleList",
-  content: "Article*",
+  children: "Article*",
 };
 
 const Article = {
@@ -14,17 +15,17 @@ const Article = {
 
 const Swiper = {
   type: "Swiper",
-  content: "Slide*",
+  children: "Slide*",
 };
 
 const Slide = {
   type: "Slide",
-  content: "container+",
+  children: "Container+",
 };
 
 const Container = {
   type: "Container",
-  content: "*",
+  children: "*",
 };
 const schema = createSchema([ArticleList, Article, Swiper, Slide, Container]);
 
@@ -84,5 +85,16 @@ describe("parseExpr", () => {
       type: "star",
       expr: { type: "name" },
     });
+  });
+});
+
+describe("PatternMatch", () => {
+  let testContent = "Article*";
+  test(`${testContent}`, () => {
+    expect(PatternMatch.parse(testContent, schema)).toBe(true);
+  });
+  testContent = "ArticleList+";
+  test(`${testContent}`, () => {
+    expect(PatternMatch.parse(testContent, schema)).toBe(true);
   });
 });

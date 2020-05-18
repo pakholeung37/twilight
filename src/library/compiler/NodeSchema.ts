@@ -1,6 +1,6 @@
 export interface NodeSchemaSpec {
   type: string;
-  content?: string;
+  children?: string;
   groups?: string;
   enter?: CompileHook;
   exit?: CompileHook;
@@ -12,20 +12,20 @@ export interface CompileHook {
 
 export default class NodeSchema {
   private _type: string;
-  private _content?: string;
+  private _children?: string;
   private _groups?: string;
   private _enter?: CompileHook;
   private _exit?: CompileHook;
 
   public constructor({
     type,
-    content = "*",
+    children = "",
     groups = "",
     enter,
     exit,
   }: NodeSchemaSpec) {
     this._type = type;
-    this._content = content;
+    this._children = children;
     this._groups = groups;
     this._enter = enter;
     this._exit = exit;
