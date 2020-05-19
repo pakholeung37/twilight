@@ -1,6 +1,6 @@
 /**
  * Compiles an NFA as produced by `nfa` into a DFA, modeled as a set
- * of state objects (`ContentMatch` instances) with transitions
+ * of state objects (`PatternMatch` instances) with transitions
  * between them.
  */
 import { NFA, State as NFAState } from "./nfa";

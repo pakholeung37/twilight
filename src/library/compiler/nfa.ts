@@ -1,9 +1,10 @@
 import { Expression } from "./types";
+import NodeSchema from "./NodeSchema";
 
-export type Term = any;
+export type Term = NodeSchema;
 
 export interface State {
-  term: Term;
+  term?: Term;
   to: number | null;
 }
 
