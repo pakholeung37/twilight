@@ -1,17 +1,20 @@
 import { Expression } from "./types";
+import NodeSchema from "./NodeSchema";
+export type Term = NodeSchema;
 
-export type Term = any;
-
-export interface State {
-  term: Term;
+export interface NFAState {
+  term?: Term;
   to: number | null;
 }
 
-export type NFA = Array<Array<State>>;
+export type NFA = Array<Array<NFAState>>;
 
 export default function nfa(expr: Expression): NFA {
   const nfa: NFA = [[]];
 
+  connect(compile(expr, 0), node());
+
+  return nfa;
   /**
    * add a new empty state in nfa;
    *
@@ -28,21 +31,21 @@ export default function nfa(expr: Expression): NFA {
    */
   function edge(
     from: number,
-    to: State["to"] = null,
-    term?: State["term"]
-  ): State {
-    const edge: State = { term, to };
+    to: NFAState["to"] = null,
+    term?: NFAState["term"]
+  ): NFAState {
+    const edge: NFAState = { term, to };
     nfa[from].push(edge);
     return edge;
   }
-  function connect(edges: Term[], to: number) {
+  function connect(edges: NFAState[], to: number) {
     edges.forEach(edge => (edge.to = to));
   }
 
-  function compile(expr: Expression, from: number): Array<State> {
+  function compile(expr: Expression, from: number): Array<NFAState> {
     if (expr.type == "choice") {
       return expr.exprs.reduce(
-        (out: Array<State>, expr) => out.concat(compile(expr, from)),
+        (out: Array<NFAState>, expr) => out.concat(compile(expr, from)),
         []
       );
     } else if (expr.type == "seq") {
@@ -88,8 +91,4 @@ export default function nfa(expr: Expression): NFA {
         "[compiler] children pattern compile failed. check if pattern vaild"
       );
   }
-
-  connect(compile(expr, 0), node());
-
-  return nfa;
 }
