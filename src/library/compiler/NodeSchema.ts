@@ -1,34 +1,25 @@
+import PatternMatch from "./PatternMatch";
+import Schema from "./Schema";
 export interface NodeSchemaSpec {
   type: string;
   children?: string;
   groups?: string;
-  enter?: CompileHook;
-  exit?: CompileHook;
-}
-
-export interface CompileHook {
-  (node: Node, parent: Node | null): void;
 }
 
 export default class NodeSchema {
   private _type: string;
-  private _children?: string;
-  private _groups?: string;
-  private _enter?: CompileHook;
-  private _exit?: CompileHook;
+  private _children: PatternMatch | string;
+  private _groups: string[];
+  // if the compiler create several time
+  // this patternMatchCache cans make a good performance.
+  private static patternMatchCache: { [key: string]: PatternMatch | undefined };
 
-  public constructor({
-    type,
-    children = "",
-    groups = "",
-    enter,
-    exit,
-  }: NodeSchemaSpec) {
+  public constructor({ type, children = "", groups = "" }: NodeSchemaSpec) {
     this._type = type;
+    // this is a lazy create, when calls createChildrenPattern,
+    // it will finally turn this into a PatternMatch
     this._children = children;
-    this._groups = groups;
-    this._enter = enter;
-    this._exit = exit;
+    this._groups = groups ? groups.split(" ") : [];
   }
 
   get type() {
@@ -38,10 +29,10 @@ export default class NodeSchema {
     return this._groups;
   }
 
-  public enter(node: Node, parent: Node | null): void {
-    this._enter && this._enter(node, parent);
-  }
-  public exit(node: Node, parent: Node | null): void {
-    this._exit && this._exit(node, parent);
+  createChildrenPattern(schema: Schema) {
+    if (this._children instanceof PatternMatch) return;
+    this._children =
+      NodeSchema.patternMatchCache[this._children] ||
+      PatternMatch.parse(this._children, schema);
   }
 }

@@ -1,21 +1,21 @@
 import { Expression, NameExpression } from "./types";
 import NodeSchema from "./NodeSchema";
 import TokenStream from "./TokenStream";
-import { Schema } from "./types";
+import Schema from "./Schema";
 import dfa from "./dfa";
 import nfa from "./nfa";
 
 export default class PatternMatch {
   validEnd: boolean;
-  next: any[] = [];
-  wrapCache = [];
+  // next: any[] = [];
+  // wrapCache = [];
   constructor(validEnd: boolean) {
     this.validEnd = validEnd;
   }
 
-  static parse(string: string, nodeSchema: Schema) {
-    const stream = new TokenStream(string, nodeSchema);
-    if (stream.next == null) return PatternMatch.empty;
+  static parse(string: string, schema: Schema) {
+    const stream = new TokenStream(string, schema);
+    if (stream.next == undefined) return PatternMatch.empty;
     const expr = parseExpr(stream);
     if (stream.next) stream.err("Unexpected trailing text");
     const match = dfa(nfa(expr));
@@ -58,8 +58,8 @@ function parseExprAtom(stream: TokenStream): Expression {
     const expr = parseExpr(stream);
     if (!stream.eat(")")) stream.err("Missing closing paren");
     return expr;
-  } else if (!/\W/.test(stream.next)) {
-    const exprs = resolveName(stream, stream.next).map(type => {
+  } else if (!/\W/.test(stream.next as string)) {
+    const exprs = resolveName(stream, stream.next as string).map(type => {
       return { type: "name", value: type } as NameExpression;
     });
     stream.forward();
@@ -71,7 +71,7 @@ function parseExprAtom(stream: TokenStream): Expression {
 }
 
 export function parseNum(stream: TokenStream): number {
-  if (/\D/.test(stream.next))
+  if (/\D/.test(stream.next as string))
     stream.err("Expected number, got '" + stream.next + "'");
   const result = Number(stream.next);
   stream.forward();

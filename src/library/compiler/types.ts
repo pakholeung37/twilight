@@ -1,5 +1,3 @@
-import NodeSchema from "./NodeSchema";
-
 export type Expression =
   | ChoiceExpression
   | SeqExpression
@@ -46,11 +44,6 @@ export interface NameExpression {
   value: any;
 }
 export type PreExpression = Partial<Expression>;
-
-export interface Schema {
-  nodes: { [key: string]: NodeSchema | undefined };
-  rules?: ((node: Node) => void)[];
-}
 
 export interface Node {
   type: string;

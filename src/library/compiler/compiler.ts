@@ -1,16 +1,9 @@
 import NodeSchema, { NodeSchemaSpec } from "./NodeSchema";
-import { Schema, Node } from "./types";
+import { Node } from "./types";
+import Schema from "./Schema";
 
-export function createSchema(schemas: NodeSchemaSpec[]): Schema {
-  return {
-    nodes: schemas.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur.type]: new NodeSchema(cur),
-      }),
-      {}
-    ),
-  };
+export interface CompileHook {
+  (node: Node, parent: Node | null): void;
 }
 
 export default class Compiler {
@@ -37,16 +30,9 @@ export default class Compiler {
         throw TypeError(
           `[compiler] nodeType ${node.type} is not on the schema`
         );
-      if (nodeSchema.enter) {
-        nodeSchema.enter(node, parent);
-      }
 
       if (node.children) {
         node.children.map(child => traverse(child, node));
-      }
-
-      if (nodeSchema.exit) {
-        nodeSchema.exit(node, parent);
       }
     }
 

@@ -1,4 +1,4 @@
-import { Schema } from "./types";
+import Schema from "./Schema";
 
 /**
  * Tokenizer
@@ -18,7 +18,7 @@ export default class TokenStream {
     if (this.tokens[0] == "") this.tokens.unshift();
   }
 
-  get next() {
+  get next(): string | undefined {
     return this.tokens[this.pos];
   }
 
