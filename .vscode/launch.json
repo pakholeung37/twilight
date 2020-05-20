@@ -19,14 +19,17 @@
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Debug Jest Tests",
+      "name": "Debug Jest spec Tests",
       "type": "node",
       "request": "launch",
       "runtimeArgs": [
         "--inspect-brk",
         "${workspaceRoot}/node_modules/jest/bin/jest.js",
-        "--runInBand"
+        "src/library/compiler/__tests__/test-compiler.js",
+        "--runInBand",
+        "--testTimeout=0"
       ],
+      "args": [],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "port": 9229
