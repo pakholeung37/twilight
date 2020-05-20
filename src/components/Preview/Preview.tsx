@@ -1,20 +1,25 @@
 import React from "react";
-import DawnBreak from "dawnbreak";
+import ArticleList from "components/modules/ArticleList";
+import s from "./preview.module.scss";
 
-export default class Preview extends React.Component {
-  componentDidMount() {
-    const appRoot = document.getElementById("preview-app");
-    if (appRoot) {
-      DawnBreak(appRoot);
-    } else {
-      console.log("dawn break mounted failed");
-    }
-  }
-  render() {
-    return <div id="preview-app"></div>;
-  }
+export default function Preivew() {
+  const props = [
+    {
+      title: "How can I alias a default import in Javascript?",
+      summary:
+        "The alias on its own is esoteric! Importing the named export and the default is handy when testing redux components.",
+      cover: {
+        src: `https://picsum.photos/${~~(600 * Math.random() + 200)}/${~~(
+          600 * Math.random() +
+          200
+        )}`,
+        alt: "dog",
+      },
+    },
+  ];
+  return (
+    <div id="preview-app" className={s.preview}>
+      <ArticleList articles={props}></ArticleList>
+    </div>
+  );
 }
-
-// export default function Preivew() {
-//   return <div></div>;
-// }

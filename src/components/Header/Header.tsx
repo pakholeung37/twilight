@@ -3,17 +3,18 @@ import { Button } from "antd";
 import {
   EyeOutlined,
   SaveOutlined,
-  CloudUploadOutlined
+  CloudUploadOutlined,
 } from "@ant-design/icons";
 import Logo from "./Logo";
+import s from "./header.module.scss";
 
 export default function Header() {
   return (
-    <div className="header">
-      <div className="header__logo-wrapper">
+    <div className={s.header}>
+      <div className={s["logo-wrapper"]}>
         <Logo />
       </div>
-      <div className="header__button-group">
+      <div className={s["button-group"]}>
         <Button type="link" icon={<EyeOutlined />}>
           预览
         </Button>

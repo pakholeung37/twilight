@@ -1,5 +1,5 @@
 import React from "react";
-import Preview from "components/Preview";
+import Preview from "components/preview";
 
 export default function Content() {
   return (

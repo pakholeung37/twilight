@@ -1,0 +1,15 @@
+{
+  "workbench.settings.editor": "json",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "javascript.format.enable": false,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.codeActionsOnSaveTimeout": 4000
+}

@@ -1,0 +1,63 @@
+@import "src/styles/variables.scss";
+
+.left-pannel {
+  min-width: 334px;
+  height: 100%;
+  display: flex;
+}
+
+.tab-container {
+}
+
+.tab {
+}
+
+.tab-item-group:hover {
+  .tab-item {
+    border-radius: 0;
+  }
+}
+
+.tab-item-container {
+}
+
+.tab-item {
+  height: 60px;
+  width: 60px;
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease-out;
+
+  &:hover,
+  &.active {
+    background: rgba($color: $primary-color, $alpha: 0.4);
+  }
+
+  &.active {
+    &::after {
+      content: "";
+      position: absolute;
+      background: $primary-color;
+      width: 4px;
+      height: 100%;
+      left: 0;
+    }
+  }
+}
+
+.contents {
+  flex-grow: 1;
+}
+
+.content-container {
+  display: none;
+  position: relative;
+
+  &.active {
+    display: block;
+  }
+}

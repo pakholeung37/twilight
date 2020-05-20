@@ -1,4 +1,6 @@
 node_modules/
 coverage/
 
-.yarn-error.log
+yarn.lock
+yarn-error.log
+

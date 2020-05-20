@@ -1,0 +1,9 @@
+@import "../../styles/variables.scss";
+
+.logo {
+  font-size: 42px;
+
+  .icon {
+    color: $primary-color;
+  }
+}

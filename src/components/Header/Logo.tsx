@@ -1,10 +1,10 @@
 import React from "react";
 import { DribbbleSquareOutlined } from "@ant-design/icons";
-
+import s from "./logo.module.scss";
 export default function Logo() {
   return (
-    <div className="logo">
-      <DribbbleSquareOutlined className="logo__icon" />
+    <div className={s.logo}>
+      <DribbbleSquareOutlined className={s.icon} />
     </div>
   );
 }
