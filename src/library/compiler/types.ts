@@ -41,7 +41,7 @@ export interface RangeExpression {
 
 export interface NameExpression {
   type: "name";
-  value: any;
+  value: NodeSchema;
 }
 export type PreExpression = Partial<Expression>;
 

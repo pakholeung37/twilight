@@ -92,7 +92,10 @@ export function parseExprRange(
   return { type: "range", min, max, expr };
 }
 /**
- * check a name is vaild or not; a vaild name should be a nodetype or group name
+ * resovle a giving name and return a group of compatible nodeSchema;
+ * compatible means: 1. the name is a nodeSchema.type then this nodeSchema is compatible;
+ * or 2.the name is in some nodeSchema.groups, then this nodeSchema is compatible.
+ *
  * @param stream tokenizer
  * @param name name should be a nodeType or a group name;
  * @return return a group of nodeSchema
@@ -102,6 +105,7 @@ function resolveName(stream: TokenStream, name: string): NodeSchema[] {
   const types = schema.nodes;
   const type = types[name];
   if (type) return [type];
+  // if name is not a type in schema, maybe it is a groups name,
   const result = [];
   for (const typeName in types) {
     const type = types[typeName] as NodeSchema;
