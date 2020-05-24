@@ -25,7 +25,23 @@
       "runtimeArgs": [
         "--inspect-brk",
         "${workspaceRoot}/node_modules/jest/bin/jest.js",
-        "src/library/compiler/__tests__/test-compiler.js",
+        "src/library/compiler/__tests__/playground.js",
+        "--runInBand",
+        "--testTimeout=0"
+      ],
+      "args": [],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
+    {
+      "name": "Debug Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/jest/bin/jest.js",
+        "__tests__"
         "--runInBand",
         "--testTimeout=0"
       ],

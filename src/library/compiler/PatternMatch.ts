@@ -7,13 +7,24 @@ import nfa from "./nfa";
 
 export default class PatternMatch {
   validEnd: boolean;
-  // next: any[] = [];
+  /**
+   * next is an array in this structure
+   * {
+   *   [2k]: PatternMatch;
+   *   [2k+1]: NodeSchema;
+   * }
+   * k := 2n
+   *
+   * @type {any[]}
+   * @memberof PatternMatch
+   */
+  next: any[] = [];
   // wrapCache = [];
   constructor(validEnd: boolean) {
     this.validEnd = validEnd;
   }
 
-  static parse(string: string, schema: Schema) {
+  static parse(string: string, schema: Schema): PatternMatch {
     const stream = new TokenStream(string, schema);
     if (stream.next == undefined) return PatternMatch.empty;
     const expr = parseExpr(stream);
@@ -23,6 +34,23 @@ export default class PatternMatch {
   }
 
   static empty = new PatternMatch(true);
+  /**
+   * Match a node type, return a match after that node matches successful
+   *
+   * @param {NodeSchema} type
+   * @returns {(PatternMatch | null)}
+   * @memberof PatternMatch
+   */
+  matchType(type: NodeSchema): PatternMatch | null {
+    for (let i = 0; i < this.next.length; i += 2) {
+      if (this.next[i] == type) return this.next[i + 1];
+    }
+    return null;
+  }
+
+  isValidEnd() {
+    return !!this.validEnd;
+  }
 }
 
 export function parseExpr(stream: TokenStream): Expression {

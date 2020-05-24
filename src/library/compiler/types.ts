@@ -1,3 +1,5 @@
+import NodeSchema from "./NodeSchema";
+
 export type Expression =
   | ChoiceExpression
   | SeqExpression
@@ -44,9 +46,3 @@ export interface NameExpression {
   value: NodeSchema;
 }
 export type PreExpression = Partial<Expression>;
-
-export interface Node {
-  type: string;
-  props: any[];
-  children: Node[];
-}

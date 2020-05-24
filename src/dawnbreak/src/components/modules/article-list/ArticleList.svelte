@@ -10,6 +10,7 @@
   {#each articles as article}
     <Article {...article} />
   {/each}
+  <slot />
 </ul>
 
 <style lang="scss">

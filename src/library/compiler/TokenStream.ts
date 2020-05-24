@@ -35,8 +35,6 @@ export default class TokenStream {
   }
 
   err(str: string) {
-    throw new SyntaxError(
-      `[compiler] ${str} in children expression ${this.string}`
-    );
+    throw new SyntaxError(`[compiler] ${str} in expression ${this.string}`);
   }
 }

@@ -1,5 +1,5 @@
 import NodeSchema, { NodeSchemaSpec } from "./NodeSchema";
-import { Node } from "./types";
+import Node from "./Node";
 import Schema from "./Schema";
 
 export interface CompileHook {

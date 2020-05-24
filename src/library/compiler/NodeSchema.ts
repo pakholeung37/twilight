@@ -12,7 +12,9 @@ export default class NodeSchema {
   private _groups: string[];
   // if the compiler create several time
   // this patternMatchCache cans make a good performance.
-  private static patternMatchCache: { [key: string]: PatternMatch | undefined };
+  private static patternMatchCache: {
+    [key: string]: PatternMatch | undefined;
+  } = {};
 
   public constructor({ type, children = "", groups = "" }: NodeSchemaSpec) {
     this._type = type;

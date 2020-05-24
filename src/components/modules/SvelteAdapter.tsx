@@ -17,7 +17,7 @@ export default function svelteAdapter(
 ) {
   let instance: SvelteComponent;
 
-  const wrapper: React.FC<any> = props => {
+  const wrapper: React.FC<any> = ({ children, ...props }) => {
     const container: React.RefObject<HTMLDivElement> = useRef(null);
 
     const eventRe = /on([A-Z]{1,}[a-zA-Z]*)/;
@@ -60,10 +60,11 @@ export default function svelteAdapter(
           };
         }
       } else instance.set(props);
+      //! debug
+      (window as any).ArticleList = instance;
       return () => instance && instance.destroy();
     });
-
-    return React.createElement("div", { ref: container });
+    return <div ref={container}>{children}</div>;
   };
   wrapper.displayName = displayName
     ? displayName

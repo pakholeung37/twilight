@@ -15,11 +15,12 @@ export default function Preivew() {
         )}`,
         alt: "dog",
       },
+      $$slots: "helloworld",
     },
   ];
   return (
     <div id="preview-app" className={s.preview}>
-      <ArticleList articles={props}></ArticleList>
+      <ArticleList articles={props}>helloworld</ArticleList>
     </div>
   );
 }
