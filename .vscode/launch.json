@@ -41,7 +41,6 @@
       "runtimeArgs": [
         "--inspect-brk",
         "${workspaceRoot}/node_modules/jest/bin/jest.js",
-        "__tests__"
         "--runInBand",
         "--testTimeout=0"
       ],

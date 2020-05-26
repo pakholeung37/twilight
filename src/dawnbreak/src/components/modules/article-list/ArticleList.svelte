@@ -7,10 +7,10 @@
 </script>
 
 <ul class="article-list">
-  {#each articles as article}
-    <Article {...article} />
-  {/each}
   <slot />
+  <!-- {#each articles as article}
+    <Article {...article} />
+  {/each} -->
 </ul>
 
 <style lang="scss">

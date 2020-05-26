@@ -28,7 +28,11 @@ export default function svelteAdapter(
       if (!instance) {
         instance = new MySvelteComponent({
           target: container.current,
-          props,
+          props: {
+            ...props,
+            $$slots: { default: [createDefaultSlot] },
+            $$scope: {},
+          },
         });
         const watchers: [string, Function][] = [];
         for (const key in props) {
@@ -71,4 +75,20 @@ export default function svelteAdapter(
     : `SvelteAdapter/${MySvelteComponent.name}`;
 
   return wrapper;
+}
+
+function createDefaultSlot(ctx: any) {
+  let t: any;
+
+  return {
+    c() {
+      t = document.createTextNode("helloworld");
+    },
+    m(target: any, anchor: any) {
+      target.insertBefore(t, anchor || null);
+    },
+    d(detaching: any) {
+      if (detaching) t.parentNode.removeChild(t);
+    },
+  };
 }
