@@ -1,10 +1,25 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, ReactPortal } from "react";
+import ReactDOM from "react-dom";
 import { SvelteComponent } from "svelte";
 
 /**
  * svelteComponent to react.Component adapter.
  * inspired by:
  * https://github.com/pngwn/svelte-adapter
+ *
+ * agreement:
+ * 1. Any events emitted by the svelte component can be passed callbacks
+ * via an {on*} prop containing a function, this function will fire when
+ * the event is emitted.
+ *
+ * 2. Some Svelte component's allow you to bind to internal data
+ * which doesn't make too much sense outside of Svelte yet
+ * they often form an important part of the API.
+ * Instead I have added the option to use a {watch*} prop
+ *
+ * 3. Svelte Components allow you to add slot which doesn't suit
+ * react. anything pass as children will be the svelte default slot;
+ * any react component pass as {slot_*} props will be the svelte {*} slot;
  *
  * @param {SvelteComponent} MySvelteComponent SvelteComponent import from .svelte
  * @param {string} displayName DisplayName for this HOC Component in react devTool
@@ -19,26 +34,34 @@ export default function svelteAdapter(
 
   const wrapper: React.FC<any> = ({ children, ...props }) => {
     const container: React.RefObject<HTMLDivElement> = useRef(null);
+    const portal: { [key: string]: ReactPortal | undefined } = {};
 
     const eventRe = /on([A-Z]{1,}[a-zA-Z]*)/;
     const watchRe = /watch([A-Z]{1,}[a-zA-Z]*)/;
+    const slotRe = /slot_([a-zA-Z]*)/;
 
     useEffect(() => {
       if (!container.current) return;
       if (!instance) {
+        // construct props
+        const svelteProps: any = {
+          ...props,
+        };
+
+        if (children) {
+          const [node, createDefaultSlot] = createSlot("default");
+          props.$$slots = { default: [createDefaultSlot] };
+          props.$$scope = {};
+          portal["default"] = ReactDOM.createPortal(children, node);
+        }
         instance = new MySvelteComponent({
           target: container.current,
-          props: {
-            ...props,
-            $$slots: { default: [createDefaultSlot] },
-            $$scope: {},
-          },
+          props: svelteProps,
         });
         const watchers: [string, Function][] = [];
         for (const key in props) {
           const eventMatch = key.match(eventRe);
           const watchMatch = key.match(watchRe);
-
           if (eventMatch && typeof props[key] === "function") {
             instance.$on(
               `${eventMatch[1][0].toLowerCase()}${eventMatch[1].slice(1)}`,
@@ -77,18 +100,40 @@ export default function svelteAdapter(
   return wrapper;
 }
 
-function createDefaultSlot(ctx: any) {
-  let t: any;
+interface Emitter {
+  (type: string): void;
+}
+/**
+ * create a slot and return [<the slot Node>, <the svelte slot function>]
+ * @param {string} slotName slot Name
+ * @param {Function} emitter sbscrible to the svelte compoonent emit when slot create, mount and detach
+ */
+function createSlot(
+  slotName: string,
+  emitter?: Emitter
+): [HTMLDivElement, Function] {
+  const tuple: [any, any] = [null, null];
 
-  return {
-    c() {
-      t = document.createTextNode("helloworld");
-    },
-    m(target: any, anchor: any) {
-      target.insertBefore(t, anchor || null);
-    },
-    d(detaching: any) {
-      if (detaching) t.parentNode.removeChild(t);
-    },
+  tuple[1] = function() {
+    return {
+      // create
+      c() {
+        tuple[0] = document.createElement("div");
+        emitter && emitter("update");
+      },
+      // mount
+      m(target: Node, anchor: Node) {
+        target.insertBefore(tuple[0] as Node, anchor || null);
+        emitter && emitter("mount");
+      },
+      // detach
+      d(detaching: boolean) {
+        if (detaching) {
+          tuple[0].parentNode && tuple[0].parentNode.removeChild(tuple[0]);
+          emitter && emitter("detach");
+        }
+      },
+    };
   };
+  return tuple;
 }
