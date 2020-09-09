@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialState = {
   applications: [
@@ -12,10 +12,10 @@ const initialState = {
     { id: 7, name: "Form" },
     { id: 8, name: "DownLoad" },
   ],
-};
+}
 
 export default createSlice({
   name: "modules",
   initialState,
   reducers: {},
-}).reducer;
+}).reducer

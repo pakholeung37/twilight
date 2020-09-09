@@ -1,11 +1,11 @@
-import React from "react";
-import s from "./application.module.scss";
+import React from "react"
+import s from "./application.module.scss"
 
 export interface ApplicationProps {
-  id: string | number;
-  name: string;
-  Icon: React.ReactNode;
-  function?: any;
+  id: string | number
+  name: string
+  Icon: React.ReactNode
+  function?: any
 }
 
 const Application: React.FC<ApplicationProps> = ({ name, Icon }) => {
@@ -14,7 +14,7 @@ const Application: React.FC<ApplicationProps> = ({ name, Icon }) => {
       {Icon}
       <div className={s["name"]}>{name}</div>
     </div>
-  );
-};
+  )
+}
 
-export default Application;
+export default Application

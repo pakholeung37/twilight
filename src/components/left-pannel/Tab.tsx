@@ -1,5 +1,5 @@
-import React from "react";
-import s from "./left-pannel.module.scss";
+import React from "react"
+import s from "./left-pannel.module.scss"
 
 const Tab: React.FC<{ a?: string }> = ({ children }) => {
   return (
@@ -13,7 +13,7 @@ const Tab: React.FC<{ a?: string }> = ({ children }) => {
           ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Tab;
+export default Tab

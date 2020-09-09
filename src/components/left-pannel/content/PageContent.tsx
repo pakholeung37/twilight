@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import PageButton from "./PageButton";
-import { RootState } from "store";
-import s from "./page-content.module.scss";
+import React from "react"
+import { useSelector } from "react-redux"
+import PageButton from "./PageButton"
+import { RootState } from "store"
+import s from "./page-content.module.scss"
 
-const pageContent: React.FC<{}> = () => {
+const PageContent: React.FC<{}> = () => {
   const { pages } = useSelector((state: RootState) => ({
     pages: state.app.pages,
-  }));
+  }))
   return (
     <div className={s["content"]}>
       <ul className={s["page-group"]}>
@@ -18,7 +18,7 @@ const pageContent: React.FC<{}> = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default pageContent;
+export default PageContent

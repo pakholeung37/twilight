@@ -1,13 +1,13 @@
-import React from "react";
-import s from "./left-pannel.module.scss";
-import Tab from "./Tab";
-import TabItem from "./TabItem";
-import { TabData } from "./LeftPannelContainer";
+import React from "react"
+import s from "./left-pannel.module.scss"
+import Tab from "./Tab"
+import TabItem from "./TabItem"
+import { TabData } from "./LeftPannelContainer"
 
 export interface LeftPannelProps {
-  tabsData: TabData[];
-  activeItemIndex: number;
-  setActiveItem: (index: number) => void;
+  tabsData: TabData[]
+  activeItemIndex: number
+  setActiveItem: (index: number) => void
 }
 
 export default function LeftPannel({
@@ -24,8 +24,7 @@ export default function LeftPannel({
               active={index === activeItemIndex}
               onClick={() => setActiveItem(index)}
               title={tabData.name}
-              key={index}
-            >
+              key={index}>
               {tabData.tabContent}
             </TabItem>
           ))}
@@ -38,12 +37,11 @@ export default function LeftPannel({
               s["content-container"],
               index === activeItemIndex ? s["active"] : "",
             ].join(" ")}
-            key={index}
-          >
+            key={index}>
             {tabData.content}
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 }

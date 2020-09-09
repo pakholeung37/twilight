@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialState = {
   pages: [
@@ -73,10 +73,10 @@ const initialState = {
     },
   ],
   activePageIndex: -1,
-};
+}
 
 export default createSlice({
   name: "app",
   initialState,
   reducers: {},
-}).reducer;
+}).reducer

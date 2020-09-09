@@ -1,3 +1,3 @@
-import p from "./PreviewContainer";
+import p from "./PreviewContainer"
 
-export default p;
+export default p

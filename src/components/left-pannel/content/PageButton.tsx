@@ -1,10 +1,10 @@
-import React from "react";
-import s from "./page-button.module.scss";
+import React from "react"
+import s from "./page-button.module.scss"
 export interface PageButtonProps {
-  name: string;
+  name: string
 }
 const PageButton: React.FC<PageButtonProps> = ({ name }) => {
-  return <div className={s["page-button"]}>{name}</div>;
-};
+  return <div className={s["page-button"]}>{name}</div>
+}
 
-export default PageButton;
+export default PageButton

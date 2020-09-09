@@ -1,6 +1,6 @@
-import React from "react";
-import Home from "./Home";
+import React from "react"
+import Home from "./Home"
 
 export default function HomeContainer() {
-  return <Home></Home>;
+  return <Home></Home>
 }

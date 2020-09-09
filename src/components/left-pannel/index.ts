@@ -1,3 +1,3 @@
-import lp from "./LeftPannelContainer";
+import lp from "./LeftPannelContainer"
 
-export default lp;
+export default lp

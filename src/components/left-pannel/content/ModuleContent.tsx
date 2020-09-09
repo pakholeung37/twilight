@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import Application from "./Application";
-import s from "./module-content.module.scss";
-import { RootState } from "store";
+import React from "react"
+import { useSelector } from "react-redux"
+import Application from "./Application"
+import s from "./module-content.module.scss"
+import { RootState } from "store"
 
 const nameIconMap: { [key: string]: JSX.Element } = {
   Swiper: <div>🖼</div>,
@@ -14,16 +14,16 @@ const nameIconMap: { [key: string]: JSX.Element } = {
   Photo: <div>📽</div>,
   Form: <div>📰</div>,
   DownLoad: <div>🗑</div>,
-};
+}
 
 const getIcon = (name: string) => {
-  return nameIconMap[name] || <div></div>;
-};
+  return nameIconMap[name] || <div></div>
+}
 
-const moduleContent: React.FC<{}> = () => {
+const ModuleContent: React.FC<{}> = () => {
   const { applications } = useSelector((state: RootState) => ({
     applications: state.modules.applications,
-  }));
+  }))
   return (
     <div className={s["content"]}>
       <ul className={s["application-group"]}>
@@ -34,7 +34,7 @@ const moduleContent: React.FC<{}> = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default moduleContent;
+export default ModuleContent
