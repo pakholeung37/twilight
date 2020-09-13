@@ -1,6 +1,8 @@
 import React from "react"
 import Home from "./Home"
 
-export default function HomeContainer() {
+const HomeContainer: React.FC = function() {
   return <Home></Home>
 }
+
+export default HomeContainer
