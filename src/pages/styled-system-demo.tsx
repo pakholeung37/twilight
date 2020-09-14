@@ -9,10 +9,12 @@ import {
   FontSizeProps,
   ColorProps,
 } from "styled-system"
-import styled, { ThemeProvider } from "styled-components"
+import styled from "@emotion/styled"
+import { ThemeProvider } from "emotion-theming"
+
 import theme from "styles/theme"
 
-const Box = styled.div<SpaceProps & WidthProps & FontSizeProps & ColorProps>`
+const Box = styled.div`
   ${space}
   ${width}
   ${fontSize}
@@ -22,7 +24,7 @@ const StyledSystemDemo: React.FC = function() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Box p={3} bg="whites.10" color="orange">
+        <Box p={3} bg="whites.10" color="blue">
           This is a Box
         </Box>
       </ThemeProvider>

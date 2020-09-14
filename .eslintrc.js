@@ -7,6 +7,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint",
   ],
+  plugins: ["emotion"],
   rules: {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
