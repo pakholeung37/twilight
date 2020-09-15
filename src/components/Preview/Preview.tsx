@@ -1,6 +1,9 @@
 import React from "react"
 import s from "./preview.module.scss"
+import PreviewContainer from "./PreviewContainer"
 
-export default function Preivew() {
+const Preivew: React.FC = () => {
   return <div id="preview-app" className={s.preview}></div>
 }
+
+export default Preivew
