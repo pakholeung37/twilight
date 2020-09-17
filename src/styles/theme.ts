@@ -9,4 +9,8 @@ breakpoints.xl = breakpoints[3]
 export default {
   ...theme,
   breakpoints,
+  t: {
+    pri: "black",
+    sec: "white",
+  },
 }
