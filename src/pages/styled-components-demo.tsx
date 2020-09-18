@@ -78,7 +78,8 @@ const Form: React.FC = function() {
     <RInput
       ref={inputRef}
       placeholder="Hover to focus!"
-      onMouseEnter={() => inputRef.current?.focus()}></RInput>
+      onMouseEnter={() => inputRef.current?.focus()}
+    ></RInput>
   )
 }
 

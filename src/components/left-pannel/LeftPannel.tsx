@@ -1,47 +1,22 @@
 import React from "react"
-import s from "./left-pannel.module.scss"
-import Tab from "./Tab"
-import TabItem from "./TabItem"
-import { TabData } from "./LeftPannelContainer"
+import { Box, Flex } from "@chakra-ui/core"
 
-export interface LeftPannelProps {
-  tabsData: TabData[]
-  activeItemIndex: number
-  setActiveItem: (index: number) => void
+const Nav: React.FC = () => {
+  return <Flex as="nav"></Flex>
 }
-
-export default function LeftPannel({
-  tabsData,
-  activeItemIndex,
-  setActiveItem,
-}: LeftPannelProps) {
+const LeftPanel: React.FC = () => {
   return (
-    <div className={s["left-pannel"]}>
-      <div className={s["tab-container"]}>
-        <Tab>
-          {tabsData.map((tabData, index) => (
-            <TabItem
-              active={index === activeItemIndex}
-              onClick={() => setActiveItem(index)}
-              title={tabData.name}
-              key={index}>
-              {tabData.tabContent}
-            </TabItem>
-          ))}
-        </Tab>
-      </div>
-      <div className={s["contents"]}>
-        {tabsData.map((tabData, index) => (
-          <div
-            className={[
-              s["content-container"],
-              index === activeItemIndex ? s["active"] : "",
-            ].join(" ")}
-            key={index}>
-            {tabData.content}
-          </div>
-        ))}
-      </div>
-    </div>
+    <Box
+      as="aside"
+      borderRight="1px"
+      borderColor="gray.200"
+      w="45px"
+      h="100%"
+      bg="white"
+    >
+      <Nav></Nav>
+    </Box>
   )
 }
+
+export default LeftPanel

@@ -8,10 +8,12 @@ export default [
   <Route
     key="styled-components-demo"
     path="/styled-components-demo"
-    component={styledComponentsDemo}></Route>,
+    component={styledComponentsDemo}
+  ></Route>,
   <Route
     key="styled-system-demo"
     path="/styled-system-demo"
-    component={StyledSystemDemo}></Route>,
+    component={StyledSystemDemo}
+  ></Route>,
   <Route key="home" path="/" component={HomePages}></Route>,
 ]
