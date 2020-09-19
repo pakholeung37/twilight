@@ -15,7 +15,7 @@ const Header: React.FC = () => {
       borderColor="border"
       align="center"
       justify="space-between"
-      h="72px"
+      h="63px"
     >
       <Flex align="center">
         <Logo></Logo>
