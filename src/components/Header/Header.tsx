@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       bg="white"
       px="20px"
       borderBottom="1px"
-      borderColor="gray.200"
+      borderColor="border"
       align="center"
       justify="space-between"
       h="72px"
@@ -23,16 +23,16 @@ const Header: React.FC = () => {
           orientation="vertical"
           mx="15px"
           h="24px"
-          borderColor="gray.400"
+          borderColor="divider"
         ></Divider>
-        <Text color="gray.600">尝试其他设计</Text>
+        <Text color="textbase">尝试其他设计</Text>
       </Flex>
       <Flex align="center">
-        <Text color="gray.400">所有变更已储存</Text>
+        <Text color="textlight">所有变更已储存</Text>
         <HistoryButton
           aria-label="go-back"
           icon={<RiArrowGoBackLine />}
-          color="blue.500"
+          color="twilight.500"
           cursor="pointer"
           fontSize="md"
           size="sm"
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         <HistoryButton
           aria-label="go-back"
           icon={<RiArrowGoForwardLine />}
-          color="blue.500"
+          color="twilight.500"
           cursor="pointer"
           fontSize="md"
           size="sm"
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
           orientation="vertical"
           mx="15px"
           h="24px"
-          borderColor="gray.400"
+          borderColor="divider"
         ></Divider>
         <Button
           colorScheme="blue"

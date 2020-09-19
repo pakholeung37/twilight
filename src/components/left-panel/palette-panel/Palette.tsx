@@ -1,21 +1,24 @@
 import React from "react"
-import { Box, Flex, List, ListItem, Text } from "@chakra-ui/core"
-const Palette: React.FC<{ colors: string[] }> = ({ colors }) => {
+import { Box, Flex } from "@chakra-ui/core"
+const Palette: React.FC<{ model: { name: string; hex: string }[] }> = ({
+  model,
+}) => {
   return (
     <Box
       border="1px"
-      borderColor="gray.200"
+      borderColor="border"
       borderRadius="10px"
       overflow="hidden"
     >
       <Flex>
-        {colors.map((color, index) => {
+        {model.map((color, index) => {
           return (
             <Box
               key={index}
-              backgroundColor={color}
+              backgroundColor={"#" + color.hex}
               h="24px"
               flexGrow={1}
+              title={color.name}
             ></Box>
           )
         })}

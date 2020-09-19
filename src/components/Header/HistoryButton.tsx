@@ -6,12 +6,12 @@ const HistoryButton: React.FC<IconButtonProps> = props => {
     <IconButton
       {...props}
       as="div"
-      color="gray.600"
+      color="textlight"
       border="none"
       variant="outline"
       _hover={{ color: props.color }}
       _active={{ color: props.color }}
-      _disabled={{ color: "gray.200", cursor: "default" }}
+      _disabled={{ color: "disabled", cursor: "default" }}
     >
       {props.children}
     </IconButton>

@@ -43,10 +43,11 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
         fontSize="1.4em"
         isRound
         color={active ? "white" : "gray.300"}
-        bg={active ? "blue.500" : undefined}
+        bg={active ? "twilight.500" : undefined}
+        borderColor={active ? "twilight.500" : undefined}
         _hover={{
-          color: active ? "white" : "blue.500",
-          borderColor: "blue.500",
+          color: active ? "white" : "twilight.500",
+          borderColor: "twilight.500",
         }}
       ></IconButton>
       <Text as="label" fontSize="xs" my=".3em" cursor="pointer">
@@ -73,7 +74,7 @@ const LeftPanel: React.FC = () => {
       justify="center"
       as="aside"
       borderRight="1px"
-      borderColor="gray.200"
+      borderColor="border"
       h="100%"
       bg="white"
       w="373px"
@@ -83,7 +84,7 @@ const LeftPanel: React.FC = () => {
         w="64px"
         flexShrink={0}
         borderRight="1px"
-        borderColor="gray.200"
+        borderColor="border"
       >
         <Tabs>
           <List px="0" spacing={4}>
