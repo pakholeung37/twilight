@@ -10,9 +10,25 @@ import {
   Avatar,
   Icon,
   IconButton,
+  IconButtonProps,
 } from "@chakra-ui/core"
 import Logo from "./Logo"
 
+const GhostIconButton: React.FC<IconButtonProps> = props => {
+  return (
+    <IconButton
+      as="div"
+      {...props}
+      color="gray.600"
+      border="none"
+      variant="outline"
+      _hover={{ color: props.color }}
+      _active={{ color: props.color }}
+    >
+      {props.children}
+    </IconButton>
+  )
+}
 const Header: React.FC = () => {
   return (
     <Flex
@@ -37,22 +53,25 @@ const Header: React.FC = () => {
       </Flex>
       <Flex align="center">
         <Text color="gray.400">所有变更已储存</Text>
-        <IconButton
+        <GhostIconButton
+          as="div"
           aria-label="go-back"
           icon={RiArrowGoBackLine}
-          variantColor="blick"
-          variant="ghost"
-          border="none"
-          isRound
-        ></IconButton>
-        <IconButton
+          color="blue.500"
+          cursor="pointer"
+          fontSize="md"
+          size="sm"
+          ml="15px"
+        ></GhostIconButton>
+        <GhostIconButton
+          as="div"
           aria-label="go-back"
           icon={RiArrowGoForwardLine}
-          variantColor="blue"
-          variant="ghost"
-          border="none"
-          isRound
-        ></IconButton>
+          color="blue.500"
+          cursor="pointer"
+          fontSize="md"
+          size="sm"
+        ></GhostIconButton>
         <Divider
           orientation="vertical"
           mx="15px"

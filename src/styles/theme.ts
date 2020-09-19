@@ -14,3 +14,5 @@ export default {
     sec: "white",
   },
 }
+
+export type Theme = typeof theme

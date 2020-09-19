@@ -1,11 +1,9 @@
 import React from "react"
-import { Box, Text } from "@chakra-ui/core"
+import { Box, Text, Image } from "@chakra-ui/core"
 
 const Logo: React.FC = () => (
   <Box>
-    <Text color="gray.700" fontSize="1.5em">
-      TWILIGHT
-    </Text>
+    <Image h="40px" src={process.env.PUBLIC_URL + "/logo.svg"}></Image>
   </Box>
 )
 
