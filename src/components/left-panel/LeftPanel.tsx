@@ -13,6 +13,9 @@ import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
 import { CgShapeSquare } from "react-icons/cg"
 import PalettePanel from "./palette-panel"
+import TextPanel from "./text-panel"
+import IconPanel from "./icon-panel"
+import BackgroundPanel from "./background-panel"
 
 const Tabs: React.FC = ({ children }) => {
   return (
@@ -22,6 +25,12 @@ const Tabs: React.FC = ({ children }) => {
   )
 }
 
+const panels = [
+  <PalettePanel key={0} />,
+  <TextPanel key={1} />,
+  <IconPanel key={2} />,
+  <BackgroundPanel key={3} />,
+]
 const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
   icon,
   children,
@@ -60,8 +69,7 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
 const menuItems = [
   { icon: <RiPaletteFill />, name: "调色盘" },
   { icon: <BiText />, name: "文本" },
-  { icon: <MdInsertPhoto />, name: "图示" },
-  { icon: <CgShapeSquare />, name: "形状" },
+  { icon: <MdInsertPhoto />, name: "标志" },
   { icon: <RiPaintBrushFill />, name: "背景" },
 ]
 const LeftPanel: React.FC = () => {
@@ -99,7 +107,7 @@ const LeftPanel: React.FC = () => {
         </Tabs>
       </Box>
       <Box h="100%" flexGrow={1}>
-        <PalettePanel></PalettePanel>
+        {panels[activeIndex]}
       </Box>
     </Flex>
   )

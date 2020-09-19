@@ -3,16 +3,7 @@ import { Text, Box, Flex, Divider, Icon } from "@chakra-ui/core"
 import { IoIosCheckmarkCircle } from "react-icons/io"
 import Palette from "./Palette"
 import palettes from "./palettes"
-const PanelInfo: React.FC = () => {
-  return (
-    <Box mx="30px" py="10px">
-      <Text color="textbase">调色板</Text>
-      <Text color="gray.600" fontSize="sm" lineHeight="base">
-        为您的商标选择一个漂亮的颜色组合。您可以单独挑选标签中的颜色。
-      </Text>
-    </Box>
-  )
-}
+import PanelInfo from "../PanelInfo"
 
 const activeState = {
   border: "1px",
@@ -23,9 +14,12 @@ const PalettePanel: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined)
   return (
     <Flex h="100%" direction="column">
-      <PanelInfo></PanelInfo>
+      <PanelInfo
+        title="调色板"
+        subtitle="为您的商标选择一个漂亮的颜色组合。您可以单独挑选标签中的颜色。"
+      ></PanelInfo>
       <Divider borderColor="border" my={0} />
-      <Box py="8px" h="" overflow="overlay">
+      <Box py="8px" overflow="overlay">
         {palettes.map((palette, index) => {
           return (
             <Box
