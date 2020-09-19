@@ -12,7 +12,7 @@ import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
 import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
 import { CgShapeSquare } from "react-icons/cg"
-import Content from "./content"
+import PalettePanel from "./PalettePanel"
 
 const Tabs: React.FC = ({ children }) => {
   return (
@@ -98,7 +98,7 @@ const LeftPanel: React.FC = () => {
         </Tabs>
       </Box>
       <Box h="100%" flexGrow={1}>
-        <PalettePannel></LeftPanel>
+        <PalettePanel></PalettePanel>
       </Box>
     </Flex>
   )
