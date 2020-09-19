@@ -12,7 +12,9 @@ import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
 import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
 import { CgShapeSquare } from "react-icons/cg"
-const Nav: React.FC = ({ children }) => {
+import Content from "./content"
+
+const Tabs: React.FC = ({ children }) => {
   return (
     <Flex as="nav" justify="center">
       {children}
@@ -25,10 +27,6 @@ const MenuItem: React.FC<{ icon: React.ComponentType; active?: boolean }> = ({
   children,
   active,
 }) => {
-  const activeStyle = {
-    color: "blue.500",
-    borderColor: "blue.500",
-  }
   return (
     <Flex
       as="div"
@@ -78,10 +76,16 @@ const LeftPanel: React.FC = () => {
       borderColor="gray.200"
       h="100%"
       bg="white"
-      w="72px"
+      w="400px"
     >
-      <Box h="100%" w="60px">
-        <Nav>
+      <Box
+        h="100%"
+        w="72px"
+        flexGrow={0}
+        borderRight="1px"
+        borderColor="gray.200"
+      >
+        <Tabs>
           <List px="0" spacing={4}>
             {menuItems.map((item, index) => (
               <ListItem key={index} onClick={() => toggleActiveIndex(index)}>
@@ -91,7 +95,10 @@ const LeftPanel: React.FC = () => {
               </ListItem>
             ))}
           </List>
-        </Nav>
+        </Tabs>
+      </Box>
+      <Box h="100%" flexGrow={1}>
+        <PalettePannel></LeftPanel>
       </Box>
     </Flex>
   )

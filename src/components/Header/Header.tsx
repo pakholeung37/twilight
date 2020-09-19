@@ -1,34 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import { RiArrowGoBackLine, RiArrowGoForwardLine } from "react-icons/ri"
-import {
-  Box,
-  Heading,
-  Flex,
-  Text,
-  Button,
-  Divider,
-  Avatar,
-  Icon,
-  IconButton,
-  IconButtonProps,
-} from "@chakra-ui/core"
+import { Flex, Text, Button, Divider, Avatar } from "@chakra-ui/core"
 import Logo from "./Logo"
+import HistoryButton from "./HistoryButton"
 
-const GhostIconButton: React.FC<IconButtonProps> = props => {
-  return (
-    <IconButton
-      as="div"
-      {...props}
-      color="gray.600"
-      border="none"
-      variant="outline"
-      _hover={{ color: props.color }}
-      _active={{ color: props.color }}
-    >
-      {props.children}
-    </IconButton>
-  )
-}
 const Header: React.FC = () => {
   return (
     <Flex
@@ -53,7 +28,7 @@ const Header: React.FC = () => {
       </Flex>
       <Flex align="center">
         <Text color="gray.400">所有变更已储存</Text>
-        <GhostIconButton
+        <HistoryButton
           as="div"
           aria-label="go-back"
           icon={RiArrowGoBackLine}
@@ -62,8 +37,8 @@ const Header: React.FC = () => {
           fontSize="md"
           size="sm"
           ml="15px"
-        ></GhostIconButton>
-        <GhostIconButton
+        ></HistoryButton>
+        <HistoryButton
           as="div"
           aria-label="go-back"
           icon={RiArrowGoForwardLine}
@@ -71,7 +46,7 @@ const Header: React.FC = () => {
           cursor="pointer"
           fontSize="md"
           size="sm"
-        ></GhostIconButton>
+        ></HistoryButton>
         <Divider
           orientation="vertical"
           mx="15px"
