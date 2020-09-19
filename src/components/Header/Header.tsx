@@ -1,6 +1,7 @@
 import React from "react"
-import { RiArrowGoBackLine, RiArrowGoForwardLine } from "react-icons/ri"
 import { Flex, Text, Button, Divider, Avatar } from "@chakra-ui/core"
+import { RiArrowGoBackLine, RiArrowGoForwardLine } from "react-icons/ri"
+import { IoMdArrowForward } from "react-icons/io"
 import Logo from "./Logo"
 import HistoryButton from "./HistoryButton"
 
@@ -29,9 +30,8 @@ const Header: React.FC = () => {
       <Flex align="center">
         <Text color="gray.400">所有变更已储存</Text>
         <HistoryButton
-          as="div"
           aria-label="go-back"
-          icon={RiArrowGoBackLine}
+          icon={<RiArrowGoBackLine />}
           color="blue.500"
           cursor="pointer"
           fontSize="md"
@@ -39,9 +39,8 @@ const Header: React.FC = () => {
           ml="15px"
         ></HistoryButton>
         <HistoryButton
-          as="div"
           aria-label="go-back"
-          icon={RiArrowGoForwardLine}
+          icon={<RiArrowGoForwardLine />}
           color="blue.500"
           cursor="pointer"
           fontSize="md"
@@ -54,14 +53,15 @@ const Header: React.FC = () => {
           borderColor="gray.400"
         ></Divider>
         <Button
-          variantColor="blue"
+          colorScheme="blue"
           border="none"
           size="md"
           borderRadius="20px"
-          rightIcon="arrow-forward"
+          rightIcon={<IoMdArrowForward />}
           cursor="pointer"
+          fontWeight="200"
         >
-          <Text fontWeight="200">下一步</Text>
+          下一步
         </Button>
         <Avatar size="sm" ml="15px"></Avatar>
       </Flex>

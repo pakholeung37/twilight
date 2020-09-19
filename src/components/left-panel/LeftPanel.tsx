@@ -12,7 +12,7 @@ import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
 import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
 import { CgShapeSquare } from "react-icons/cg"
-import PalettePanel from "./PalettePanel"
+import PalettePanel from "./palette-panel"
 
 const Tabs: React.FC = ({ children }) => {
   return (
@@ -22,7 +22,7 @@ const Tabs: React.FC = ({ children }) => {
   )
 }
 
-const MenuItem: React.FC<{ icon: React.ComponentType; active?: boolean }> = ({
+const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
   icon,
   children,
   active,
@@ -57,11 +57,11 @@ const MenuItem: React.FC<{ icon: React.ComponentType; active?: boolean }> = ({
 }
 
 const menuItems = [
-  { icon: RiPaletteFill, name: "调色盘" },
-  { icon: BiText, name: "文本" },
-  { icon: MdInsertPhoto, name: "图示" },
-  { icon: CgShapeSquare, name: "形状" },
-  { icon: RiPaintBrushFill, name: "背景" },
+  { icon: <RiPaletteFill />, name: "调色盘" },
+  { icon: <BiText />, name: "文本" },
+  { icon: <MdInsertPhoto />, name: "图示" },
+  { icon: <CgShapeSquare />, name: "形状" },
+  { icon: <RiPaintBrushFill />, name: "背景" },
 ]
 const LeftPanel: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -76,12 +76,12 @@ const LeftPanel: React.FC = () => {
       borderColor="gray.200"
       h="100%"
       bg="white"
-      w="400px"
+      w="373px"
     >
       <Box
         h="100%"
-        w="72px"
-        flexGrow={0}
+        w="64px"
+        flexShrink={0}
         borderRight="1px"
         borderColor="gray.200"
       >

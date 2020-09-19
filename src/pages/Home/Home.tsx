@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <section id="editor">
       <Header />
-      <Box h="calc(100vh - 73px)" bg="#efecea">
+      <Box h="calc(100vh - 73px)" bg="#efecea" overflow="hidden">
         <LeftPanel></LeftPanel>
         <Content></Content>
       </Box>

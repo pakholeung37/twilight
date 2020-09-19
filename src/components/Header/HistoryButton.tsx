@@ -4,8 +4,8 @@ import { IconButton, IconButtonProps } from "@chakra-ui/core"
 const HistoryButton: React.FC<IconButtonProps> = props => {
   return (
     <IconButton
-      as="div"
       {...props}
+      as="div"
       color="gray.600"
       border="none"
       variant="outline"
