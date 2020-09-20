@@ -3,7 +3,6 @@ import { Box } from "@chakra-ui/core"
 import Header from "components/header"
 import LeftPanel from "components/left-panel"
 import Sketch from "components/sketch"
-import {} from "react-icons"
 
 const Home: React.FC = () => {
   return (
