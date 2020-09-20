@@ -29,6 +29,7 @@ export default {
     textdark: "#171923",
     textbase: "#2D3748",
     textlight: "#A0AEC0",
+    workspacebase: "#EFECEA",
   },
 }
 
