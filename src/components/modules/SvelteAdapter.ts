@@ -30,7 +30,7 @@ export default function SvelteAdapter(
           target: container.current,
           props,
         })
-        const watchers: [string, Function][] = []
+        const watchers: [string, (args: any) => any][] = []
         for (const key in props) {
           const eventMatch = key.match(eventRe)
           const watchMatch = key.match(watchRe)
