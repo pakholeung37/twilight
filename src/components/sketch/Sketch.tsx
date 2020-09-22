@@ -1,8 +1,7 @@
 import React from "react"
 import { Box } from "@chakra-ui/core"
-import { height } from "styled-system"
 
-type SketchProps = {
+interface SketchProps {
   width?: number
   height?: number
 }

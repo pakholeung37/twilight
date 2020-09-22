@@ -14,7 +14,7 @@ import { SvelteComponent } from "svelte"
 export default function SvelteAdapter(
   MySvelteComponent: typeof SvelteComponent,
   displayName?: string,
-) {
+): React.ComponentType {
   let instance: SvelteComponent
 
   const Wrapper: React.FC<any> = props => {

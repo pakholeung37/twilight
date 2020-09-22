@@ -1,17 +1,8 @@
 import React, { useState } from "react"
-import {
-  Box,
-  Flex,
-  List,
-  ListItem,
-  IconButton,
-  Text,
-  Button,
-} from "@chakra-ui/core"
+import { Box, Flex, List, ListItem, IconButton, Text } from "@chakra-ui/core"
 import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
 import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
-import { CgShapeSquare } from "react-icons/cg"
 import PalettePanel from "./palette-panel"
 import TextPanel from "./text-panel"
 import IconPanel from "./icon-panel"

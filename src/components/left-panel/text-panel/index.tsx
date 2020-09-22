@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Text, Box, Flex, Divider, Icon } from "@chakra-ui/core"
+import { Box, Flex, Divider } from "@chakra-ui/core"
 import PanelInfo from "../PanelInfo"
 import AddButton from "../AddButton"
 
