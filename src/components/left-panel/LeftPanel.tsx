@@ -64,7 +64,8 @@ const menuItems = [
   { icon: <RiPaintBrushFill />, name: "背景" },
 ]
 const LeftPanel: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(1)
+  // setting initial tab state
+  const [activeIndex, setActiveIndex] = useState(2)
   const toggleActiveIndex = (index: number) => {
     setActiveIndex(index)
   }
