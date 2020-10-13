@@ -5,7 +5,7 @@ import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
 import PalettePanel from "./palette-panel"
 import TextPanel from "./text-panel"
-import IconPanel from "./icon-panel"
+import FigurePanel from "./figure-panel"
 import BackgroundPanel from "./background-panel"
 
 const Tabs: React.FC = ({ children }) => {
@@ -19,7 +19,7 @@ const Tabs: React.FC = ({ children }) => {
 const panels = [
   <PalettePanel key={0} />,
   <TextPanel key={1} />,
-  <IconPanel key={2} />,
+  <FigurePanel key={2} />,
   <BackgroundPanel key={3} />,
 ]
 const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({

@@ -12,7 +12,7 @@ export default class ImageBuilder {
           if (img) {
             res(img)
           } else {
-            rej({ errMsg: "something wrong with node" })
+            rej({ errMsg: "something wrong with parsing node" })
           }
           this._stage.destroy()
         },

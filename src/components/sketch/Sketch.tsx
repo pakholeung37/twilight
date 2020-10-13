@@ -1,6 +1,15 @@
 import React, { useRef, useEffect } from "react"
 import { Box } from "@chakra-ui/core"
-import { Stage, Layer, Circle, ImageBuilder } from "libs/sketch"
+import {
+  Stage,
+  Layer,
+  Ellipse,
+  Star,
+  Line,
+  ImageBuilder,
+  Wedge,
+  Text,
+} from "libs/sketch"
 
 interface SketchProps {
   width?: number
@@ -19,21 +28,20 @@ const Sketch: React.FC<SketchProps> = ({ width, height }) => {
       })
 
       const layer = new Layer()
-
-      layer.add(
-        new Circle({
-          x: stage.width() / 2,
-          y: stage.height() / 2,
-          radius: 70,
-          fill: "red",
-          stroke: "black",
-          strokeWidth: 4,
-        }),
-      )
+      const circle = new Text({
+        x: stage.width() / 2,
+        y: 15,
+        text: "Simple Text",
+        fontSize: 30,
+        fontFamily: "Calibri",
+        fill: "green",
+      })
+      layer.add(circle)
 
       stage.add(layer)
 
       layer.draw()
+      console.log(circle.toJSON())
     }
   })
   return (
