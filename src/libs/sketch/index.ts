@@ -15,3 +15,4 @@ export const Image = Konva.Image
 export const Label = Konva.Label
 export const Star = Konva.Star
 export const ImageBuilder = ib
+export * from "./use-sketch"
