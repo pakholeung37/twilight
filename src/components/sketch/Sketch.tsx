@@ -9,9 +9,11 @@ interface SketchProps {
 
 const Sketch: React.FC<SketchProps> = ({ width, height }) => {
   const sketchRef = useRef<HTMLDivElement>(null)
+  const [sketch, setActiveSketch] = useSketch("main", sketchRef)
   useEffect(() => {
-    useSketch()
+    setActiveSketch("main")
   })
+
   return (
     <Box
       bg="white"
