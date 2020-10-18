@@ -66,7 +66,7 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
 
 const LeftPanel: React.FC = () => {
   // setting initial tab state
-  const [activeIndex, setActiveIndex] = useState(2)
+  const [activeIndex, setActiveIndex] = useState(4)
   const toggleActiveIndex = (index: number) => {
     setActiveIndex(index)
   }
