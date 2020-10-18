@@ -6,11 +6,11 @@ import Figure from "./Figure"
 import { ImageBuilder, useSketch, create } from "libs/sketch"
 
 const figureList = [
-  `{"attrs":{"x":400,"y":300,"radius":70,"fill":"red","stroke":"black","strokeWidth":4},"className":"Circle"}`,
-  `{"attrs":{"x":400,"y":300,"radiusX":100,"radiusY":50,"fill":"yellow","stroke":"black","strokeWidth":4},"className":"Ellipse"}`,
-  `{"attrs":{"x":400,"y":300,"radius":70,"angle":60,"fill":"red","stroke":"black","strokeWidth":4,"rotation":-120},"className":"Wedge"}`,
-  `{"attrs":{"x":400,"y":300,"numPoints":6,"innerRadius":40,"outerRadius":70,"fill":"yellow","stroke":"black","strokeWidth":4},"className":"Star"}`,
-  `{"attrs":{"x":400,"y":15,"text":"Simple Text","fontSize":30,"fontFamily":"Calibri","fill":"green"},"className":"Text"}`,
+  `{"attrs":{"x":400,"y":300,"radius":70,"fill":"red","stroke":"black","strokeWidth":4, "draggable": true },"className":"Circle"}`,
+  `{"attrs":{"x":400,"y":300,"radiusX":100,"radiusY":50,"fill":"yellow","stroke":"black","strokeWidth":4, "draggable": true },"className":"Ellipse"}`,
+  `{"attrs":{"x":400,"y":300,"radius":70,"angle":60,"fill":"red","stroke":"black","strokeWidth":4,"rotation":-120, "draggable": true },"className":"Wedge"}`,
+  `{"attrs":{"x":400,"y":300,"numPoints":6,"innerRadius":40,"outerRadius":70,"fill":"yellow","stroke":"black","strokeWidth":4, "draggable": true },"className":"Star"}`,
+  `{"attrs":{"x":400,"y":15,"text":"Simple Text","fontSize":30,"fontFamily":"Calibri","fill":"green", "draggable": true },"className":"Text"}`,
 ]
 const FigurePanel: React.FC = () => {
   const [figures, updateFigures] = useState<string[]>([

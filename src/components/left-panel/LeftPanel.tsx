@@ -7,6 +7,19 @@ import PalettePanel from "./palette-panel"
 import TextPanel from "./text-panel"
 import FigurePanel from "./figure-panel"
 import BackgroundPanel from "./background-panel"
+import SketchPanel from "./sketch-panel"
+
+const menuItems = [
+  { icon: <RiPaletteFill />, name: "调色盘", tab: <PalettePanel key={0} /> },
+  { icon: <BiText />, name: "文本", tab: <TextPanel key={1} /> },
+  { icon: <MdInsertPhoto />, name: "标志", tab: <FigurePanel key={2} /> },
+  {
+    icon: <RiPaintBrushFill />,
+    name: "背景",
+    tab: <BackgroundPanel key={3} />,
+  },
+  { icon: <RiPaintBrushFill />, name: "画板", tab: <SketchPanel key={4} /> },
+]
 
 const Tabs: React.FC = ({ children }) => {
   return (
@@ -16,12 +29,6 @@ const Tabs: React.FC = ({ children }) => {
   )
 }
 
-const panels = [
-  <PalettePanel key={0} />,
-  <TextPanel key={1} />,
-  <FigurePanel key={2} />,
-  <BackgroundPanel key={3} />,
-]
 const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
   icon,
   children,
@@ -57,12 +64,6 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
   )
 }
 
-const menuItems = [
-  { icon: <RiPaletteFill />, name: "调色盘" },
-  { icon: <BiText />, name: "文本" },
-  { icon: <MdInsertPhoto />, name: "标志" },
-  { icon: <RiPaintBrushFill />, name: "背景" },
-]
 const LeftPanel: React.FC = () => {
   // setting initial tab state
   const [activeIndex, setActiveIndex] = useState(2)
@@ -99,7 +100,7 @@ const LeftPanel: React.FC = () => {
         </Tabs>
       </Box>
       <Box h="100%" flexGrow={1}>
-        {panels[activeIndex]}
+        {menuItems[activeIndex].tab}
       </Box>
     </Flex>
   )
