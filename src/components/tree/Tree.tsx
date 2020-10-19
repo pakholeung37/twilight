@@ -6,28 +6,22 @@ import { useClickAway } from "ahooks"
 export type TreeNode = {
   title: string
   children?: TreeNode[]
-  key: number | string
+  key: string | number
 }
 export interface TreeProps {
   treeData: TreeNode[] | TreeNode
 }
 
-const Tree: React.FC<TreeProps> = ({ treeData }) => {
-  const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
-  const nodeClick = (key: TreeNode["key"]) => {
-    setActiveNode(key)
-  }
-  const ref = useRef<HTMLDivElement>(null)
-  // useClickAway(() => {
-  //   setActiveNode("")
-  // }, ref)
+const Tree: React.FC<TreeProps & {
+  nodeClick: (key: string | number) => void
+  activeNode: string | number
+}> = ({ treeData, nodeClick, activeNode }) => {
   return (
     <>
       {((Array.isArray(treeData) && treeData) || [treeData]).map(node => {
         const active = activeNode === node.key
-        console.log(activeNode)
         return (
-          <Box ref={ref} key={node.key}>
+          <Box key={node.key}>
             <Button
               as="div"
               w="100%"
@@ -45,7 +39,11 @@ const Tree: React.FC<TreeProps> = ({ treeData }) => {
             </Button>
             {node.children ? (
               <Box ml="12px">
-                <Tree treeData={node.children}></Tree>
+                <Tree
+                  treeData={node.children}
+                  nodeClick={nodeClick}
+                  activeNode={activeNode}
+                ></Tree>
               </Box>
             ) : (
               undefined
@@ -57,4 +55,20 @@ const Tree: React.FC<TreeProps> = ({ treeData }) => {
   )
 }
 
-export default Tree
+const TreeRoot: React.FC<TreeProps> = args => {
+  const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
+  const nodeClick = (key: TreeNode["key"]) => {
+    setActiveNode(key)
+  }
+  const ref = useRef<HTMLDivElement>(null)
+  useClickAway(() => {
+    setActiveNode("")
+  }, ref)
+
+  return (
+    <div ref={ref}>
+      <Tree {...args} nodeClick={nodeClick} activeNode={activeNode}></Tree>
+    </div>
+  )
+}
+export default TreeRoot
