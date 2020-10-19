@@ -1,5 +1,7 @@
 import React from "react"
 
-export default function Tree() {
+const Tree: React.FC<{ arg1: boolean }> = ({ arg1 }) => {
   return <div>tree</div>
 }
+
+export default Tree
