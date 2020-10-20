@@ -45,3 +45,40 @@ Base.args = {
     },
   ],
 }
+
+export const Draggable = Template.bind({})
+Draggable.args = {
+  treeData: [
+    {
+      title: "parent 1",
+      key: "0",
+      children: [
+        {
+          title: "parent 1-0",
+          key: "1",
+          children: [
+            {
+              title: "leaf",
+              key: "2",
+            },
+            {
+              title: "leaf",
+              key: "3",
+            },
+          ],
+        },
+        {
+          title: "parent 1-1",
+          key: "4",
+          children: [
+            {
+              title: "leaf",
+              key: "5",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  draggable: true,
+}
