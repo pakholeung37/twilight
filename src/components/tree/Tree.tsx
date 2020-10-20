@@ -12,50 +12,58 @@ export interface TreeProps {
   treeData: TreeNode[] | TreeNode
 }
 
-const Tree: React.FC<TreeProps & {
+const Tree: React.FC<{
   nodeClick: (key: string | number) => void
   activeNode: string | number
+  treeData: TreeNode
 }> = ({ treeData, nodeClick, activeNode }) => {
+  const [isExpand, setExpand] = useState(false)
+  const toggleExpand = () => {
+    setExpand(prev => !prev)
+  }
+  const node = treeData
+  const active = activeNode === node.key
   return (
-    <>
-      {((Array.isArray(treeData) && treeData) || [treeData]).map(node => {
-        const active = activeNode === node.key
-        return (
-          <Box key={node.key}>
-            <Button
-              as="div"
-              w="100%"
-              h="2rem"
-              justifyContent="left"
-              color={active ? "white" : "gray.700"}
-              background={active ? "twilight.500" : "transparent"}
-              _hover={{}}
-              _active={{}}
-              transition=""
-              onClick={() => nodeClick(node.key)}
-            >
-              <BsFillCaretRightFill />
-              <Text pl="5px">{node.title}</Text>
-            </Button>
-            {node.children ? (
-              <Box ml="12px">
-                <Tree
-                  treeData={node.children}
-                  nodeClick={nodeClick}
-                  activeNode={activeNode}
-                ></Tree>
-              </Box>
-            ) : (
-              undefined
-            )}
+    <Box>
+      <Button
+        as="div"
+        w="100%"
+        h="2rem"
+        justifyContent="left"
+        color={active ? "white" : "gray.700"}
+        background={active ? "twilight.500" : "transparent"}
+        _hover={{}}
+        _active={{}}
+        transition=""
+        onClick={() => {
+          toggleExpand()
+          nodeClick(node.key)
+        }}
+      >
+        {node.children && (
+          <Box as="span" transform={isExpand ? "rotate(90deg)" : ""}>
+            <BsFillCaretRightFill />
           </Box>
-        )
-      })}
-    </>
+        )}
+        <Text pl="5px">{node.title}</Text>
+      </Button>
+      {node.children && (
+        <Box ml="12px" display={isExpand ? "block" : "none"}>
+          {node.children.map(node => (
+            <Tree
+              key={node.key}
+              treeData={node}
+              nodeClick={nodeClick}
+              activeNode={activeNode}
+            ></Tree>
+          ))}
+        </Box>
+      )}
+    </Box>
   )
 }
 
-const TreeRoot: React.FC<TreeProps> = args => {
+const TreeRoot: React.FC<TreeProps> = ({ treeData }) => {
   const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
   const nodeClick = (key: TreeNode["key"]) => {
     setActiveNode(key)
@@ -67,7 +75,14 @@ const TreeRoot: React.FC<TreeProps> = args => {
 
   return (
     <div ref={ref}>
-      <Tree {...args} nodeClick={nodeClick} activeNode={activeNode}></Tree>
+      {(Array.isArray(treeData) ? treeData : [treeData]).map(node => (
+        <Tree
+          key={node.key}
+          treeData={node}
+          nodeClick={nodeClick}
+          activeNode={activeNode}
+        ></Tree>
+      ))}
     </div>
   )
 }
