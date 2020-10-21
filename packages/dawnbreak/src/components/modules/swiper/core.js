@@ -286,8 +286,9 @@ export default class Siema {
           ? this.drag.endX - this.drag.startX
           : 0
 
-        this.sliderFrame.style[this.transformProperty] = `translate3d(${offset +
-          dragDistance}px, 0, 0)`
+        this.sliderFrame.style[this.transformProperty] = `translate3d(${
+          offset + dragDistance
+        }px, 0, 0)`
         this.currentSlide = mirrorSlideIndex - howManySlides
       } else {
         this.currentSlide = this.currentSlide - howManySlides
@@ -336,8 +337,9 @@ export default class Siema {
           ? this.drag.endX - this.drag.startX
           : 0
 
-        this.sliderFrame.style[this.transformProperty] = `translate3d(${offset +
-          dragDistance}px, 0, 0)`
+        this.sliderFrame.style[this.transformProperty] = `translate3d(${
+          offset + dragDistance
+        }px, 0, 0)`
         this.currentSlide = mirrorSlideIndex + howManySlides
       } else {
         this.currentSlide = this.currentSlide + howManySlides
@@ -584,10 +586,9 @@ export default class Siema {
       const offset = this.config.rtl
         ? currentOffset + dragOffset
         : currentOffset - dragOffset
-      this.sliderFrame.style[this.transformProperty] = `translate3d(${(this
-        .config.rtl
-        ? 1
-        : -1) * offset}px, 0, 0)`
+      this.sliderFrame.style[this.transformProperty] = `translate3d(${
+        (this.config.rtl ? 1 : -1) * offset
+      }px, 0, 0)`
     }
   }
 
@@ -654,10 +655,9 @@ export default class Siema {
       const offset = this.config.rtl
         ? currentOffset + dragOffset
         : currentOffset - dragOffset
-      this.sliderFrame.style[this.transformProperty] = `translate3d(${(this
-        .config.rtl
-        ? 1
-        : -1) * offset}px, 0, 0)`
+      this.sliderFrame.style[this.transformProperty] = `translate3d(${
+        (this.config.rtl ? 1 : -1) * offset
+      }px, 0, 0)`
     }
   }
 

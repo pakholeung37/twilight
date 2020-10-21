@@ -40,7 +40,7 @@ const Input = styled.input.attrs(props => ({
 const NormalButton: React.FC<{
   theme?: typeof theme
   children: any
-}> = function({ theme, children }) {
+}> = function ({ theme, children }) {
   return (
     <button style={theme ? { color: theme.fg, background: theme.bg } : {}}>
       {children}
@@ -72,7 +72,7 @@ const RInput = styled.input`
   border: none;
   border-radius: 3px;
 `
-const Form: React.FC = function() {
+const Form: React.FC = function () {
   const inputRef = useRef<HTMLInputElement>(null)
   return (
     <RInput
@@ -83,7 +83,7 @@ const Form: React.FC = function() {
   )
 }
 
-const StyledComponentsDemo: React.FC = function() {
+const StyledComponentsDemo: React.FC = function () {
   return (
     <>
       <ThemeProvider theme={theme}>

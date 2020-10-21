@@ -101,7 +101,7 @@ const Box = styled.div<
   ${fontSize}
   ${color}
 `
-const StyledSystemDemo: React.FC = function() {
+const StyledSystemDemo: React.FC = function () {
   return (
     <>
       <ThemeProvider theme={theme}>

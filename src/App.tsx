@@ -6,7 +6,7 @@ import routes from "./routes"
 import { ThemeProvider } from "emotion-theming"
 import theme from "styles/theme"
 import { RecoilRoot } from "recoil"
-const App: React.FC = function() {
+const App: React.FC = function () {
   return (
     <RecoilRoot>
       <Global

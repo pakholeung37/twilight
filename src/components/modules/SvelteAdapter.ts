@@ -51,7 +51,7 @@ export default function SvelteAdapter(
 
         if (watchers.length) {
           const update = instance.$$.update
-          instance.$$.update = function(...args) {
+          instance.$$.update = function (...args) {
             watchers.forEach(([name, callback]) => {
               const index = instance.$$.props[name]
               callback(instance.$$.ctx[index])
