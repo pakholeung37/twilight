@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Box, Text, Button, BoxProps, useUpdateEffect } from "@chakra-ui/core"
+import { Box, Text, Button, BoxProps } from "@chakra-ui/core"
 import { BsFillCaretRightFill } from "react-icons/bs"
-import { useClickAway, useDrag, useDrop, useTimeout, useUpdate } from "ahooks"
+import { useClickAway, useDrag, useDrop } from "ahooks"
 
 export type TreeNode = {
   title: string
@@ -24,12 +24,13 @@ export interface TreeProps {
   draggable?: boolean
 }
 
-const DropZone: React.FC<BoxProps & {
-  onHover?: () => void
-  onDrop?: (content: any, event: React.DragEvent<Element> | undefined) => void
-  active: boolean
-}> = ({ active, onHover, onDrop, ...args }) => {
-  const [porps, { isHovering }] = useDrop({
+const DropZone: React.FC<
+  BoxProps & {
+    onHover?: () => void
+    onDrop?: (content: any, event: React.DragEvent<Element> | undefined) => void
+  }
+> = ({ onHover, onDrop, ...args }) => {
+  const [dropProps, { isHovering }] = useDrop({
     onDom(content, e) {
       onDrop?.(content, e)
       console.log(`custom dropped: `, content, e)
@@ -39,21 +40,22 @@ const DropZone: React.FC<BoxProps & {
     const timer = setTimeout(() => {
       console.log("useTimeout")
       if (isHovering) {
+        // force to update isHovering
+        dropProps.onDragLeave({} as any)
         onHover?.()
       }
     }, 1000)
     return () => clearTimeout(timer)
-  }, [isHovering, onHover])
+  }, [dropProps, isHovering, onHover])
   return (
     <Box w="100%" position="relative" {...args}>
       <Box
         className="drop-zone"
-        {...porps}
+        {...dropProps}
         h="18px"
         w="100%"
         position="absolute"
         top="-7px"
-        pointerEvents={active ? "auto" : "none"}
       ></Box>
       <Box
         borderBottom="2px"
@@ -108,7 +110,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   })
   return (
     <Box>
-      {draggable && <DropZone zIndex={depth} active={isDragging}></DropZone>}
+      {draggable && isDragging && <DropZone zIndex={depth}></DropZone>}
       <Button
         as="div"
         w="100%"
@@ -160,12 +162,8 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           ))}
         </Box>
       )}
-      {draggable && (
-        <DropZone
-          zIndex={depth + 1}
-          active={isDragging}
-          onHover={() => setExpand(true)}
-        ></DropZone>
+      {draggable && isDragging && (
+        <DropZone zIndex={depth + 1} onHover={() => setExpand(true)}></DropZone>
       )}
     </Box>
   )
