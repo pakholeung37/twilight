@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 import { Box, Text, Button, BoxProps } from "@chakra-ui/core"
-import { BsFillCaretRightFill } from "react-icons/bs"
+import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
 
 export type TreeNode = {
@@ -26,7 +26,7 @@ export interface TreeProps {
 
 const DropZone: React.FC<
   BoxProps & {
-    onHover?: () => void
+    onHover?: (content: any) => void
     onDrop?: (content: any, event: React.DragEvent<Element> | undefined) => void
   }
 > = ({ onHover, onDrop, ...args }) => {
@@ -40,9 +40,7 @@ const DropZone: React.FC<
     const timer = setTimeout(() => {
       console.log("useTimeout")
       if (isHovering) {
-        // force to update isHovering
-        dropProps.onDragLeave({} as any)
-        onHover?.()
+        onHover?.(dropProps.onDragLeave)
       }
     }, 1000)
     return () => clearTimeout(timer)
@@ -110,12 +108,16 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   })
   return (
     <Box>
-      {draggable && isDragging && <DropZone zIndex={depth}></DropZone>}
+      {draggable && isDragging && (
+        <DropZone zIndex={depth} ml={`${(depth - 1) * 20}px`}></DropZone>
+      )}
       <Button
         as="div"
         w="100%"
-        h="1.6rem"
+        h="2rem"
         fontWeight=""
+        fontSize="1rem"
+        pl={`calc(.5rem + ${(depth - 1) * 20}px)`}
         justifyContent="left"
         color={active ? "white" : "gray.700"}
         background={active ? "twilight.500" : "transparent"}
@@ -132,21 +134,19 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         {...(draggable ? getDragProps(node) : {})}
         {...(draggable ? getDropProps : {})}
       >
-        {node.children && (
-          <Box
-            as="span"
-            transform={isExpand ? "rotate(90deg)" : ""}
-            pointerEvents="none"
-          >
-            <BsFillCaretRightFill pointerEvents="none" />
+        {node.children?.length && (
+          <Box as="span" pointerEvents="none" pr="5px">
+            {isExpand ? (
+              <AiFillCaretDown />
+            ) : (
+              <AiFillCaretRight pointerEvents="none" />
+            )}
           </Box>
         )}
-        <Text pl="5px" pointerEvents="none">
-          {node.title}
-        </Text>
+        <Text pointerEvents="none">{node.title}</Text>
       </Button>
-      {node.children && (
-        <Box ml="20px" display={isExpand ? "block" : "none"}>
+      {node.children?.length && (
+        <Box display={isExpand ? "block" : "none"}>
           {node.children.map(node => (
             <TreeNode
               key={node.key}
@@ -163,7 +163,14 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         </Box>
       )}
       {draggable && isDragging && (
-        <DropZone zIndex={depth + 1} onHover={() => setExpand(true)}></DropZone>
+        <DropZone
+          zIndex={depth + 1}
+          onHover={(dragLeave: any) => {
+            node.children?.length && dragLeave()
+            setExpand(true)
+          }}
+          ml={`${(depth - 1) * 20}px`}
+        ></DropZone>
       )}
     </Box>
   )

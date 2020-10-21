@@ -45,7 +45,7 @@ const SketchPanel: React.FC = () => {
         subtitle="管理您正在画板中的标志和文字。"
       ></PanelInfo>
       <Divider borderColor="border" my={0} />
-      <Box overflow="overlay" mx="30px" py="30px">
+      <Box overflow="overlay">
         <Tree {...treeProps}></Tree>
       </Box>
     </Flex>
