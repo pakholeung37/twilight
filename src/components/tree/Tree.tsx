@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Box, Text, Button, BoxProps } from "@chakra-ui/core"
+import { Box, Text, Button, BoxProps, Collapse } from "@chakra-ui/core"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
+import DropZone from "./DropZone"
 
 export type TreeNode = {
   title: string
-  children?: TreeNode[]
+  children?: Exclude<TreeNode[] | React.ReactNode, React.ReactNodeArray>
   key: string | number
 }
 
@@ -22,56 +23,6 @@ export interface TreeNodeProps {
 export interface TreeProps {
   treeData: TreeNode[] | TreeNode
   draggable?: boolean
-}
-
-const DropZone: React.FC<
-  BoxProps & {
-    onHover?: (content: any) => void
-    onDrop?: (content: any, event: React.DragEvent<Element> | undefined) => void
-  }
-> = ({ onHover, onDrop, ...args }) => {
-  const [dropProps, { isHovering }] = useDrop({
-    onDom(content, e) {
-      onDrop?.(content, e)
-      console.log(`custom dropped: `, content, e)
-    },
-  })
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("useTimeout")
-      if (isHovering) {
-        onHover?.(dropProps.onDragLeave)
-      }
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [dropProps, isHovering, onHover])
-  return (
-    <Box w="100%" position="relative" {...args}>
-      <Box
-        className="drop-zone"
-        {...dropProps}
-        h="18px"
-        w="100%"
-        position="absolute"
-        top="-7px"
-      ></Box>
-      <Box
-        borderBottom="2px"
-        borderColor={isHovering ? "twilight.500" : "transparent"}
-        position="absolute"
-        w="100%"
-        pointerEvents="none"
-        _after={{
-          content: `""`,
-          borderRadius: "4px",
-          border: "4px",
-          borderColor: isHovering ? "twilight.500" : "transparent",
-          position: "absolute",
-          top: "-3px",
-        }}
-      ></Box>
-    </Box>
-  )
 }
 
 const TreeNode: React.FC<TreeNodeProps> = ({
@@ -122,7 +73,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         color={active ? "white" : "gray.700"}
         background={active ? "twilight.500" : "transparent"}
         border="2px"
-        borderColor={isHovering ? "twilight.500" : "transparent"}
+        borderColor={isDragging && isHovering ? "twilight.500" : "transparent"}
         _hover={{}}
         _active={{}}
         transition=""
@@ -132,21 +83,24 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           nodeClick?.(node)
         }}
         {...(draggable ? getDragProps(node) : {})}
-        {...(draggable ? getDropProps : {})}
+        {...(draggable && isDragging ? getDropProps : {})}
       >
-        {node.children?.length && (
+        {(Array.isArray(node.children) && node.children.length) ||
+        node.children ? (
           <Box as="span" pointerEvents="none" pr="5px">
             {isExpand ? (
-              <AiFillCaretDown />
+              <Box mt="2px">
+                <AiFillCaretDown pointerEvents="none" />
+              </Box>
             ) : (
               <AiFillCaretRight pointerEvents="none" />
             )}
           </Box>
-        )}
+        ) : undefined}
         <Text pointerEvents="none">{node.title}</Text>
       </Button>
-      {node.children?.length && (
-        <Box display={isExpand ? "block" : "none"}>
+      {Array.isArray(node.children) && node.children?.length ? (
+        <Collapse isOpen={isExpand}>
           {node.children.map(node => (
             <TreeNode
               key={node.key}
@@ -160,13 +114,15 @@ const TreeNode: React.FC<TreeNodeProps> = ({
               activeNode={activeNode}
             ></TreeNode>
           ))}
-        </Box>
+        </Collapse>
+      ) : (
+        <Collapse isOpen={isExpand}>{node.children}</Collapse>
       )}
       {draggable && isDragging && (
         <DropZone
           zIndex={depth + 1}
           onHover={(dragLeave: any) => {
-            node.children?.length && dragLeave()
+            node.children && dragLeave()
             setExpand(true)
           }}
           ml={`${(depth - 1) * 20}px`}
