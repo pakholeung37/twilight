@@ -14,29 +14,29 @@ export const Base = Template.bind({})
 Base.args = {
   treeData: [
     {
-      title: "parent 1",
+      title: "容器 1",
       key: "0",
       children: [
         {
-          title: "parent 1-0",
+          title: "容器 1-0",
           key: "1",
           children: [
             {
-              title: "leaf",
+              title: "叶子点",
               key: "2",
             },
             {
-              title: "leaf",
+              title: "叶子点",
               key: "3",
             },
           ],
         },
         {
-          title: "parent 1-1",
+          title: "容器 1-1",
           key: "4",
           children: [
             {
-              title: "leaf",
+              title: "叶子点",
               key: "5",
             },
           ],
@@ -50,29 +50,29 @@ export const Draggable = Template.bind({})
 Draggable.args = {
   treeData: [
     {
-      title: "parent 1",
+      title: "容器 1",
       key: "0",
       children: [
         {
-          title: "parent 1-0",
+          title: "容器 1-0",
           key: "1",
           children: [
             {
-              title: "leaf",
+              title: "叶子点",
               key: "2",
             },
             {
-              title: "leaf",
+              title: "叶子点",
               key: "3",
             },
           ],
         },
         {
-          title: "parent 1-1",
+          title: "容器 1-1",
           key: "4",
           children: [
             {
-              title: "leaf",
+              title: "叶子点",
               key: "5",
             },
           ],
