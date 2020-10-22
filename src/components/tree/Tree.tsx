@@ -1,13 +1,29 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState } from "react"
 import { Box, Text, Button, BoxProps, Collapse } from "@chakra-ui/core"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
+import { DropProps } from "ahooks/lib/useDrop/useDrop"
 import DropZone from "./DropZone"
+
+type DragProps = ReturnType<ReturnType<typeof useDrag>>
+export interface renderButton {
+  (args: {
+    node: TreeNode
+    depth: number
+    active: boolean
+    TreeIsDragging: boolean
+    isHovering: boolean
+    isExpanded: boolean
+    onClick: () => void
+    dragDropProps: Partial<DropProps & DragProps>
+  }): React.ReactNode
+}
 
 export type TreeNode = {
   title: string
   children?: Exclude<TreeNode[] | React.ReactNode, React.ReactNodeArray>
   key: string | number
+  renderButton?: renderButton
 }
 
 export interface TreeNodeProps {
@@ -19,10 +35,12 @@ export interface TreeNodeProps {
   nodeClick?: (node: TreeNode) => void
   nodeDragStart?: (node: TreeNode, e: React.DragEvent | undefined) => void
   nodeDragEnd?: (node: TreeNode, e: React.DragEvent | undefined) => void
+  renderButton?: renderButton
 }
 export interface TreeProps {
   treeData: TreeNode[] | TreeNode
   draggable?: boolean
+  renderButton?: renderButton
 }
 
 const TreeNode: React.FC<TreeNodeProps> = ({
@@ -31,11 +49,12 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   depth,
   draggable,
   isDragging,
+  renderButton,
   nodeClick,
   nodeDragStart,
   nodeDragEnd,
 }) => {
-  const [isExpand, setExpand] = useState(false)
+  const [isExpanded, setExpand] = useState(false)
   const toggleExpand = () => {
     setExpand(prev => !prev)
   }
@@ -52,7 +71,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
       console.log("dragEnd", data, e)
     },
   })
-  const [getDropProps, { isHovering }] = useDrop({
+  const [dropProps, { isHovering }] = useDrop({
     onDom(content, e) {
       console.log(`custom dropped: `, content, e)
     },
@@ -62,45 +81,66 @@ const TreeNode: React.FC<TreeNodeProps> = ({
       {draggable && isDragging && (
         <DropZone zIndex={depth} ml={`${(depth - 1) * 20}px`}></DropZone>
       )}
-      <Button
-        as="div"
-        w="100%"
-        h="2rem"
-        fontWeight=""
-        fontSize="1rem"
-        pl={`calc(.5rem + ${(depth - 1) * 20}px)`}
-        justifyContent="left"
-        color={active ? "white" : "gray.700"}
-        background={active ? "twilight.500" : "transparent"}
-        border="2px"
-        borderColor={isDragging && isHovering ? "twilight.500" : "transparent"}
-        _hover={{}}
-        _active={{}}
-        transition=""
-        boxSizing="border-box"
-        onClick={() => {
-          toggleExpand()
-          nodeClick?.(node)
-        }}
-        {...(draggable ? getDragProps(node) : {})}
-        {...(draggable && isDragging ? getDropProps : {})}
-      >
-        {(Array.isArray(node.children) && node.children.length) ||
-        node.children ? (
-          <Box as="span" pointerEvents="none" pr="5px">
-            {isExpand ? (
-              <Box mt="2px">
-                <AiFillCaretDown pointerEvents="none" />
-              </Box>
-            ) : (
-              <AiFillCaretRight pointerEvents="none" />
-            )}
-          </Box>
-        ) : undefined}
-        <Text pointerEvents="none">{node.title}</Text>
-      </Button>
+      {renderButton ? (
+        renderButton({
+          node,
+          depth,
+          active,
+          TreeIsDragging: isDragging,
+          isHovering,
+          isExpanded,
+          onClick: () => {
+            toggleExpand()
+            nodeClick?.(node)
+          },
+          dragDropProps: {
+            ...(draggable ? getDragProps(node) : {}),
+            ...(draggable && isDragging ? dropProps : {}),
+          },
+        })
+      ) : (
+        <Button
+          as="div"
+          w="100%"
+          h="2rem"
+          fontWeight=""
+          fontSize="1rem"
+          pl={`calc(.5rem + ${(depth - 1) * 20}px)`}
+          justifyContent="left"
+          color={active ? "white" : "gray.700"}
+          background={active ? "twilight.500" : "transparent"}
+          border="2px"
+          borderColor={
+            isDragging && isHovering ? "twilight.500" : "transparent"
+          }
+          _hover={{}}
+          _active={{}}
+          transition=""
+          boxSizing="border-box"
+          onClick={() => {
+            toggleExpand()
+            nodeClick?.(node)
+          }}
+          {...(draggable ? getDragProps(node) : {})}
+          {...(draggable && isDragging ? dropProps : {})}
+        >
+          {(Array.isArray(node.children) && node.children.length) ||
+          node.children ? (
+            <Box as="span" pointerEvents="none" pr="5px">
+              {isExpanded ? (
+                <Box mt="2px">
+                  <AiFillCaretDown pointerEvents="none" />
+                </Box>
+              ) : (
+                <AiFillCaretRight pointerEvents="none" />
+              )}
+            </Box>
+          ) : undefined}
+          <Text pointerEvents="none">{node.title}</Text>
+        </Button>
+      )}
       {Array.isArray(node.children) && node.children?.length ? (
-        <Collapse isOpen={isExpand}>
+        <Collapse isOpen={isExpanded}>
           {node.children.map(node => (
             <TreeNode
               key={node.key}
@@ -112,11 +152,12 @@ const TreeNode: React.FC<TreeNodeProps> = ({
               nodeDragStart={nodeDragStart}
               nodeDragEnd={nodeDragEnd}
               activeNode={activeNode}
+              renderButton={node.renderButton || renderButton}
             ></TreeNode>
           ))}
         </Collapse>
       ) : (
-        <Collapse isOpen={isExpand}>{node.children}</Collapse>
+        <Collapse isOpen={isExpanded}>{node.children}</Collapse>
       )}
       {draggable && isDragging && (
         <DropZone
@@ -132,7 +173,11 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   )
 }
 
-const TreeRoot: React.FC<TreeProps> = ({ treeData, draggable }) => {
+const TreeRoot: React.FC<TreeProps> = ({
+  treeData,
+  draggable,
+  renderButton,
+}) => {
   const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
   const nodeClick = ({ key }: TreeNode) => {
     setActiveNode(key)
@@ -162,6 +207,7 @@ const TreeRoot: React.FC<TreeProps> = ({ treeData, draggable }) => {
           activeNode={activeNode}
           isDragging={isNodeDragging}
           draggable={draggable || false}
+          renderButton={node.renderButton || renderButton}
         ></TreeNode>
       ))}
     </div>
