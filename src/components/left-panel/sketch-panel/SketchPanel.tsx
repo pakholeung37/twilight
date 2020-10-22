@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { Box, Flex, Divider, Button, Collapse } from "@chakra-ui/core"
+import { Box, Flex, Divider, Button, Collapse, Text } from "@chakra-ui/core"
+import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"
 import Tree from "components/tree"
-
-const treeProps = {
+import { TreeProps, RenderButton } from "components/tree/Tree"
+const subTreeProps = {
   treeData: [
     {
       title: "容器 1",
@@ -37,8 +38,64 @@ const treeProps = {
     },
   ],
 }
+
+const sketchButton: RenderButton = ({
+  node,
+  onClick,
+  dragDropProps,
+  isExpanded,
+}) => {
+  return (
+    <Button
+      as="div"
+      w="100%"
+      h="2rem"
+      fontWeight=""
+      fontSize=".9rem"
+      justifyContent="left"
+      color="gray.700"
+      backgroundColor="#f9f9f9"
+      borderBottom="1px"
+      borderColor="border"
+      _hover={{}}
+      _active={{}}
+      transition=""
+      borderRadius="none"
+      boxSizing="border-box"
+      onClick={onClick}
+      {...dragDropProps}
+    >
+      {(Array.isArray(node.children) && node.children.length) ||
+      node.children ? (
+        <Box as="span" pointerEvents="none" pr="5px">
+          {isExpanded ? (
+            <Box mt="2px">
+              <AiFillCaretDown pointerEvents="none" />
+            </Box>
+          ) : (
+            <AiFillCaretRight pointerEvents="none" />
+          )}
+        </Box>
+      ) : undefined}
+      <Text pointerEvents="none">{node.title}</Text>
+    </Button>
+  )
+}
+const treeProps: TreeProps = {
+  treeData: [
+    {
+      title: "画板 1",
+      key: "1",
+      renderButton: sketchButton,
+      children: (
+        <Box m="4px" backgroundColor="#f3f3f3">
+          <Tree {...subTreeProps}></Tree>
+        </Box>
+      ),
+    },
+  ],
+}
 const SketchPanel: React.FC = () => {
-  const [sketchOpen, setSketchOpen] = useState(false)
   return (
     <Flex h="100%" direction="column">
       <PanelInfo
@@ -46,31 +103,7 @@ const SketchPanel: React.FC = () => {
         subtitle="管理您正在画板中的标志和文字。"
       ></PanelInfo>
       <Divider borderColor="border" my={0} />
-      <Box overflow="overlay" backgroundColor="#f3f3f3">
-        <Button
-          as="div"
-          w="100%"
-          h="2rem"
-          fontWeight=""
-          fontSize="1rem"
-          justifyContent="left"
-          color="gray.700"
-          backgroundColor="#f9f9f9"
-          borderBottom="1px"
-          borderColor="border"
-          _hover={{}}
-          _active={{}}
-          transition=""
-          borderRadius="none"
-          boxSizing="border-box"
-          onClick={() => setSketchOpen(prev => !prev)}
-        >
-          画板1
-        </Button>
-        <Collapse m="4px" isOpen={sketchOpen}>
-          <Tree {...treeProps}></Tree>
-        </Collapse>
-      </Box>
+      <Tree {...treeProps}></Tree>
     </Flex>
   )
 }

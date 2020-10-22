@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Box, Text, Button, BoxProps, Collapse } from "@chakra-ui/core"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
@@ -6,7 +6,7 @@ import { DropProps } from "ahooks/lib/useDrop/useDrop"
 import DropZone from "./DropZone"
 
 type DragProps = ReturnType<ReturnType<typeof useDrag>>
-export interface renderButton {
+export interface RenderButton {
   (args: {
     node: TreeNode
     depth: number
@@ -23,7 +23,7 @@ export type TreeNode = {
   title: string
   children?: Exclude<TreeNode[] | React.ReactNode, React.ReactNodeArray>
   key: string | number
-  renderButton?: renderButton
+  renderButton?: RenderButton
 }
 
 export interface TreeNodeProps {
@@ -35,12 +35,12 @@ export interface TreeNodeProps {
   nodeClick?: (node: TreeNode) => void
   nodeDragStart?: (node: TreeNode, e: React.DragEvent | undefined) => void
   nodeDragEnd?: (node: TreeNode, e: React.DragEvent | undefined) => void
-  renderButton?: renderButton
+  renderButton?: RenderButton
 }
 export interface TreeProps {
   treeData: TreeNode[] | TreeNode
   draggable?: boolean
-  renderButton?: renderButton
+  renderButton?: RenderButton
 }
 
 const TreeNode: React.FC<TreeNodeProps> = ({
@@ -61,6 +61,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   const node = treeData
   const active = activeNode === node.key
 
+  // drag event
   const getDragProps = useDrag({
     onDragStart(data, e) {
       nodeDragStart?.(data, e)
@@ -71,11 +72,24 @@ const TreeNode: React.FC<TreeNodeProps> = ({
       console.log("dragEnd", data, e)
     },
   })
+  // drop event
   const [dropProps, { isHovering }] = useDrop({
     onDom(content, e) {
       console.log(`custom dropped: `, content, e)
     },
   })
+
+  // auto expand while hover on button
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("useTimeout")
+      if (isHovering && !isExpanded) {
+        setExpand(true)
+      }
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [isExpanded, isHovering])
+
   return (
     <Box>
       {draggable && isDragging && (
@@ -104,7 +118,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           w="100%"
           h="2rem"
           fontWeight=""
-          fontSize="1rem"
+          fontSize=".8rem"
           pl={`calc(.5rem + ${(depth - 1) * 20}px)`}
           justifyContent="left"
           color={active ? "white" : "gray.700"}

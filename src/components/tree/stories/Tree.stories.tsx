@@ -1,7 +1,7 @@
 import React from "react"
 import { Story, Meta } from "@storybook/react/types-6-0"
 import { Flex, Text, Box } from "@chakra-ui/core"
-import Tree, { TreeProps, renderButton } from "../Tree"
+import Tree, { TreeProps, RenderButton } from "../Tree"
 import {
   AiOutlineFolder,
   AiOutlineFolderOpen,
@@ -187,8 +187,8 @@ Recursive.args = {
   draggable: true,
 }
 
-export const RenderButton = Template.bind({})
-const customButton: renderButton = ({
+export const Render_Button = Template.bind({})
+const customButton: RenderButton = ({
   node,
   onClick,
   dragDropProps,
@@ -219,7 +219,7 @@ const customButton: renderButton = ({
     </Box>
   )
 }
-RenderButton.args = {
+Render_Button.args = {
   treeData: [
     {
       title: "文件夹 1",
