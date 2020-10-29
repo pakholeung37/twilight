@@ -99,9 +99,16 @@ const LeftPanel: React.FC = () => {
           </List>
         </Tabs>
       </Box>
-      <Box h="100%" flexGrow={1}>
-        {menuItems[activeIndex].tab}
-      </Box>
+      {menuItems.map((item, index) => (
+        <Box
+          h="100%"
+          display={index === activeIndex ? "block" : "none"}
+          flexGrow={1}
+          key={index}
+        >
+          {item.tab}
+        </Box>
+      ))}
     </Flex>
   )
 }
