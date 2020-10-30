@@ -1,12 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
-import {
-  Box,
-  Text,
-  Button,
-  BoxProps,
-  Collapse,
-  ColorProps,
-} from "@chakra-ui/core"
+import { Box, Text, Button, BoxProps, ColorProps } from "@chakra-ui/core"
+import { Collapse } from "@chakra-ui/transition"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
 import { DropProps } from "ahooks/lib/useDrop/useDrop"
@@ -161,7 +155,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         </Button>
       )}
       {Array.isArray(node.children) && node.children?.length ? (
-        <Collapse isOpen={isExpanded}>
+        <Collapse in={isExpanded}>
           {node.children.map(node => (
             <TreeNode
               key={node.key}
@@ -178,7 +172,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           ))}
         </Collapse>
       ) : (
-        <Collapse isOpen={isExpanded}>{node.children}</Collapse>
+        <Collapse in={isExpanded}>{node.children}</Collapse>
       )}
       {draggable && isDragging && (
         <DropZone

@@ -1,5 +1,7 @@
-import { Stage, Node } from "./index"
+import konva from "konva"
 
+const Stage = konva.Stage
+const Node = konva.Node
 export default class ImageBuilder {
   static _stage: InstanceType<typeof Stage>
 

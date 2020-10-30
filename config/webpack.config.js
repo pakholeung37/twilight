@@ -298,7 +298,7 @@ module.exports = function (webpackEnv) {
         ...paths.moduleFileExtensions
           .map(ext => `.${ext}`)
           .filter(ext => useTypeScript || !ext.includes("ts")),
-        "svelte",
+        // "svelte",
       ],
       alias: {
         // Support React Native Web
@@ -311,7 +311,7 @@ module.exports = function (webpackEnv) {
         }),
         ...(modules.webpackAliases || {}),
         // add svelte
-        svelte: path.resolve("node_modules", "svelte"),
+        // svelte: path.resolve("node_modules", "svelte"),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -411,23 +411,23 @@ module.exports = function (webpackEnv) {
               },
             },
             // svelte config
-            {
-              test: /\.(svelte)$/,
-              exclude: /node_modules/,
-              use: {
-                loader: "svelte-loader",
-                options: {
-                  preprocess: require("svelte-preprocess")({
-                    scss: {
-                      includePaths: ["src"],
-                    },
-                    postcss: {
-                      plugins: [require("autoprefixer")],
-                    },
-                  }),
-                },
-              },
-            },
+            // {
+            //   test: /\.(svelte)$/,
+            //   exclude: /node_modules/,
+            //   use: {
+            //     loader: "svelte-loader",
+            //     options: {
+            //       preprocess: require("svelte-preprocess")({
+            //         scss: {
+            //           includePaths: ["src"],
+            //         },
+            //         postcss: {
+            //           plugins: [require("autoprefixer")],
+            //         },
+            //       }),
+            //     },
+            //   },
+            // },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
             {

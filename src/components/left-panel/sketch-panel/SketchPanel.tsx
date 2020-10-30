@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Flex, Divider, Button, Collapse, Text } from "@chakra-ui/core"
+import { Box, Flex, Divider, Button, Text } from "@chakra-ui/core"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"
 import Tree from "components/tree"

@@ -1,7 +1,8 @@
 import { RefObject, useEffect } from "react"
 import { atom, useRecoilState } from "recoil"
-import { Layer, Stage } from "./index"
+import Konva from "konva"
 
+const { Layer, Stage } = Konva
 const activeSketchState = atom({
   key: "activeSketchState",
   default: "",
