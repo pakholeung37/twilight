@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react"
 import { Box } from "@chakra-ui/core"
-import { useSketch } from "libs/sketch"
 import Konva from "konva"
 import { Stage, Layer, Rect, Text } from "libs/sketch"
 
@@ -28,6 +27,7 @@ class ColoredRect extends React.Component {
         fill={this.state.color}
         shadowBlur={5}
         onClick={this.handleClick}
+        draggable={true}
       />
     )
   }
