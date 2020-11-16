@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Box, Flex, Divider, Image } from "@chakra-ui/core"
+import { Box, Flex, Divider, Image } from "@chakra-ui/react"
 import PanelInfo from "../PanelInfo"
 import AddButton from "../AddButton"
 import Figure from "./Figure"
@@ -45,7 +45,7 @@ const FigurePanel: React.FC = () => {
         title="管理标志"
         subtitle="使用一个或多个标志向大家展示您的业务。"
       ></PanelInfo>
-      <Divider borderColor="border" my={0} />
+      <Divider my={0} />
       <Box overflow="auto">
         {figures.map((figure, index) => (
           <Box

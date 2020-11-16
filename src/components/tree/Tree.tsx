@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Box, Text, Button, BoxProps, ColorProps } from "@chakra-ui/core"
+import { Box, Text, Button, BoxProps, ColorProps } from "@chakra-ui/react"
 import { Collapse } from "./Collapse"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
@@ -118,8 +118,8 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           as="div"
           w="100%"
           h="2rem"
-          fontWeight=""
-          fontSize=".8rem"
+          fontWeight="auto"
+          fontSize="xs"
           pl={`calc(.5rem + ${(depth - 1) * 20}px)`}
           justifyContent="left"
           color={active ? "white" : "gray.700"}

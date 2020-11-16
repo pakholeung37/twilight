@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { IconButton, IconButtonProps } from "@chakra-ui/core"
+import { IconButton, IconButtonProps } from "@chakra-ui/react"
 
 const HistoryButton: React.FC<IconButtonProps> = props => {
   return (

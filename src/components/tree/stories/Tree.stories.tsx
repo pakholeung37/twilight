@@ -1,6 +1,6 @@
 import React from "react"
 import { Story, Meta } from "@storybook/react/types-6-0"
-import { Flex, Text, Box } from "@chakra-ui/core"
+import { Flex, Text, Box } from "@chakra-ui/react"
 import Tree, { TreeProps, RenderButton } from "../Tree"
 import {
   AiOutlineFolder,

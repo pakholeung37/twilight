@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Flex } from "@chakra-ui/core"
+import { Box, Flex } from "@chakra-ui/react"
 import Sketch from "components/sketch"
 
 const WorkSpace: React.FC = () => {

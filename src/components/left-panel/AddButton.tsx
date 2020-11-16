@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Text, Icon, Button } from "@chakra-ui/core"
+import { Flex, Text, Icon, Button } from "@chakra-ui/react"
 import { RiAddFill } from "react-icons/ri"
 
 const icons = {

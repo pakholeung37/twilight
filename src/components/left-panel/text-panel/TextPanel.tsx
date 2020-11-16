@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Flex, Divider } from "@chakra-ui/core"
+import { Box, Flex, Divider } from "@chakra-ui/react"
 import PanelInfo from "../PanelInfo"
 import AddButton from "../AddButton"
 
@@ -10,7 +10,7 @@ const TextPanel: React.FC = () => {
         title="管理文字"
         subtitle="新增并自订所有您喜欢的文字。"
       ></PanelInfo>
-      <Divider borderColor="border" my={0} />
+      <Divider my={0} />
       <Box overflow="overlay" mx="30px" py="30px">
         <AddButton title="新增文本"></AddButton>
       </Box>

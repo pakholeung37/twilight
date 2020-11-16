@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Flex, Divider, Button, Text } from "@chakra-ui/core"
+import { Box, Flex, Divider, Button, Text } from "@chakra-ui/react"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"
 import Tree from "components/tree"
@@ -50,13 +50,11 @@ const sketchButton: RenderButton = ({
       as="div"
       w="100%"
       h="2rem"
-      fontWeight=""
-      fontSize=".9rem"
+      fontSize="xs"
       justifyContent="left"
       color="gray.700"
       backgroundColor="#f9f9f9"
       borderBottom="1px"
-      borderColor="border"
       _hover={{}}
       _active={{}}
       transition=""
@@ -102,7 +100,7 @@ const SketchPanel: React.FC = () => {
         title="管理画板"
         subtitle="管理您正在画板中的标志和文字。"
       ></PanelInfo>
-      <Divider borderColor="border" my={0} />
+      <Divider my={0} />
       <Tree {...treeProps}></Tree>
     </Flex>
   )

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react"
-import { Box } from "@chakra-ui/core"
+import { Box } from "@chakra-ui/react"
 import Konva from "konva"
 import { Stage, Layer, Rect, Text } from "libs/sketch"
 

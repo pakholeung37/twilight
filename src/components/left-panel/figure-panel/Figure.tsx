@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Box, Image } from "@chakra-ui/core"
+import { Flex, Box, Image } from "@chakra-ui/react"
 
 const Figure: React.FC<{
   imgSrc?: string

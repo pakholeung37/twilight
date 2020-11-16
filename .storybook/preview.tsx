@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ChakraProvider } from "@chakra-ui/core"
+import { ChakraProvider } from "@chakra-ui/react"
 import { Global, css } from "@emotion/core"
 import normalize from "emotion-normalize"
 import { RecoilRoot } from "recoil"
@@ -17,7 +17,7 @@ const withChakra = (StoryFn: Function) => (
           ${normalize}
         `}
       />
-        <StoryFn />
+      <StoryFn />
     </ChakraProvider>
   </RecoilRoot>
 )

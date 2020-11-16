@@ -1,4 +1,4 @@
-import { theme } from "@chakra-ui/core"
+import { theme, extendTheme } from "@chakra-ui/react"
 
 const breakpoints: any = ["360px", "768px", "1024px", "1440px"]
 breakpoints.sm = breakpoints[0]
@@ -6,8 +6,14 @@ breakpoints.md = breakpoints[1]
 breakpoints.lg = breakpoints[2]
 breakpoints.xl = breakpoints[3]
 
-export default {
-  ...theme,
+export default extendTheme({
+  fontSizes: {
+    xs: "12px",
+    sm: "14px",
+    md: "1rem",
+    lg: "1.125rem",
+    xl: "1.25rem",
+  },
   breakpoints,
   colors: {
     ...theme.colors,
@@ -31,6 +37,20 @@ export default {
     textlight: "#A0AEC0",
     workspacebase: "#EFECEA",
   },
-}
+  borders: {
+    none: 0,
+    "1px": "1px solid #E2E8F0",
+    "2px": "2px solid #E2E8F0",
+    "4px": "4px solid #E2E8F0",
+    "8px": "8px solid #E2E8F0",
+  },
+  styles: {
+    global: {
+      body: {
+        fontSize: "sm",
+      },
+    },
+  },
+})
 
 export type Theme = typeof theme

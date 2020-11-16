@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Text, Button, Divider, Avatar } from "@chakra-ui/core"
+import { Flex, Text, Button, Divider, Avatar } from "@chakra-ui/react"
 import { RiArrowGoBackLine, RiArrowGoForwardLine } from "react-icons/ri"
 import { IoMdArrowForward } from "react-icons/io"
 import Logo from "./Logo"
@@ -12,10 +12,9 @@ const Header: React.FC = () => {
       bg="white"
       px="20px"
       borderBottom="1px"
-      borderColor="border"
       align="center"
       justify="space-between"
-      h="63px"
+      h="53px"
     >
       <Flex align="center">
         <Logo></Logo>
@@ -55,7 +54,7 @@ const Header: React.FC = () => {
         <Button
           colorScheme="blue"
           border="none"
-          size="md"
+          size="sm"
           borderRadius="20px"
           rightIcon={<IoMdArrowForward />}
           cursor="pointer"

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Flex, List, ListItem, IconButton, Text } from "@chakra-ui/core"
+import { Box, Flex, List, ListItem, IconButton, Text } from "@chakra-ui/react"
 import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
 import { BiText } from "react-icons/bi"
 import { MdInsertPhoto } from "react-icons/md"
@@ -47,7 +47,8 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
         icon={icon}
         aria-label="menu-button"
         variant="outline"
-        fontSize="1.4em"
+        fontSize="sm"
+        size="sm"
         isRound
         color={active ? "white" : "gray.300"}
         bg={active ? "twilight.500" : undefined}
@@ -57,7 +58,7 @@ const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
           borderColor: "twilight.500",
         }}
       ></IconButton>
-      <Text as="label" fontSize="xs" my=".3em" cursor="pointer">
+      <Text as="label" fontSize="xs" my="1" cursor="pointer">
         {children}
       </Text>
     </Flex>
@@ -75,20 +76,13 @@ const LeftPanel: React.FC = () => {
       justify="center"
       as="aside"
       borderRight="1px"
-      borderColor="border"
       h="100%"
       bg="white"
-      w="373px"
+      w="320px"
     >
-      <Box
-        h="100%"
-        w="64px"
-        flexShrink={0}
-        borderRight="1px"
-        borderColor="border"
-      >
+      <Box h="100%" w="52px" flexShrink={0} borderRight="1px" py="4">
         <Tabs>
-          <List px="0" spacing={4}>
+          <List px="0" spacing="2">
             {menuItems.map((item, index) => (
               <ListItem key={index} onClick={() => toggleActiveIndex(index)}>
                 <MenuItem icon={item.icon} active={activeIndex === index}>
