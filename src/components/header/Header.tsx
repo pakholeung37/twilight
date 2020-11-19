@@ -54,15 +54,13 @@ const Header: React.FC = () => {
         <Button
           colorScheme="blue"
           border="none"
-          size="sm"
           borderRadius="20px"
           rightIcon={<IoMdArrowForward />}
           cursor="pointer"
-          fontWeight="200"
         >
           下一步
         </Button>
-        <Avatar size="sm" ml="15px"></Avatar>
+        <Avatar ml="15px"></Avatar>
       </Flex>
     </Flex>
   )

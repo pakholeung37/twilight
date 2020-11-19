@@ -51,6 +51,30 @@ export default extendTheme({
       },
     },
   },
+  components: {
+    Button: getDefaultProps(),
+    Avatar: getDefaultProps(),
+    Input: {
+      baseStyle: {
+        borderRadius: "xs",
+      },
+      defaultProps: {
+        size: "xs",
+      },
+    },
+    InputNumber: {
+      defaultProps: {
+        size: "xs",
+      },
+    },
+  },
 })
 
+function getDefaultProps() {
+  return {
+    defaultProps: {
+      size: "sm",
+    },
+  }
+}
 export type Theme = typeof theme

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Box, Flex, List, ListItem, IconButton, Text } from "@chakra-ui/react"
 import { BiText } from "react-icons/bi"
-import TextPanel from "./text-panel"
+import InfoPanel from "./info-panel"
 
 const LeftPanel: React.FC = () => {
   // setting initial tab state
@@ -17,7 +17,9 @@ const LeftPanel: React.FC = () => {
       bg="white"
       w="272px"
       borderLeft="1px"
-    ></Flex>
+    >
+      <InfoPanel />
+    </Flex>
   )
 }
 
