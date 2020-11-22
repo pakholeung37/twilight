@@ -83,7 +83,6 @@ const TreeNode: React.FC<TreeNodeProps> = ({
   // auto expand while hover on button
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("useTimeout")
       if (isHovering && !isExpanded) {
         setExpand(true)
       }

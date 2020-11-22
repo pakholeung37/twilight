@@ -35,7 +35,7 @@ export default extendTheme({
     textdark: "#171923",
     textbase: "#2D3748",
     textlight: "#A0AEC0",
-    workspacebase: "#EFECEA",
+    workspacebase: "#F9F9F9",
   },
   borders: {
     none: 0,
@@ -62,7 +62,7 @@ export default extendTheme({
         size: "xs",
       },
     },
-    InputNumber: {
+    NumberInput: {
       defaultProps: {
         size: "xs",
       },

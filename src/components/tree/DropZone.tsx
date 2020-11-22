@@ -17,7 +17,6 @@ const DropZone: React.FC<
   })
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("useTimeout")
       if (isHovering) {
         onHover?.(dropProps.onDragLeave)
       }

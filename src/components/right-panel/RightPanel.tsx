@@ -10,14 +10,7 @@ const LeftPanel: React.FC = () => {
     setActiveIndex(index)
   }
   return (
-    <Flex
-      justify="center"
-      as="aside"
-      h="100%"
-      bg="white"
-      w="272px"
-      borderLeft="1px"
-    >
+    <Flex justify="center" as="aside" h="100%" w="272px" borderLeft="1px">
       <InfoPanel />
     </Flex>
   )
