@@ -68,7 +68,6 @@ export interface StageProps
 // consumers will not be able to use the values as a type or constructor.
 // The down side to this approach, is that typescript thinks the type is a
 // function, but if the user tries to call it a runtime exception will occur.
-
 export const Stage: KonvaNodeComponent<Konva.Stage, StageProps>
 export const Layer: KonvaNodeComponent<Konva.Layer, Konva.LayerConfig>
 export const FastLayer: KonvaNodeComponent<Konva.FastLayer, Konva.LayerConfig>
@@ -100,5 +99,98 @@ export const RegularPolygon: KonvaNodeComponent<
 >
 export const Arrow: KonvaNodeComponent<Konva.Arrow, Konva.ArrowConfig>
 export const Shape: KonvaNodeComponent<Konva.Shape, Konva.ShapeConfig>
+
+export type LayerProps = Konva.LayerConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Layer>
+export type FastLayerProps = Konva.LayerConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.FastLayer>
+export type GroupProps = Konva.NodeConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Group>
+export type LabelProps = Konva.NodeConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Label>
+
+/** Shapes */
+export type RectProps = Konva.RectConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Rect>
+export type CircleProps = Konva.CircleConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Circle>
+export type EllipseProps = Konva.EllipseConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Ellipse>
+export type WedgeProps = Konva.WedgeConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Wedge>
+export type TransformerProps = Konva.TransformerConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Transformer>
+export type LineProps = Konva.LineConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Line>
+export type SpriteProps = Konva.SpriteConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Sprite>
+export type ImageProps = Konva.ImageConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Image>
+export type TextProps = Konva.TextConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Text>
+export type TextPathProps = Konva.TextPathConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.TextPath>
+export type StarProps = Konva.StarConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Star>
+export type RingProps = Konva.RingConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Ring>
+export type ArcProps = Konva.ArcConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Arc>
+export type TagProps = Konva.TagConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Tag>
+export type PathProps = Konva.PathConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Path>
+export type RegularPolygonProps = Konva.RegularPolygonConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.RegularPolygon>
+export type ArrowProps = Konva.ArrowConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Arrow>
+export type ShapeProps = Konva.ShapeConfig &
+  KonvaNodeEvents &
+  React.ClassAttributes<Konva.Shape>
+
+export type LayerConfig = Konva.LayerConfig
+export type FastLayerConfig = Konva.LayerConfig
+export type GroupConfig = Konva.NodeConfig
+export type LabelConfig = Konva.NodeCofig
+
+export type RectConfig = Konva.RectConfig
+export type CircleConfig = Konva.CircleConfig
+export type EllipseConfig = Konva.EllipseConfig
+export type WedgeConfig = Konva.WedgeConfig
+export type TransformerConfig = Konva.TransformerConfig
+export type LineConfig = Konva.LineConfig
+export type SpriteConfig = Konva.SpriteConfig
+export type ImageConfig = Konva.ImageConfig
+export type TextConfig = Konva.TextConfig
+export type TextPathConfig = Konva.TextPathConfig
+export type StarConfig = Konva.StarConfig
+export type RingConfig = Konva.RingConfig
+export type ArcConfig = Konva.ArcConfig
+export type TagConfig = Konva.TagConfig
+export type PathConfig = Konva.PathConfig
+export type RegularPolygonConfig = Konva.RegularPolygonConfig
+export type ArrowConfig = Konva.ArrowConfig
+export type ShapeConfig = Konva.ShapeConfig
 
 export const useStrictMode: (useStrictMode: boolean) => void
