@@ -1,4 +1,4 @@
-import { shapeIdsAtom, ShapeManager } from "states"
+import { shapeIdsAtom, shapeManager } from "states"
 import { useSetRecoilState } from "recoil"
 
 export const useDeleteShape = () => {
@@ -6,7 +6,7 @@ export const useDeleteShape = () => {
 
   const deleteShape = (deleteId: number) => {
     setShapeIds(shapeIds => shapeIds.filter(id => id !== deleteId))
-    ShapeManager.delete(deleteId)
+    shapeManager.delete(deleteId)
   }
 
   return deleteShape

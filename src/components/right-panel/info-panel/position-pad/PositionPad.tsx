@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, SimpleGrid } from "@chakra-ui/react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { selectedShapeIdAtom, ShapeManager, nullShapeAtom } from "states"
+import { selectedShapeIdAtom, shapeManager } from "states"
 import NumberInput from "./NumberInput"
 
 const PositionPad = () => {
@@ -10,13 +10,9 @@ const PositionPad = () => {
   const [
     { x = "", y = "", width = "", height = "" },
     setShapeState,
-  ] = useRecoilState(
-    selectedShapeId ? ShapeManager.get(selectedShapeId) : nullShapeAtom,
-  )
-  console.log(selectedShapeId, x)
+  ] = useRecoilState(shapeManager.get(selectedShapeId))
   const createHandleChange = (key: string) => {
     return (_: string, num: number) => {
-      console.log("change")
       if (isNaN(num)) num = 0
       setShapeState(last => ({
         ...last,

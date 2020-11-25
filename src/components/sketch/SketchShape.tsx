@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import { ShapeManager, selectedShapeIdAtom } from "states"
+import { shapeManager, selectedShapeIdAtom } from "states"
 import { KonvaEventObject } from "konva/types/Node"
 import { useThrottleFn } from "ahooks"
 import { Rect, Circle } from "libs/sketch"
@@ -15,7 +15,7 @@ interface SketchShapeProps {
 }
 
 const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
-  const [shapeState, setShapeState] = useRecoilState(ShapeManager.get(id))
+  const [shapeState, setShapeState] = useRecoilState(shapeManager.get(id))
   const [controledState, setControledState] = useState({ x: 10, y: 10 })
   const [isDragging, setIsDragging] = useState(false)
   const setSelectedShapeId = useSetRecoilState(selectedShapeIdAtom)

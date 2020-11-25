@@ -1,25 +1,76 @@
 import { atom, RecoilState } from "recoil"
-import { ShapeState, ShapeFactory } from "./shapeState"
+import { ShapeState, ShapeMeta } from "./shapeState"
+
+interface ShapeFactoryInterface {
+  get(options: Partial<ShapeState>): ShapeState
+}
+export class ShapeFactory implements ShapeFactoryInterface {
+  public get({ type, ...args }: Partial<ShapeState>): ShapeState {
+    switch (type) {
+      case "Circle":
+        return {
+          width: 50,
+          height: 50,
+          x: 10,
+          y: 10,
+          fill: "#ffff00",
+          radius: 25,
+          type,
+          ...args,
+        } as ShapeMeta<"Circle">
+      case "Rect":
+      default:
+        return {
+          width: 40,
+          height: 40,
+          x: 10,
+          y: 10,
+          fill: "#ffff00",
+          type,
+          ...args,
+        } as ShapeMeta<"Rect">
+    }
+  }
+}
 
 let id = 1
 export class ShapeManager {
-  private static shapeMap = new Map<number, RecoilState<ShapeState>>()
-  public static get(id: number) {
+  private shapeMap: Map<number, RecoilState<ShapeState>>
+  private shapeFactory: ShapeFactoryInterface
+  public constructor(shapeFactory: ShapeFactoryInterface) {
+    this.shapeFactory = shapeFactory
+    this.shapeMap = new Map<number, RecoilState<ShapeState>>()
+  }
+  public get(id: number) {
     const shapeAtom = this.shapeMap.get(id)
     if (!shapeAtom) throw new Error(`no atom with id: ${id}`)
     return shapeAtom
   }
-  public static add({ type, ...args }: Partial<ShapeState>) {
+  public add(options: Partial<ShapeState>, rewriteId?: number) {
     this.shapeMap.set(
-      id,
+      rewriteId !== undefined ? rewriteId : id,
       atom<ShapeState>({
         key: `shape-${id}`,
-        default: ShapeFactory.get({ type, ...args }),
+        default: this.shapeFactory.get(options),
       }),
     )
-    return id++
+    return rewriteId !== undefined ? rewriteId : id++
   }
-  public static delete(id: number) {
+  public delete(id: number) {
     this.shapeMap.delete(id)
   }
 }
+
+export const shapeManager = new ShapeManager(new ShapeFactory())
+
+shapeManager.add(
+  {
+    type: "Rect",
+    width: undefined,
+    height: undefined,
+    x: undefined,
+    y: undefined,
+    fill: "#ffff00",
+  },
+  0,
+)
