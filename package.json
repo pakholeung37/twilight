@@ -31,7 +31,7 @@
     "react-reconciler": "^0.25.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
-    "recoil": "^0.0.13",
+    "recoil": "^0.1.0",
     "redux": "^4.0.5",
     "styled-components": "^5.1.0",
     "styled-normalize": "^8.0.7",
