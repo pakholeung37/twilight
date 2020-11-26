@@ -16,5 +16,4 @@ import ib from "./ImageBuilder"
 // export const Star = Konva.Star
 export const ImageBuilder = ib
 export const create = Konva.Node.create.bind(Node)
-export * from "./use-sketch"
 export * from "./src/ReactKonva"

@@ -3,7 +3,7 @@ import { Box, Flex, Divider, Image } from "@chakra-ui/react"
 import PanelInfo from "../PanelInfo"
 import AddButton from "../AddButton"
 import Figure from "./Figure"
-import { ImageBuilder, useSketch, create } from "libs/sketch"
+import { ImageBuilder, create } from "libs/sketch"
 
 const figureList = [
   `{"attrs":{"x":400,"y":300,"radius":70,"fill":"red","stroke":"black","strokeWidth":4, "draggable": true },"className":"Circle"}`,
@@ -16,8 +16,6 @@ const FigurePanel: React.FC = () => {
   const [figures, updateFigures] = useState<string[]>([
     ...figureList.map(() => ""),
   ])
-
-  const [sketch] = useSketch()
 
   useEffect(() => {
     figureList.forEach((figure, index) => {
@@ -32,11 +30,11 @@ const FigurePanel: React.FC = () => {
   }, [])
 
   const createFigure = (index: number) => {
-    const figureJSON = figureList[index]
-    create(figureJSON)
-    console.log("createFigure: ", sketch)
-    ;(sketch?.getLayers()[0] as any).add(create(figureJSON))
-    sketch?.draw()
+    // const figureJSON = figureList[index]
+    // create(figureJSON)
+    // console.log("createFigure: ", sketch)
+    // ;(sketch?.getLayers()[0] as any).add(create(figureJSON))
+    // sketch?.draw()
   }
 
   return (

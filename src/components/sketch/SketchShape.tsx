@@ -20,9 +20,13 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   const [isDragging, setIsDragging] = useState(false)
   const setSelectedShapeId = useSetRecoilState(selectedShapeIdAtom)
 
-  const handleClick = useCallback(() => {
-    setSelectedShapeId(id)
-  }, [id, setSelectedShapeId])
+  const handleClick = useCallback(
+    e => {
+      console.log(e)
+      setSelectedShapeId(id)
+    },
+    [id, setSelectedShapeId],
+  )
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true)
@@ -61,15 +65,17 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     },
     [setShapeState, setControledState, setIsDragging],
   )
-  const ShapeCompoenet: any = Shape[shapeState.type]
+  const handleXChange = useCallback((e: any) => console.log(e), [])
+  const ShapeComponent: any = Shape[shapeState.type]
   return (
-    <ShapeCompoenet
+    <ShapeComponent
       {...shapeState}
       width={shapeState.width}
       height={shapeState.height}
       x={isDragging ? controledState.x : shapeState.x}
       y={isDragging ? controledState.y : shapeState.y}
       draggable
+      onxChange={handleXChange}
       onClick={handleClick}
       onDragStart={handleDragStart}
       onDragMove={handleDragMove}

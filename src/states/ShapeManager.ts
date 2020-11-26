@@ -47,14 +47,15 @@ export class ShapeManager {
     return shapeAtom
   }
   public add(options: Partial<ShapeState>, rewriteId?: number) {
+    const inlineId = rewriteId !== undefined ? rewriteId : id++
     this.shapeMap.set(
-      rewriteId !== undefined ? rewriteId : id,
+      inlineId,
       atom<ShapeState>({
-        key: `shape-${id}`,
+        key: `shape-${inlineId}`,
         default: this.shapeFactory.get(options),
       }),
     )
-    return rewriteId !== undefined ? rewriteId : id++
+    return inlineId
   }
   public delete(id: number) {
     this.shapeMap.delete(id)
