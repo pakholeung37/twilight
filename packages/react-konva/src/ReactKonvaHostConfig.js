@@ -29,7 +29,7 @@ export function appendInitialChild(parentInstance, child) {
     // Noop for string children of Text (eg <Text>foo</Text>)
     invariant(
       false,
-      'Don not use plain text as child of Konva.Node. You are using text: "%s"',
+      'Do not use plain text as child of Konva.Node. You are using text: "%s"',
       child,
     )
     return
@@ -52,8 +52,27 @@ export function createInstance(type, props, internalInstanceHandle) {
     return
   }
 
-  const instance = new NodeClass()
-  applyNodeProps(instance, props)
+  // we need to split props into events and non events
+  // we we can pass non events into constructor directly
+  // that way the performance should be better
+  // we we apply change "applyNodeProps"
+  // then it will trigger change events on first run
+  // but we don't need them!
+  const propsWithoutEvents = {}
+  const propsWithOnlyEvents = {}
+
+  for (var key in props) {
+    var isEvent = key.slice(0, 2) === "on"
+    if (isEvent) {
+      propsWithOnlyEvents[key] = props[key]
+    } else {
+      propsWithoutEvents[key] = props[key]
+    }
+  }
+
+  const instance = new NodeClass(propsWithoutEvents)
+
+  applyNodeProps(instance, propsWithOnlyEvents)
 
   return instance
 }
@@ -65,7 +84,7 @@ export function createTextInstance(
 ) {
   invariant(
     false,
-    'Text components are not supported for now in ReactKonva. You text is: "' +
+    'Text components are not supported for now in ReactKonva. Your text is: "' +
       text +
       '"',
   )
@@ -80,7 +99,7 @@ export function getPublicInstance(instance) {
 }
 
 export function prepareForCommit() {
-  // Noop
+  return null
 }
 
 export function prepareUpdate(domElement, type, oldProps, newProps) {
@@ -210,5 +229,9 @@ export function unhideInstance(instance, props) {
 }
 
 export function unhideTextInstance(textInstance, text) {
+  // Noop
+}
+
+export function clearContainer(container) {
   // Noop
 }

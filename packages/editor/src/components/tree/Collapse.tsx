@@ -1,9 +1,8 @@
-/** @jsx jsx */
+import React from "react"
 import AnimateHeight, {
   AnimateHeightProps as AnimateProps,
 } from "react-animate-height"
 import { chakra, PropsOf, forwardRef } from "@chakra-ui/system"
-import { jsx } from "@emotion/react"
 import { __DEV__ } from "@chakra-ui/utils"
 
 type AnimateHeightProps = Pick<

@@ -2,7 +2,7 @@
   "license": "MIT",
   "name": "@twilight/react-konva",
   "description": "React binding to canvas element via Konva framework",
-  "version": "16.13.0-0",
+  "version": "17.0.0",
   "keywords": [
     "react",
     "canvas",
@@ -16,28 +16,29 @@
     "url": "git@github.com:konvajs/react-konva.git"
   },
   "dependencies": {
-    "scheduler": "^0.19.1",
-    "react-reconciler": "^0.25.1"
+    "react-reconciler": "~0.26.0-rc.0",
+    "scheduler": "^0.19.1"
   },
   "peerDependencies": {
-    "konva": "^3.2.5 || ^4.0.3",
-    "react": "16.13.x",
-    "react-dom": "16.13.x"
+    "konva": ">3.2.5",
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.1.1",
     "@types/react": "^16.9.34",
     "chai": "^4.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "konva": "^4.1.2",
+    "konva": "^7.0.4",
     "nwb": "^0.23.0",
-    "react": "~16.10.0",
-    "react-dom": "~16.10.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "sinon": "^7.5.0",
     "use-image": "^1.0.5"
   },
   "scripts": {
-    "build": "nwb build-react-component && cp ./ReactKonvaCore.d.ts ./lib",
+    "build": "nwb build-react-component && cpy ./ReactKonvaCore.d.ts ./lib",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react && npm run test:typings",

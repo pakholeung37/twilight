@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  * Based on ReactArt.js
  * Copyright (c) 2017-present Lavrenov Anton.
@@ -6,17 +5,20 @@
  *
  * MIT
  */
-import React, { version as _version, forwardRef } from "react"
-import { isBrowser, Stage as _Stage } from "konva/lib/Core"
-import ReactFiberReconciler from "react-reconciler"
-import { getClosestInstanceFromNode } from "./ReactDOMComponentTree"
-import * as HostConfig from "./ReactKonvaHostConfig"
-import { applyNodeProps, toggleStrictMode } from "./makeUpdates"
+"use strict"
+
+const React = require("react")
+const Konva = require("konva/lib/Core")
+const ReactFiberReconciler = require("react-reconciler")
+const ReactDOMComponentTree = require("./ReactDOMComponentTree")
+const HostConfig = require("./ReactKonvaHostConfig")
+const { applyNodeProps, toggleStrictMode } = require("./makeUpdates")
 
 // export for testing
 // const REACT_VERSION = '16.8.3';
 // const __matchRectVersion = React.version === REACT_VERSION;
 // skip version testing for now
+const __matchRectVersion = true
 
 // That warning is useful, but I am not sure we really need it
 // if (!__matchRectVersion) {
@@ -27,12 +29,12 @@ import { applyNodeProps, toggleStrictMode } from "./makeUpdates"
 //   );
 // }
 
-class StageClass extends React.Component {
+class Stage extends React.Component {
   componentDidMount() {
-    if (!isBrowser) {
+    if (!Konva.isBrowser) {
       return
     }
-    this._stage = new _Stage({
+    this._stage = new Konva.Stage({
       width: this.props.width,
       height: this.props.height,
       container: this._tagRef,
@@ -59,7 +61,7 @@ class StageClass extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!isBrowser) {
+    if (!Konva.isBrowser) {
       return
     }
     this._setRef(this._stage)
@@ -69,7 +71,7 @@ class StageClass extends React.Component {
   }
 
   componentWillUnmount() {
-    if (!isBrowser) {
+    if (!Konva.isBrowser) {
       return
     }
     this._setRef(null)
@@ -132,9 +134,9 @@ KONVA_NODES.forEach(function (nodeName) {
 const KonvaRenderer = ReactFiberReconciler(HostConfig)
 
 KonvaRenderer.injectIntoDevTools({
-  findFiberByHostInstance: getClosestInstanceFromNode,
+  findFiberByHostInstance: ReactDOMComponentTree.getClosestInstanceFromNode,
   bundleType: process.env.NODE_ENV !== "production" ? 1 : 0,
-  version: _version,
+  version: React.version,
   rendererPackageName: "react-konva",
   getInspectorDataForViewTag: (...args) => {
     console.log(args)
@@ -143,36 +145,13 @@ KonvaRenderer.injectIntoDevTools({
 
 /** API */
 
-export const Stage = forwardRef((props, ref) => {
-  return <StageClass {...props} forwardedRef={ref} />
+const StageWrap = React.forwardRef((props, ref) => {
+  return <Stage {...props} forwardedRef={ref} />
 })
 
-Stage.displayName = "Stage"
-
-export const {
-  Layer,
-  FastLayer,
-  Group,
-  Label,
-  Rect,
-  Circle,
-  Ellipse,
-  Wedge,
-  Line,
-  Sprite,
-  Image,
-  Text,
-  TextPath,
-  Star,
-  Ring,
-  Arc,
-  Tag,
-  Path,
-  RegularPolygon,
-  Arrow,
-  Shape,
-  Transformer,
-} = TYPES
-
-export const useStrictMode = toggleStrictMode
-export const __matchRectVersion = true
+module.exports = {
+  ...TYPES,
+  __matchRectVersion,
+  Stage: StageWrap,
+  useStrictMode: toggleStrictMode,
+}

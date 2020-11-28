@@ -1,14 +1,11 @@
 {
-  "presets": ["react-app"],
+  "presets": ["react-app", "@emotion/babel-preset-css-prop"],
   "env": {
     "production": {
-      "plugins": ["emotion", "babel-plugin-styled-components"]
+      "plugins": ["@emotion"]
     },
     "development": {
-      "plugins": [
-        ["emotion", { "sourceMap": true }],
-        "babel-plugin-styled-components"
-      ]
+      "plugins": [["@emotion", { "sourceMap": true }]]
     }
   }
 }

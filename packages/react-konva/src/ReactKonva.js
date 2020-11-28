@@ -5,6 +5,12 @@
  *
  * MIT
  */
+"use strict"
 
+const ReactKonvaCore = require("./ReactKonvaCore")
 // import full konva to enable all nodes
-export * from "./ReactKonvaCore"
+const Konva = require("konva")
+
+module.exports = {
+  ...ReactKonvaCore,
+}

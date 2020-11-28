@@ -14,7 +14,7 @@ const PositionPad = () => {
   const createHandleChange = (key: string) => {
     return (_: string, num: number) => {
       if (isNaN(num)) num = 0
-      setShapeState(last => ({
+      setShapeState((last: any) => ({
         ...last,
         [key]: num,
       }))

@@ -6,11 +6,11 @@
  *
  *
  */
+"use strict"
+
 var validateFormat =
   process.env.NODE_ENV !== "production"
-    ? function () {
-        /** empty */
-      }
+    ? function (format) {}
     : function (format) {
         if (format === undefined) {
           throw new Error("invariant(...): Second argument must be a string.")
