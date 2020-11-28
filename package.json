@@ -8,8 +8,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run build --stream",
+    "test": "lerna run test --stream",
     "start": "yarn workspace @twilight/editor start",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./packages/editor/public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

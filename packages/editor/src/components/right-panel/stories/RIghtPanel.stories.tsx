@@ -4,7 +4,7 @@ import { Story, Meta } from "@storybook/react/types-6-0"
 import RightPanel from "../index"
 
 export default {
-  title: "LeftPanel",
+  title: "RightPanel",
   component: RightPanel,
 } as Meta
 

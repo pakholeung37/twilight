@@ -1,9 +1,7 @@
-import * as React from "react"
-import { ChakraProvider } from "@chakra-ui/react"
-import { Global, css } from "@emotion/core"
-import normalize from "emotion-normalize"
+import React from "react"
+import { ChakraProvider, Button } from "@chakra-ui/react"
 import { RecoilRoot } from "recoil"
-import theme from "../src/styles/theme"
+import theme from "../packages/editor/src/styles/theme"
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -12,11 +10,6 @@ export const parameters = {
 const withChakra = (StoryFn: Function) => (
   <RecoilRoot>
     <ChakraProvider theme={theme}>
-      <Global
-        styles={css`
-          ${normalize}
-        `}
-      />
       <StoryFn />
     </ChakraProvider>
   </RecoilRoot>

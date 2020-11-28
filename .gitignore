@@ -2,5 +2,4 @@ node_modules/
 coverage/
 packages/*/lib
 packages/*/build
-yarn-error.log
-
+*.log

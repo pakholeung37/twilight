@@ -1,4 +1,4 @@
-import Compiler, { createSchema } from "../compiler"
+import { createSchema } from "../compiler"
 import NodeSchema from "../NodeSchema"
 import TokenStream from "../TokenStream"
 import PatternMatch, { parseExpr } from "../PatternMatch"
