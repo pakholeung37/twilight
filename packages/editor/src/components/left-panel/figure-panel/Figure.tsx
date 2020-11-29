@@ -10,10 +10,9 @@ const Figure: React.FC<{
       as="div"
       display="block"
       h="108px"
-      borderRadius="md"
+      borderRadius="sm"
       bg="transparent"
       border="1px"
-      borderColor="twilight.100"
       cursor="pointer"
       transition="all .25s"
       _hover={{

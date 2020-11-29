@@ -44,9 +44,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    {
-      wait: 40,
-    },
+    { wait: 40 },
   )
 
   const handleDragEnd = useCallback(

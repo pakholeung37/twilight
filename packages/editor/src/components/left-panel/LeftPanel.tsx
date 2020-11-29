@@ -1,22 +1,8 @@
 import React, { useState } from "react"
-import {
-  Box,
-  Flex,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-  Tabs,
-  IconButton,
-  Text,
-} from "@chakra-ui/react"
-import { RiPaletteFill, RiPaintBrushFill } from "react-icons/ri"
-import { BiText } from "react-icons/bi"
+import { Box, TabList, TabPanels, TabPanel, Tab, Tabs } from "@chakra-ui/react"
+import { RiPaintBrushFill } from "react-icons/ri"
 import { MdInsertPhoto } from "react-icons/md"
-import PalettePanel from "./palette-panel"
-import TextPanel from "./text-panel"
 import FigurePanel from "./figure-panel"
-import BackgroundPanel from "./background-panel"
 import SketchPanel from "./sketch-panel"
 
 const menuItems = [
@@ -31,42 +17,6 @@ const menuItems = [
   // },
 ]
 
-// const MenuItem: React.FC<{ icon: React.ReactElement; active?: boolean }> = ({
-//   icon,
-//   children,
-//   active,
-// }) => {
-//   return (
-//     <Flex
-//       as="div"
-//       cursor="pointer"
-//       flexDirection="column"
-//       justify="center"
-//       align="center"
-//     >
-//       <IconButton
-//         as="div"
-//         icon={icon}
-//         aria-label="menu-button"
-//         variant="outline"
-//         fontSize="sm"
-//         size="sm"
-//         isRound
-//         color={active ? "white" : "gray.300"}
-//         bg={active ? "twilight.500" : undefined}
-//         borderColor={active ? "twilight.500" : undefined}
-//         _hover={{
-//           color: active ? "white" : "twilight.500",
-//           borderColor: "twilight.500",
-//         }}
-//       ></IconButton>
-//       <Text as="label" fontSize="xs" my="1" cursor="pointer">
-//         {children}
-//       </Text>
-//     </Flex>
-//   )
-// }
-
 const LeftPanel: React.FC = () => {
   // setting initial tab state
   const [activeIndex, setActiveIndex] = useState(0)
@@ -78,12 +28,11 @@ const LeftPanel: React.FC = () => {
       <Tabs
         variant="line"
         colorScheme="twilight"
-        borderBottom="none"
         size="sm"
         index={activeIndex}
         onChange={toggleActiveIndex}
       >
-        <TabList>
+        <TabList borderBottom="none">
           {menuItems.map((item, index) => (
             <Tab
               key={index}

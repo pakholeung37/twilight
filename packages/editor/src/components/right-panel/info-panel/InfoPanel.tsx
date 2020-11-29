@@ -9,15 +9,15 @@ import { selectedShapeIdAtom } from "../../../states"
 const InfoPanel: React.FC = () => {
   const selectedId = useRecoilValue(selectedShapeIdAtom)
 
-  const handleAddShape = useAddShape()
-  const handleDeleteShape = useDeleteShape()
+  const addShape = useAddShape()
+  const deleteShape = useDeleteShape()
 
   return (
     <Box>
       <PositionPad />
-      <Button onClick={() => handleAddShape("Rect")}>new Rect</Button>
-      <Button onClick={() => handleAddShape("Circle")}>new Circle</Button>
-      <Button onClick={() => selectedId && handleDeleteShape(selectedId)}>
+      <Button onClick={() => addShape({ type: "Rect" })}>new Rect</Button>
+      <Button onClick={() => addShape({ type: "Circle" })}>new Circle</Button>
+      <Button onClick={() => selectedId && deleteShape(selectedId)}>
         delete item: {selectedId}
       </Button>
     </Box>

@@ -1,11 +1,11 @@
-import { shapeIdsAtom, shapeManager, NodeType } from "../../states"
+import { shapeIdsAtom, shapeManager, ShapeOptions } from "../../states"
 import { useSetRecoilState } from "recoil"
 
 export const useAddShape = () => {
   const setShapeIds = useSetRecoilState(shapeIdsAtom)
 
-  const addShape = (type: NodeType) => {
-    const id = shapeManager.add({ type })
+  const addShape = (options: ShapeOptions) => {
+    const id = shapeManager.add(options)
     setShapeIds(shapeIds => [...shapeIds, id])
   }
 

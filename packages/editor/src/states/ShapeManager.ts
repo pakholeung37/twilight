@@ -1,37 +1,5 @@
 import { atom, RecoilState } from "recoil"
-import { ShapeState, ShapeMeta } from "./shapeState"
-
-interface ShapeFactoryInterface {
-  get(options: Partial<ShapeState>): ShapeState
-}
-export class ShapeFactory implements ShapeFactoryInterface {
-  public get({ type, ...args }: Partial<ShapeState>): ShapeState {
-    switch (type) {
-      case "Circle":
-        return {
-          width: 50,
-          height: 50,
-          x: 10,
-          y: 10,
-          fill: "#ffff00",
-          radius: 25,
-          type,
-          ...args,
-        } as ShapeMeta<"Circle">
-      case "Rect":
-      default:
-        return {
-          width: 40,
-          height: 40,
-          x: 10,
-          y: 10,
-          fill: "#ffff00",
-          type,
-          ...args,
-        } as ShapeMeta<"Rect">
-    }
-  }
-}
+import { ShapeFactoryInterface, ShapeOptions, ShapeFactory, ShapeState } from "./ShapeFactory"
 
 let id = 1
 export class ShapeManager {
@@ -46,7 +14,7 @@ export class ShapeManager {
     if (!shapeAtom) throw new Error(`no atom with id: ${id}`)
     return shapeAtom
   }
-  public add(options: Partial<ShapeState>, rewriteId?: number) {
+  public add(options: ShapeOptions, rewriteId?: number) {
     const inlineId = rewriteId !== undefined ? rewriteId : id++
     this.shapeMap.set(
       inlineId,
