@@ -3,3 +3,4 @@ coverage/
 packages/*/lib
 packages/*/build
 *.log
+.eslintcache
