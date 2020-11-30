@@ -3,11 +3,11 @@ import { Box, TabList, TabPanels, TabPanel, Tab, Tabs } from "@chakra-ui/react"
 import { RiPaintBrushFill } from "react-icons/ri"
 import { MdInsertPhoto } from "react-icons/md"
 import FigurePanel from "./figure-panel"
-import SketchPanel from "./sketch-panel"
+import TreeviewPanel from "./treeview-panel"
 
 const menuItems = [
   // { icon: <RiPaletteFill />, name: "调色盘", tab: <PalettePanel key={0} /> },
-  { icon: <RiPaintBrushFill />, name: "画板", tab: <SketchPanel /> },
+  { icon: <RiPaintBrushFill />, name: "画板", tab: <TreeviewPanel /> },
   // { icon: <BiText />, name: "文本", tab: <TextPanel key={1} /> },
   { icon: <MdInsertPhoto />, name: "素材", tab: <FigurePanel /> },
   // {

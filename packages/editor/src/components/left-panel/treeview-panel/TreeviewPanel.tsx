@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Box, Flex, Divider, Button, Text } from "@chakra-ui/react"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"
-import Tree from "../../../components/tree"
-import { TreeProps, RenderButton } from "../../../components/tree/Tree"
+import Tree from "../../tree"
+import { TreeProps, RenderButton } from "../../tree/Tree"
 const subTreeProps = {
   treeData: [
     {
