@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Box, Text, Button, BoxProps, ColorProps } from "@chakra-ui/react"
+import { Box, Text, Button } from "@chakra-ui/react"
 import { Collapse } from "./Collapse"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
