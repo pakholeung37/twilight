@@ -3,12 +3,12 @@ import { ShapeOptions } from "../../../states";
 export const figureList = [
   {
     type: "Circle",
-    radius: 70,
-    x: 70,
-    y: 70,
+    radius: 30,
+    x: 30,
+    y: 30,
     fill: "red",
     stroke: "black",
-    strokeWidth: 4,
+    strokeWidth: 1,
   },
   {
     type: "Rect",
@@ -18,7 +18,7 @@ export const figureList = [
     height: 50,
     fill: 'green',
     stroke: 'black',
-    strokeWidth: 4,
+    strokeWidth: 1,
   }
   // {
   //   attrs: {

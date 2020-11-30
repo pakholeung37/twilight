@@ -15,8 +15,6 @@ const InfoPanel: React.FC = () => {
   return (
     <Box>
       <PositionPad />
-      <Button onClick={() => addShape({ type: "Rect" })}>new Rect</Button>
-      <Button onClick={() => addShape({ type: "Circle" })}>new Circle</Button>
       <Button onClick={() => selectedId && deleteShape(selectedId)}>
         delete item: {selectedId}
       </Button>

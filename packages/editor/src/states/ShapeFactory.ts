@@ -24,33 +24,34 @@ import {
 } from "@twilight/react-konva"
 
 type NODES = {
-  // Layer: LayerConfig
-  // FastLayer: FastLayerConfig
-  // Group: GroupConfig
-  // Label: LabelConfig
+  Layer: LayerConfig
+  FastLayer: FastLayerConfig
+  Group: GroupConfig
+  Label: LabelConfig
   Rect: RectConfig
   Circle: CircleConfig
-  // Ellipse: EllipseConfig
-  // Wedge: WedgeConfig
-  // Line: LineConfig
-  // Sprite: SpriteConfig
-  // Image: ImageConfig
-  // Text: TextConfig
-  // TextPath: TextPathConfig
-  // Star: StarConfig
-  // Ring: RingConfig
-  // Arc: ArcConfig
-  // Tag: TagConfig
-  // Path: PathConfig
-  // RegularPolygon: RegularPolygonConfig
-  // Arrow: ArrowConfig
-  // Shape: ShapeConfig
-  // Transformer: TransformerConfig
+  Ellipse: EllipseConfig
+  Wedge: WedgeConfig
+  Line: LineConfig
+  Sprite: SpriteConfig
+  Image: ImageConfig
+  Text: TextConfig
+  TextPath: TextPathConfig
+  Star: StarConfig
+  Ring: RingConfig
+  Arc: ArcConfig
+  Tag: TagConfig
+  Path: PathConfig
+  RegularPolygon: RegularPolygonConfig
+  Arrow: ArrowConfig
+  Shape: ShapeConfig
+  Transformer: TransformerConfig
 }
 
 export type NodeType = keyof NODES
 export type ShapeMeta<T extends keyof NODES> = {
   type: T
+  label: string
 } & NODES[T]
 
 export type ShapeState = ShapeMeta<"Rect"> | ShapeMeta<"Circle">
@@ -72,6 +73,7 @@ export class ShapeFactory implements ShapeFactoryInterface {
           fill: "#ffff00",
           radius: 25,
           type,
+          label: "circle",
           ...args,
         } as ShapeMeta<"Circle">
       case "Rect":
@@ -83,6 +85,7 @@ export class ShapeFactory implements ShapeFactoryInterface {
           y: 10,
           fill: "#ffff00",
           type,
+          label: "rect",
           ...args,
         } as ShapeMeta<"Rect">
     }
