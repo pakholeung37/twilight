@@ -4,7 +4,6 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { selectedShapeIdAtom, shapeManager } from "../../../../states"
 import NumberInput from "./NumberInput"
 
-
 const useCreateHandleChange = function (key: string, set: any) {
   const handleChange = useCallback(
     (_: string, num: number) => {
@@ -27,7 +26,6 @@ const PositionPad = () => {
     setShapeState,
   ] = useRecoilState(shapeManager.get(selectedShapeId))
 
-
   const handleChangeX = useCreateHandleChange("x", setShapeState)
   const handleChangeY = useCreateHandleChange("y", setShapeState)
   const handleChangeW = useCreateHandleChange("width", setShapeState)
@@ -48,7 +46,7 @@ const PositionPad = () => {
           onChange={handleChangeY}
           suffix="Y"
         />
-        <NumberInput
+        {/* <NumberInput
           isDisabled={!selectedShapeId}
           value={width}
           onChange={handleChangeW}
@@ -59,7 +57,7 @@ const PositionPad = () => {
           value={height}
           onChange={handleChangeH}
           suffix="H"
-        />
+        /> */}
       </SimpleGrid>
     </Box>
   )

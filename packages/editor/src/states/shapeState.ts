@@ -39,7 +39,7 @@ const throttleGet = throttle((get: GetRecoilValue) => {
 
   return {
     treeData: shapes.map((shape, index) =>({
-      title: shape.label,
+      title: shape.name,
       active: selectedShape === shape,
       key: index
     }))

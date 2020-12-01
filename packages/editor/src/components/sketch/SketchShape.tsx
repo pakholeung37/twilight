@@ -3,11 +3,12 @@ import { useRecoilState, useSetRecoilState } from "recoil"
 import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
 import { useThrottleFn } from "ahooks"
-import { Rect, Circle } from "@twilight/react-konva"
+import { Rect, Circle, Ellipse } from "@twilight/react-konva"
 
 const Shape = {
-  Rect: Rect,
-  Circle: Circle,
+  Rect,
+  Circle,
+  Ellipse,
 }
 
 interface SketchShapeProps {
@@ -67,8 +68,6 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   return (
     <ShapeComponent
       {...shapeState}
-      width={shapeState.width}
-      height={shapeState.height}
       x={isDragging ? controledState.x : shapeState.x}
       y={isDragging ? controledState.y : shapeState.y}
       draggable

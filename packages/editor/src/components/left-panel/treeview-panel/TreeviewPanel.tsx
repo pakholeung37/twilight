@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import { Box, Flex, Divider, Button, Text } from "@chakra-ui/react"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"

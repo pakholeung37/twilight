@@ -51,43 +51,52 @@ type NODES = {
 export type NodeType = keyof NODES
 export type ShapeMeta<T extends keyof NODES> = {
   type: T
-  label: string
+  name: string
 } & NODES[T]
 
-export type ShapeState = ShapeMeta<"Rect"> | ShapeMeta<"Circle">
+export type ShapeState = ShapeMeta<"Rect"> | ShapeMeta<"Circle">  | ShapeMeta<"Ellipse">
 
 export interface ShapeFactoryInterface {
   get(options: ShapeOptions): ShapeState
 }
 export type ShapeOptions = Partial<ShapeState>
 
+const defaultOptions = {
+  Circle: {
+    radius: 25,
+    x: 10,
+    y: 10,
+    fill: "#ffff00",
+    name: "circle",
+  } as ShapeMeta<"Circle">,
+  Rect: {
+    width: 40,
+    height: 40,
+    x: 10,
+    y: 10,
+    fill: "#ffff00",
+    name: "rect",
+  } as ShapeMeta<"Rect">,
+  Ellipse: {
+    width: 50,
+    height: 50,
+    x: 30,
+    y: 20,
+    radiusX: 30,
+    radiusY: 20,
+    fill: "#ffff00",
+    name: "ellipse"
+  } as ShapeMeta<"Ellipse">
+}
 export class ShapeFactory implements ShapeFactoryInterface {
   public get({ type, ...args }: ShapeOptions): ShapeState {
-    switch (type) {
-      case "Circle":
-        return {
-          width: 50,
-          height: 50,
-          x: 10,
-          y: 10,
-          fill: "#ffff00",
-          radius: 25,
-          type,
-          label: "circle",
-          ...args,
-        } as ShapeMeta<"Circle">
-      case "Rect":
-      default:
-        return {
-          width: 40,
-          height: 40,
-          x: 10,
-          y: 10,
-          fill: "#ffff00",
-          type,
-          label: "rect",
-          ...args,
-        } as ShapeMeta<"Rect">
+    if(!type || !defaultOptions[type]) {
+      throw new Error("not expected type")
     }
+    return {
+      ...defaultOptions[type],
+      type,
+      ...args,
+    } as ShapeState
   }
 }

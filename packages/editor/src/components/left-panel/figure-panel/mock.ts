@@ -1,4 +1,4 @@
-import { ShapeOptions } from "../../../states";
+import { ShapeOptions } from "../../../states"
 
 export const figureList = [
   {
@@ -16,23 +16,20 @@ export const figureList = [
     y: 20,
     width: 100,
     height: 50,
-    fill: 'green',
-    stroke: 'black',
+    fill: "green",
+    stroke: "black",
     strokeWidth: 1,
-  }
-  // {
-  //   attrs: {
-  //     x: 400,
-  //     y: 300,
-  //     radiusX: 100,
-  //     radiusY: 50,
-  //     fill: "yellow",
-  //     stroke: "black",
-  //     strokeWidth: 4,
-  //     draggable: true,
-  //   },
-  //   className: "Ellipse",
-  // },
+  },
+  {
+    type: "Ellipse",
+    x: 40,
+    y: 40,
+    radiusX: 40,
+    radiusY: 30,
+    fill: "blue",
+    stroke: "black",
+    strokeWidth: 1,
+  },
   // {
   //   attrs: {
   //     x: 400,

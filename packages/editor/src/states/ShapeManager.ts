@@ -20,7 +20,7 @@ export class ShapeManager {
       inlineId,
       atom<ShapeState>({
         key: `shape-${inlineId}`,
-        default: this.shapeFactory.get(options),
+        default: { ...this.shapeFactory.get(options), id: ""+inlineId },
       }),
     )
     return inlineId
