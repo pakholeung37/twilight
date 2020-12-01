@@ -4,6 +4,7 @@
   "description": "editor",
   "author": "Pakho Leung <pakholeung37@gmail.com>",
   "license": "MIT",
+  "private": "true",
   "main": "lib/editor.js",
   "dependencies": {
     "@chakra-ui/react": "^1.0.0",

@@ -14,7 +14,6 @@ interface SketchProps {
 }
 
 const Sketch: React.FC<SketchProps> = ({ width, height }) => {
-  // const [shapeState, setShapeState] = useRecoilState(shapeAtom)
   const shapeIds = useRecoilValue(shapeIdsAtom)
   const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE()
 

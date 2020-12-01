@@ -44,11 +44,23 @@ const throttleGet = throttle((get: GetRecoilValue) => {
       key: index
     }))
   }
-}, 2000)
+}, 200)
 
 export const shapeTreeviewSelector = selector({
   key: "shapes-treeview",
   get: ({ get }) => {
+    console.log("recreate: "+ count)
     return throttleGet(get) || { treeData: [] }
+
+    // const shapes = get(shapeSelector)
+    // const selectedShape = get(selectedShapeSelector)
+
+    // return {
+    //   treeData: shapes.map((shape, index) =>({
+    //     title: shape.label,
+    //     active: selectedShape === shape,
+    //     key: index
+    //   }))
+    // }
   }
 })

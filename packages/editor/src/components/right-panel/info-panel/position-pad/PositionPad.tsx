@@ -1,8 +1,23 @@
-import React from "react"
+import React, { useCallback, useMemo } from "react"
 import { Box, SimpleGrid } from "@chakra-ui/react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { selectedShapeIdAtom, shapeManager } from "../../../../states"
 import NumberInput from "./NumberInput"
+
+
+const useCreateHandleChange = function (key: string, set: any) {
+  const handleChange = useCallback(
+    (_: string, num: number) => {
+      return set((last: any) => ({
+        ...last,
+        [key]: num,
+      }))
+    },
+    [key, set],
+  )
+
+  return handleChange
+}
 
 const PositionPad = () => {
   const selectedShapeId = useRecoilValue(selectedShapeIdAtom)
@@ -11,19 +26,13 @@ const PositionPad = () => {
     { x = "", y = "", width = "", height = "" },
     setShapeState,
   ] = useRecoilState(shapeManager.get(selectedShapeId))
-  const createHandleChange = (key: string) => {
-    return (_: string, num: number) => {
-      if (isNaN(num)) num = 0
-      setShapeState((last: any) => ({
-        ...last,
-        [key]: num,
-      }))
-    }
-  }
-  const handleChangeX = createHandleChange("x")
-  const handleChangeY = createHandleChange("y")
-  const handleChangeW = createHandleChange("width")
-  const handleChangeH = createHandleChange("height")
+
+
+  const handleChangeX = useCreateHandleChange("x", setShapeState)
+  const handleChangeY = useCreateHandleChange("y", setShapeState)
+  const handleChangeW = useCreateHandleChange("width", setShapeState)
+  const handleChangeH = useCreateHandleChange("height", setShapeState)
+
   return (
     <Box borderBottom="1px" px="15px" py="15px">
       <SimpleGrid columns={2} spacing={3}>

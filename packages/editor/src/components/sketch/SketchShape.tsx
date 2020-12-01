@@ -44,7 +44,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 40 },
+    { wait: 60 },
   )
 
   const handleDragEnd = useCallback(
@@ -63,7 +63,6 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     },
     [setShapeState, setControledState, setIsDragging],
   )
-  const handleXChange = useCallback((e: any) => console.log(e), [])
   const ShapeComponent: any = Shape[shapeState.type]
   return (
     <ShapeComponent
@@ -73,7 +72,6 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
       x={isDragging ? controledState.x : shapeState.x}
       y={isDragging ? controledState.y : shapeState.y}
       draggable
-      onxChange={handleXChange}
       onClick={handleClick}
       onDragStart={handleDragStart}
       onDragMove={handleDragMove}

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import {
   InputGroup,
   InputRightAddon,
@@ -7,7 +7,7 @@ import {
   NumberInputProps,
 } from "@chakra-ui/react"
 
-const NumberInput: React.FC<NumberInputProps & { suffix: string }> = ({
+const NumberInput: React.FC<NumberInputProps & { suffix: string }> = memo(({
   suffix,
   ...props
 }) => {
@@ -19,6 +19,6 @@ const NumberInput: React.FC<NumberInputProps & { suffix: string }> = ({
       <InputRightAddon>{suffix}</InputRightAddon>
     </InputGroup>
   )
-}
+})
 
 export default NumberInput

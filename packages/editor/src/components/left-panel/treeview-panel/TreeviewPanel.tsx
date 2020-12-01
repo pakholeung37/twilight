@@ -57,6 +57,7 @@ const TreeViewPanel: React.FC = () => {
         {
           title: "画板 1",
           key: "1",
+          expand: true,
           renderButton: sketchButton,
           children: (
             <Box m="4px" backgroundColor="#f3f3f3">
