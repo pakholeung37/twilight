@@ -29,6 +29,7 @@ const LeftPanel: React.FC = () => {
         variant="line"
         colorScheme="twilight"
         size="sm"
+        h="100%"
         index={activeIndex}
         onChange={toggleActiveIndex}
       >
@@ -46,7 +47,8 @@ const LeftPanel: React.FC = () => {
             </Tab>
           ))}
         </TabList>
-        <TabPanels>
+        {/* 26为tabList的高度 */}
+        <TabPanels h="calc(100% - 26px)">
           {menuItems.map((item, index) => (
             <TabPanel h="100%" p={0} key={index}>
               {item.tab}

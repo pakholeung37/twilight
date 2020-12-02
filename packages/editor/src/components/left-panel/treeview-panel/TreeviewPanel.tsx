@@ -76,7 +76,9 @@ const TreeViewPanel: React.FC = () => {
         subtitle="管理您正在画板中的标志和文字。"
       ></PanelInfo>
       <Divider my={0} />
-      <Tree {...treeProps}></Tree>
+      <Box flexShrink={1} overflowY="auto">
+        <Tree {...treeProps}></Tree>
+      </Box>
     </Flex>
   )
 }
