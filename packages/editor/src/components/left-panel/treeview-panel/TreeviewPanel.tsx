@@ -50,9 +50,9 @@ const sketchButton: RenderButton = ({
 
 const TreeViewPanel: React.FC = () => {
   const treeview = useRecoilValue(shapeTreeviewSelector)
-
-  const treeProps = useMemo<TreeProps>(
-    () => ({
+  const treeProps = useMemo<TreeProps>(() => {
+    console.log("recomputed")
+    return {
       treeData: [
         {
           title: "画板 1",
@@ -66,9 +66,8 @@ const TreeViewPanel: React.FC = () => {
           ),
         },
       ],
-    }),
-    [treeview],
-  )
+    }
+  }, [treeview])
   return (
     <Flex h="100%" direction="column">
       <PanelInfo

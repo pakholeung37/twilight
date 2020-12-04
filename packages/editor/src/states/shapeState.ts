@@ -1,6 +1,5 @@
 import { throttle, memoize } from "lodash"
-import { memo } from "react"
-import { atom, GetRecoilValue, selector, selectorFamily } from "recoil"
+import { atom, selector, selectorFamily } from "recoil"
 import { ShapeState } from "./ShapeFactory"
 import { shapeManager } from "./ShapeManager"
 
@@ -78,7 +77,6 @@ export const shapeTreeviewSelector = selector({
   get: ({ get }) => {
     const shapesIds = get(shapeIdsAtom)
     const treeData = shapesIds.map((id) => get(shapeTreeNeedSelector(id)))
-    console.log("recreate: "+ shapesIds)
     return JSONMemorize(JSON.stringify({ treeData }))
   }
 })

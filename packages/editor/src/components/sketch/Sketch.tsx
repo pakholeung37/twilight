@@ -7,6 +7,7 @@ import {
 import { Stage, Layer } from "@twilight/react-konva"
 import { shapeIdsAtom } from "../../states/shapeState"
 import SketchShape from "./SketchShape"
+import Portal from "./Portal"
 
 interface SketchProps {
   width?: number

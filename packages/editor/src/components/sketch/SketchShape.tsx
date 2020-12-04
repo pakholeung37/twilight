@@ -4,6 +4,7 @@ import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
 import { useThrottleFn } from "ahooks"
 import { Rect, Circle, Ellipse } from "@twilight/react-konva"
+import Portal from "./Portal"
 
 const Shape = {
   Rect,
@@ -23,7 +24,6 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
 
   const handleClick = useCallback(
     e => {
-      console.log(e)
       setSelectedShapeId(id)
     },
     [id, setSelectedShapeId],
@@ -66,16 +66,21 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   )
   const ShapeComponent: any = Shape[shapeState.type]
   return (
-    <ShapeComponent
-      {...shapeState}
-      x={isDragging ? controledState.x : shapeState.x}
-      y={isDragging ? controledState.y : shapeState.y}
-      draggable
-      onClick={handleClick}
-      onDragStart={handleDragStart}
-      onDragMove={handleDragMove}
-      onDragEnd={handleDragEnd}
-    />
+    <>
+      <Portal>
+        <div>helloworld</div>
+      </Portal>
+      <ShapeComponent
+        {...shapeState}
+        x={isDragging ? controledState.x : shapeState.x}
+        y={isDragging ? controledState.y : shapeState.y}
+        draggable
+        onClick={handleClick}
+        onDragStart={handleDragStart}
+        onDragMove={handleDragMove}
+        onDragEnd={handleDragEnd}
+      />
+    </>
   )
 }
 
