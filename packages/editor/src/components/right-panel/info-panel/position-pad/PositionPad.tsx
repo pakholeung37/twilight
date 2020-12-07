@@ -36,13 +36,13 @@ const PositionPad = () => {
       <SimpleGrid columns={2} spacing={3}>
         <NumberInput
           isDisabled={!selectedShapeId}
-          value={x}
+          value={(+x).toFixed(2)}
           onChange={handleChangeX}
           suffix="X"
         />
         <NumberInput
           isDisabled={!selectedShapeId}
-          value={y}
+          value={(+y).toFixed(2)}
           onChange={handleChangeY}
           suffix="Y"
         />

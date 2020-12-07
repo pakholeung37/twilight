@@ -1,4 +1,4 @@
-import { throttle, memoize } from "lodash"
+import { memoize } from "lodash"
 import { atom, selector, selectorFamily } from "recoil"
 import { ShapeState } from "./ShapeFactory"
 import { shapeManager } from "./ShapeManager"
@@ -19,7 +19,7 @@ export const selectedShapeSelector = selector<ShapeState>({
     const selectedShapeId = get(selectedShapeIdAtom)
     const selectedShape = get(shapeManager.get(selectedShapeId))
     return selectedShape
-  }
+  },
 })
 
 export const shapeSelector = selector<ShapeState[]>({
@@ -44,6 +44,7 @@ export const shapeSelector = selector<ShapeState[]>({
 const JSONMemorize = memoize((data: string) => ({
   ...JSON.parse(data)
 }))
+
 export const shapeTreeNeedSelector = selectorFamily<{ title: string, active: boolean, key: string }, number>({
   key: "shape-tree-need",
   get: (id) => ({ get }) => {

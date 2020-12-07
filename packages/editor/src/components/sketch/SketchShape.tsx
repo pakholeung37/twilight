@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
 import { useThrottleFn } from "ahooks"
-import { Rect, Circle, Ellipse } from "@twilight/react-konva"
-import Portal from "./Portal"
+import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
+import { useTheme } from "@chakra-ui/react"
 
 const Shape = {
   Rect,
@@ -20,8 +20,9 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   const [shapeState, setShapeState] = useRecoilState(shapeManager.get(id))
   const [controledState, setControledState] = useState({ x: 10, y: 10 })
   const [isDragging, setIsDragging] = useState(false)
-  const setSelectedShapeId = useSetRecoilState(selectedShapeIdAtom)
+  const [selectedId, setSelectedShapeId] = useRecoilState(selectedShapeIdAtom)
 
+  // handleDrag
   const handleClick = useCallback(
     e => {
       setSelectedShapeId(id)
@@ -45,7 +46,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 60 },
+    { wait: 80 },
   )
 
   const handleDragEnd = useCallback(
@@ -64,14 +65,29 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     },
     [setShapeState, setControledState, setIsDragging],
   )
+  // transformer
+  const isSelected = selectedId === id
+  const shapeRef = React.useRef<any>(null)
+  const trRef = React.useRef<any>(null)
+
+  React.useEffect(() => {
+    if (isSelected) {
+      // we need to attach transformer manually
+      if (!trRef.current) throw new Error("transformer's dom not found")
+      trRef.current.nodes([shapeRef.current])
+    }
+  }, [isSelected])
+
+  // theming
+  const theme = useTheme()
+
   const ShapeComponent: any = Shape[shapeState.type]
   return (
     <>
-      <Portal>
-        <div>helloworld</div>
-      </Portal>
       <ShapeComponent
         {...shapeState}
+        ref={shapeRef}
+        strokeScaleEnabled={false}
         x={isDragging ? controledState.x : shapeState.x}
         y={isDragging ? controledState.y : shapeState.y}
         draggable
@@ -80,6 +96,18 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         onDragMove={handleDragMove}
         onDragEnd={handleDragEnd}
       />
+      {isSelected && (
+        <Transformer
+          ref={trRef}
+          anchorFill="#fff"
+          anchorSize={6}
+          anchorStroke="#828c97"
+          anchorCornerRadius={1}
+          borderStroke="#bcc1ce"
+          rotateEnabled={false}
+          ignoreStroke={true}
+        />
+      )}
     </>
   )
 }
