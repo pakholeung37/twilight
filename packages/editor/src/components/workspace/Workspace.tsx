@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react"
-import { Box, Flex, useTheme } from "@chakra-ui/react"
+import { Box, Flex, ThemeProvider } from "@chakra-ui/react"
 import { Stage, Layer, Rect, Group } from "@twilight/react-konva"
 import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from "recoil"
 import Sketch from "../../components/sketch"
+import theme from "../../styles/theme"
+
 const WorkSpace: React.FC = () => {
   const workspaceRef = useRef<HTMLDivElement>(null)
 
@@ -19,7 +21,6 @@ const WorkSpace: React.FC = () => {
 
   const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE()
 
-  const theme = useTheme()
   return (
     <Box
       bg="workspacebase"
@@ -38,11 +39,13 @@ const WorkSpace: React.FC = () => {
     </Flex> */}
       <Stage width={width} height={height}>
         <RecoilBridge>
-          <Layer>
-            <Group offsetX={-100} offsetY={-200}>
-              <Sketch width={375} height={625} />
-            </Group>
-          </Layer>
+          <ThemeProvider theme={theme}>
+            <Layer>
+              <Group offsetX={-100} offsetY={-200}>
+                <Sketch width={375} height={625} />
+              </Group>
+            </Layer>
+          </ThemeProvider>
         </RecoilBridge>
       </Stage>
     </Box>

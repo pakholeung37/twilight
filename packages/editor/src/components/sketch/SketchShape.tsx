@@ -2,9 +2,8 @@ import React, { useCallback, useState } from "react"
 import { useRecoilState } from "recoil"
 import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
-import { useThrottleFn } from "ahooks"
+import { useDebounceFn, useThrottleFn } from "ahooks"
 import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
-import { useTheme } from "@chakra-ui/react"
 
 const Shape = {
   Rect,
@@ -18,11 +17,10 @@ interface SketchShapeProps {
 
 const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   const [shapeState, setShapeState] = useRecoilState(shapeManager.get(id))
-  const [controledState, setControledState] = useState({ x: 10, y: 10 })
-  const [isDragging, setIsDragging] = useState(false)
   const [selectedId, setSelectedShapeId] = useRecoilState(selectedShapeIdAtom)
 
   // handleDrag
+  const [isDragging, setIsDragging] = useState(false)
   const handleClick = useCallback(
     e => {
       setSelectedShapeId(id)
@@ -35,7 +33,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     setSelectedShapeId(id)
   }, [id, setSelectedShapeId])
 
-  const { run: handleDragMove } = useThrottleFn<
+  const { run: handleDragMove } = useDebounceFn<
     ({ target }: KonvaEventObject<DragEvent>) => void
   >(
     ({ target }) => {
@@ -46,7 +44,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 80 },
+    { wait: 16 },
   )
 
   const handleDragEnd = useCallback(
@@ -57,13 +55,9 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         x,
         y,
       }))
-      setControledState({
-        x,
-        y,
-      })
       setIsDragging(false)
     },
-    [setShapeState, setControledState, setIsDragging],
+    [setShapeState, setIsDragging],
   )
   // transformer
   const isSelected = selectedId === id
@@ -78,9 +72,6 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     }
   }, [isSelected])
 
-  // theming
-  const theme = useTheme()
-
   const ShapeComponent: any = Shape[shapeState.type]
   return (
     <>
@@ -88,8 +79,8 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         {...shapeState}
         ref={shapeRef}
         strokeScaleEnabled={false}
-        x={isDragging ? controledState.x : shapeState.x}
-        y={isDragging ? controledState.y : shapeState.y}
+        x={isDragging ? 0 : shapeState.x}
+        y={isDragging ? 0 : shapeState.y}
         draggable
         onClick={handleClick}
         onDragStart={handleDragStart}
@@ -102,8 +93,9 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
           anchorFill="#fff"
           anchorSize={6}
           anchorStroke="#828c97"
-          anchorCornerRadius={1}
-          borderStroke="#bcc1ce"
+          anchorCornerRadius={0.8}
+          borderStroke="#9a9da7"
+          borderStrokeWidth={0.4}
           rotateEnabled={false}
           ignoreStroke={true}
         />

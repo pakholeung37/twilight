@@ -7,6 +7,7 @@ import NumberInput from "./NumberInput"
 const useCreateHandleChange = function (key: string, set: any) {
   const handleChange = useCallback(
     (_: string, num: number) => {
+      _ === "" && (num = 0)
       return set((last: any) => ({
         ...last,
         [key]: num,
