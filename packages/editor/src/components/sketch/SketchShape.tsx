@@ -44,7 +44,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 16 },
+    { wait: 40 },
   )
 
   const handleDragEnd = useCallback(
@@ -79,8 +79,8 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         {...shapeState}
         ref={shapeRef}
         strokeScaleEnabled={false}
-        x={isDragging ? 0 : shapeState.x}
-        y={isDragging ? 0 : shapeState.y}
+        // x={isDragging ? 0 : shapeState.x}
+        // y={isDragging ? 0 : shapeState.y}
         draggable
         onClick={handleClick}
         onDragStart={handleDragStart}
