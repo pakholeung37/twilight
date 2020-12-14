@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import routes from "./routes"
 import theme from "./styles/theme"
 import { RecoilRoot } from "recoil"
+import "./styles/tailwind-base.css"
 
 const App: React.FC = function () {
   return (
