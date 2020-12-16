@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRecoilState } from "recoil"
 import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
 import { useDebounceFn, useThrottleFn } from "ahooks"
 import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
-
+import Konva from "konva"
+import { snapSystemManager } from "../workspace/snap-system"
 const Shape = {
   Rect,
   Circle,
@@ -44,7 +45,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 40 },
+    { wait: 16 },
   )
 
   const handleDragEnd = useCallback(
@@ -61,18 +62,31 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   )
   // transformer
   const isSelected = selectedId === id
-  const shapeRef = React.useRef<any>(null)
-  const trRef = React.useRef<any>(null)
+  const shapeRef = useRef<Konva.Node>(null)
+  const trRef = useRef<Konva.Transformer>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSelected) {
       // we need to attach transformer manually
-      if (!trRef.current) throw new Error("transformer's dom not found")
+      if (!trRef.current || !shapeRef.current)
+        throw new Error("transformer's node or node not found")
       trRef.current.nodes([shapeRef.current])
     }
   }, [isSelected])
 
-  const ShapeComponent: any = Shape[shapeState.type]
+  // snap system
+  useEffect(() => {
+    if (!shapeRef.current) throw new Error("node not found")
+    const node = shapeRef.current
+    snapSystemManager.addNode(node)
+    return () => {
+      snapSystemManager.removeNode(node)
+    }
+  })
+
+  const ShapeComponent: any = useMemo(() => Shape[shapeState.type], [
+    shapeState.type,
+  ])
   return (
     <>
       <ShapeComponent

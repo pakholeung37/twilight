@@ -2,7 +2,7 @@ import { memoize } from "lodash"
 import { atom, selector, selectorFamily } from "recoil"
 import { ShapeState } from "./ShapeFactory"
 import { shapeManager } from "./ShapeManager"
-
+import {produce} from "immer"
 export const selectedShapeIdAtom = atom<number>({
   key: "selected-shape-id",
   default: 0,
@@ -41,22 +41,30 @@ export const shapeSelector = selector<ShapeState[]>({
  * https://github.com/facebookexperimental/Recoil/issues/314
  *
  */
-const JSONMemorize = memoize((data: string) => ({
-  ...JSON.parse(data)
-}))
+type shapeTreeNeedState = { title: string, active: boolean, key: string }
+// const stateCache = new Map<string, shapeTreeNeedState>()
+// const getState = (id: string) => {
+//   const state = stateCache.get(id)
+//   if (state) return state
 
-export const shapeTreeNeedSelector = selectorFamily<{ title: string, active: boolean, key: string }, number>({
+//   stateCache.set(id, { title: "", active: false, key: "" })
+//   return stateCache.get(id)
+// }
+export const shapeTreeNeedSelector = selectorFamily<shapeTreeNeedState, number>({
   key: "shape-tree-need",
-  get: (id) => ({ get }) => {
+  get: memoize((id) => {
+    let stateCache = { title: "", active: false, key: "" }
+    return ({ get }) => {
     const shape = get(shapeManager.get(id))
     const selectedShapeId = get(selectedShapeIdAtom)
-    const data = {
-      title: shape.name,
-      active: !!shape.id && (+shape.id === selectedShapeId),
-      key: shape.id as string
-    }
-    return JSONMemorize(JSON.stringify(data))
-  }
+    const nextState = produce(stateCache, (lastState) => {
+      lastState.title = shape.name
+      lastState.active = !!shape.id && (+shape.id === selectedShapeId)
+      lastState.key = shape.id as string
+    })
+    stateCache = nextState
+    return nextState
+  }})
 })
 
 // const throttleGet = throttle((get: GetRecoilValue) => {
@@ -78,7 +86,7 @@ export const shapeTreeviewSelector = selector({
   get: ({ get }) => {
     const shapesIds = get(shapeIdsAtom)
     const treeData = shapesIds.map((id) => get(shapeTreeNeedSelector(id)))
-    return JSONMemorize(JSON.stringify({ treeData }))
+    return { treeData }
   }
 })
 

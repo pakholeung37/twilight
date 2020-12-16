@@ -49,9 +49,9 @@ const sketchButton: RenderButton = ({
 }
 
 const TreeViewPanel: React.FC = () => {
-  // const treeview = useRecoilValue(shapeTreeviewSelector)
+  const treeview = useRecoilValue(shapeTreeviewSelector)
   // 暂时屏蔽该state
-  const treeview = { treeData: [] }
+  // const treeview = { treeData: [] }
   const treeProps = useMemo<TreeProps>(() => {
     console.log("recomputed")
     return {
