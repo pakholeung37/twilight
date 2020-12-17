@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRecoilState } from "recoil"
 import { shapeManager, selectedShapeIdAtom } from "../../states"
 import { KonvaEventObject } from "konva/types/Node"
-import { useDebounceFn, useThrottleFn } from "ahooks"
+import { useDebounceFn } from "ahooks"
 import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
 import Konva from "konva"
-import { snapSystemManager } from "../workspace/snap-system"
+import { snapSystemManager, useGuideLine } from "../workspace/snap-system"
+import { useCompose } from "../../hooks"
+
 const Shape = {
   Rect,
   Circle,
@@ -20,7 +22,10 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
   const [shapeState, setShapeState] = useRecoilState(shapeManager.get(id))
   const [selectedId, setSelectedShapeId] = useRecoilState(selectedShapeIdAtom)
 
-  // handleDrag
+  /**
+   * handle drag
+   *
+   */
   const [isDragging, setIsDragging] = useState(false)
   const handleClick = useCallback(
     e => {
@@ -60,7 +65,10 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     },
     [setShapeState, setIsDragging],
   )
-  // transformer
+  /**
+   * transformer
+   *
+   */
   const isSelected = selectedId === id
   const shapeRef = useRef<Konva.Node>(null)
   const trRef = useRef<Konva.Transformer>(null)
@@ -74,7 +82,11 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     }
   }, [isSelected])
 
-  // snap system
+  /**
+   * snap system
+   *
+   */
+  const { setGuideLineH, setGuideLineV } = useGuideLine()
   useEffect(() => {
     if (!shapeRef.current) throw new Error("node not found")
     const node = shapeRef.current
@@ -84,6 +96,25 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     }
   })
 
+  const dragStartForSnap = useCallback(() => {
+    if (shapeRef.current) {
+      snapSystemManager.computedGuideLines({ target: shapeRef.current })
+    }
+  }, [])
+
+  const dragEndForSnap = useCallback(() => {
+    if (shapeRef.current) {
+      snapSystemManager.cleanGuideLines()
+    }
+  }, [])
+
+  const dragBoundFunc = useCallback(({ x, y }: { x: number; y: number }) => {},
+  [])
+  // 组装 drag 方法
+  const composeDragStart = useCompose(handleDragStart, dragStartForSnap)
+  const composeDragEnd = useCompose(handleDragEnd, dragEndForSnap)
+
+  // 动态获取shape组件
   const ShapeComponent: any = useMemo(() => Shape[shapeState.type], [
     shapeState.type,
   ])
@@ -97,9 +128,9 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         // y={isDragging ? 0 : shapeState.y}
         draggable
         onClick={handleClick}
-        onDragStart={handleDragStart}
+        onDragStart={composeDragStart}
         onDragMove={handleDragMove}
-        onDragEnd={handleDragEnd}
+        onDragEnd={composeDragEnd}
       />
       {isSelected && (
         <Transformer
