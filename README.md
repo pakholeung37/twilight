@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using [cra-template-typekit](https://github.com/rrebase/cra-template-typekit)
+great performance, strict structure and easy to use in mind.
 
 ## Available Scripts
 
