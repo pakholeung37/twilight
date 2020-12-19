@@ -50,7 +50,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         y,
       }))
     },
-    { wait: 16 },
+    { wait: 4 },
   )
 
   const handleDragEnd = useCallback(
@@ -98,7 +98,9 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
 
   const dragStartForSnap = useCallback(() => {
     if (shapeRef.current) {
-      snapSystemManager.computedGuideLines({ target: shapeRef.current })
+      snapSystemManager.freezeGuideLines({
+        filter: node => node === shapeRef.current,
+      })
     }
   }, [])
 
@@ -108,8 +110,20 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
     }
   }, [])
 
-  const dragBoundFunc = useCallback(({ x, y }: { x: number; y: number }) => {},
-  [])
+  const dragBoundFunc = useCallback(
+    ({ x, y }: { x: number; y: number }) => {
+      if (shapeRef.current) {
+        const [
+          guideLineH,
+          guideLineV,
+        ] = snapSystemManager.computedGuideLines(shapeRef.current, { x, y })
+        setGuideLineH(guideLineH)
+        setGuideLineV(guideLineV)
+      }
+      return { x, y }
+    },
+    [setGuideLineH, setGuideLineV],
+  )
   // 组装 drag 方法
   const composeDragStart = useCompose(handleDragStart, dragStartForSnap)
   const composeDragEnd = useCompose(handleDragEnd, dragEndForSnap)
@@ -131,6 +145,7 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
         onDragStart={composeDragStart}
         onDragMove={handleDragMove}
         onDragEnd={composeDragEnd}
+        dragBoundFunc={dragBoundFunc}
       />
       {isSelected && (
         <Transformer

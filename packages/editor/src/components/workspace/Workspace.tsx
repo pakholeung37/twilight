@@ -5,7 +5,7 @@ import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from "recoil"
 import Sketch from "../../components/sketch"
 import theme from "../../styles/theme"
 import { useSize } from "ahooks"
-import { SnapSystem } from "./snap-system"
+import { SnapSystem, SnapSystemRC } from "./snap-system"
 const WorkSpace: React.FC = () => {
   const workspaceRef = useRef<HTMLDivElement>(null)
 
@@ -37,12 +37,13 @@ const WorkSpace: React.FC = () => {
                 <Group offsetX={-100} offsetY={-200}>
                   <Sketch width={375} height={625} />
                 </Group>
-                <SnapSystem />
+                {/* <SnapSystem /> */}
               </Layer>
             </ThemeProvider>
           </RecoilBridge>
         </Stage>
       </Box>
+      <SnapSystemRC />
     </Box>
   )
 }

@@ -1,10 +1,10 @@
 import {atom, useRecoilState} from "recoil"
-
-const guideLineHAtom = atom<number[] | null>({
+import { GuideLine } from "./SnapSystemManager"
+const guideLineHAtom = atom<GuideLine | null>({
   key: "guide-line-h",
   default: null
 })
-const guideLineVAtom = atom<number[] | null>({
+const guideLineVAtom = atom<GuideLine | null>({
   key: "guide-line-v",
   default: null
 })
