@@ -20,6 +20,8 @@
     "framer-motion": "^2.9.4",
     "immer": "^8.0.0",
     "lodash": "^4.17.20",
+    "mobx": "^6.0.4",
+    "mobx-react-lite": "^3.1.6",
     "randomcolor": "^0.6.2",
     "react-animate-height": "^2.0.23",
     "react-custom-scrollbars": "^4.2.1",
