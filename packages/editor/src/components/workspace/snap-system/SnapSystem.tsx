@@ -8,24 +8,14 @@ export const SnapSystem: React.FC = () => {
     <Group>
       {guideLineH && (
         <Line
-          points={[
-            -6000,
-            Math.round(guideLineH.offset),
-            6000,
-            Math.round(guideLineH.offset),
-          ]}
+          points={[-6000, guideLineH.offset, 6000, guideLineH.offset]}
           strokeWidth={1}
           stroke="red"
         ></Line>
       )}
       {guideLineV && (
         <Line
-          points={[
-            Math.round(guideLineV.offset),
-            -6000,
-            Math.round(guideLineV.offset),
-            6000,
-          ]}
+          points={[guideLineV.offset, -6000, guideLineV.offset, 6000]}
           strokeWidth={1}
           stroke="red"
         ></Line>
