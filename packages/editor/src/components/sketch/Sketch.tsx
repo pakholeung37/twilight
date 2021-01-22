@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from "react"
+import React from "react"
 import { useRecoilValue } from "recoil"
-import { Layer, Rect, Group } from "@twilight/react-konva"
+import { Rect } from "@twilight/react-konva"
 import { shapeIdsAtom } from "../../states/shapeState"
 import SketchShape from "./SketchShape"
 
@@ -11,7 +11,6 @@ interface SketchProps {
 
 const Sketch: React.FC<SketchProps> = ({ width, height }) => {
   const shapeIds = useRecoilValue(shapeIdsAtom)
-
   return (
     <>
       {/* background */}

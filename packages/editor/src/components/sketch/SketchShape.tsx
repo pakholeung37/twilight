@@ -26,13 +26,10 @@ const SketchShape: React.FC<SketchShapeProps> = ({ id }) => {
    * handle drag
    *
    */
-  const [isDragging, setIsDragging] = useState(false)
-  const handleClick = useCallback(
-    e => {
-      setSelectedShapeId(id)
-    },
-    [id, setSelectedShapeId],
-  )
+  const [, setIsDragging] = useState(false)
+  const handleClick = useCallback(() => {
+    setSelectedShapeId(id)
+  }, [id, setSelectedShapeId])
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true)

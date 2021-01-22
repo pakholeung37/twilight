@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef } from "react"
 import { observer } from "mobx-react-lite"
-import { Box, Flex, ThemeProvider } from "@chakra-ui/react"
-import { Stage, Layer, Rect, Group } from "@twilight/react-konva"
+import { Box, ThemeProvider } from "@chakra-ui/react"
+import { Stage, Layer, Group } from "@twilight/react-konva"
 import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from "recoil"
 import Sketch from "../../components/sketch"
 import theme from "../../styles/theme"
 import { useSize } from "ahooks"
-import { SnapSystem, SnapSystemRC } from "./snap-system"
+import { SnapSystem } from "./snap-system"
 import { rootStore, RootStoreProvider, useRootStore } from "../../store"
 
 const WorkSpace: React.FC = () => {

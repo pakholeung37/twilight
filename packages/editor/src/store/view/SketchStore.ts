@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx"
+import { makeObservable, observable } from "mobx"
 import { assign } from "../utils"
 import { ShapeModel } from "../model"
 
