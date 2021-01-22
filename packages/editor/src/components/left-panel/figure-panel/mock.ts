@@ -1,15 +1,16 @@
-import { ShapeOptions } from "../../../states"
+// import { ShapeOptions } from "../../../states"
+import { ShapeCreator } from "../../../store/model"
 
 export const figureList = [
-  {
-    type: "Circle",
-    radius: 30,
-    x: 30,
-    y: 30,
-    fill: "red",
-    stroke: "black",
-    strokeWidth: 1,
-  },
+  // {
+  //   type: "Circle",
+  //   radius: 30,
+  //   x: 30,
+  //   y: 30,
+  //   fill: "red",
+  //   stroke: "black",
+  //   strokeWidth: 1,
+  // },
   {
     type: "Rect",
     x: 20,
@@ -17,19 +18,19 @@ export const figureList = [
     width: 100,
     height: 50,
     fill: "green",
-    stroke: "black",
-    strokeWidth: 1,
+    // stroke: "black",
+    // strokeWidth: 1,
   },
-  {
-    type: "Ellipse",
-    x: 40,
-    y: 40,
-    radiusX: 40,
-    radiusY: 30,
-    fill: "blue",
-    stroke: "black",
-    strokeWidth: 1,
-  },
+  // {
+  //   type: "Ellipse",
+  //   x: 40,
+  //   y: 40,
+  //   radiusX: 40,
+  //   radiusY: 30,
+  //   fill: "blue",
+  //   stroke: "black",
+  //   strokeWidth: 1,
+  // },
   // {
   //   attrs: {
   //     x: 400,
@@ -70,4 +71,4 @@ export const figureList = [
   //   },
   //   className: "Text",
   // },
-] as ShapeOptions[]
+] as ShapeCreator[]

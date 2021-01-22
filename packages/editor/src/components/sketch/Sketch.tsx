@@ -1,25 +1,27 @@
 import React from "react"
-import { useRecoilValue } from "recoil"
 import { Rect } from "@twilight/react-konva"
-import { shapeIdsAtom } from "../../states/shapeState"
-import SketchShape from "./SketchShape"
+import SketchShape from "./SketchShape_Mobx"
+import { useRootStore } from "../../store"
+import { observer } from "mobx-react-lite"
 
 interface SketchProps {
   width?: number
   height?: number
 }
 
-const Sketch: React.FC<SketchProps> = ({ width, height }) => {
-  const shapeIds = useRecoilValue(shapeIdsAtom)
+const Sketch: React.FC<SketchProps> = () => {
+  const {
+    sketchStore: { width, height, shapes },
+  } = useRootStore()
   return (
     <>
       {/* background */}
       <Rect fill="#fff" width={width} height={height} />
-      {shapeIds.map(id => (
-        <SketchShape id={id} key={id} />
+      {shapes.map(shape => (
+        <SketchShape shapeModel={shape} key={shape.id} />
       ))}
     </>
   )
 }
 
-export default Sketch
+export default observer(Sketch)

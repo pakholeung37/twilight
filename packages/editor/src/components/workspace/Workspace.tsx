@@ -38,10 +38,7 @@ const WorkSpace: React.FC = () => {
               <ThemeProvider theme={theme}>
                 <Layer>
                   <Group offsetX={-100} offsetY={-200}>
-                    <Sketch
-                      width={sketchStore.width}
-                      height={sketchStore.height}
-                    />
+                    <Sketch />
                   </Group>
                   <SnapSystem />
                 </Layer>
