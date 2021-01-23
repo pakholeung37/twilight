@@ -1,6 +1,6 @@
 import React from "react"
 import { Rect } from "@twilight/react-konva"
-import SketchShape from "./SketchShape_Mobx"
+import SketchShape from "./SketchShape"
 import { useRootStore } from "../../store"
 import { observer } from "mobx-react-lite"
 

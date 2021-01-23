@@ -1,25 +1,9 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback } from "react"
 import { Box, SimpleGrid } from "@chakra-ui/react"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { selectedShapeIdAtom, shapeManager } from "../../../../states"
 import NumberInput from "./NumberInput"
 import { observer } from "mobx-react-lite"
 import { useRootStore } from "../../../../store"
 
-// const useCreateHandleChange = function (key: string, set: any) {
-//   const handleChange = useCallback(
-//     (_: string, num: number) => {
-//       _ === "" && (num = 0)
-//       return set((last: any) => ({
-//         ...last,
-//         [key]: num,
-//       }))
-//     },
-//     [key, set],
-//   )
-
-//   return handleChange
-// }
 const PostionInputX = observer(function PostionInputX() {
   const {
     sketchStore: { selectedShape },
@@ -59,27 +43,11 @@ const PostionInputY = observer(function PostionInputX() {
 })
 
 const PositionPad: React.FC = () => {
-  // const handleChangeW = useCreateHandleChange("width", setShapeState)
-  // const handleChangeH = useCreateHandleChange("height", setShapeState)
-
   return (
     <Box borderBottom="1px" px="15px" py="15px">
       <SimpleGrid columns={2} spacing={3}>
         <PostionInputX />
         <PostionInputY />
-
-        {/* <NumberInput
-          isDisabled={!selectedShapeId}
-          value={width}
-          onChange={handleChangeW}
-          suffix="W"
-        />
-        <NumberInput
-          isDisabled={!selectedShapeId}
-          value={height}
-          onChange={handleChangeH}
-          suffix="H"
-        /> */}
       </SimpleGrid>
     </Box>
   )

@@ -1,18 +1,28 @@
-import { action, makeObservable, observable } from "mobx"
+import { action, makeObservable, observable, computed } from "mobx"
 import { assign } from "../utils"
 import { ShapeModel, shapeFactory, ShapeCreator } from "../model"
-interface SketchStoreInterface {
-  width: number
-  height: number
-  shapes: ShapeModel[]
+import { TreeProps } from "../../components/tree/Tree"
+interface SketchStoreOptions {
+  width?: number
+  height?: number
 }
-export class SketchStore implements SketchStoreInterface {
+export class SketchStore {
   @observable width: number = 375
   @observable height: number = 625
   @observable shapes: ShapeModel[] = []
   @observable selectedShape: ShapeModel | null = null
 
-  constructor(options: Partial<SketchStoreInterface>) {
+  @computed get shapeTreeData(): TreeProps {
+    return {
+      treeData: this.shapes.map(shape => ({
+        title: shape.name,
+        active: shape === this.selectedShape,
+        key: shape.id
+      })),
+    }
+  }
+
+  constructor(options: SketchStoreOptions) {
     makeObservable(this)
     assign(this, options)
   }
@@ -21,7 +31,11 @@ export class SketchStore implements SketchStoreInterface {
     this.selectedShape = shapeModel
   }
 
-  @action.bound addShape = (options: ShapeCreator) => {
+  @action addShape = (options: ShapeCreator) => {
     this.shapes.push(shapeFactory.get(options))
+  }
+
+  @action removeShape = (shapeModel: ShapeModel) => {
+    this.shapes = this.shapes.filter(shape => shape !== shapeModel)
   }
 }

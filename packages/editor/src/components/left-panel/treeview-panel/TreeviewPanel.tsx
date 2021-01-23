@@ -1,11 +1,12 @@
-import React, { useMemo } from "react"
+import React from "react"
+import { observer } from "mobx-react-lite"
+import { computed } from "mobx"
 import { Box, Flex, Divider, Button, Text } from "@chakra-ui/react"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import PanelInfo from "../PanelInfo"
 import Tree from "../../tree"
 import { TreeProps, RenderButton } from "../../tree/Tree"
-import { shapeTreeviewSelector } from "../../../states"
-import { useRecoilValue } from "recoil"
+import { useRootStore } from "../../../store"
 
 const sketchButton: RenderButton = ({
   node,
@@ -49,27 +50,34 @@ const sketchButton: RenderButton = ({
 }
 
 const TreeViewPanel: React.FC = () => {
-  const treeview = useRecoilValue(shapeTreeviewSelector)
+  const {
+    sketchStore: { shapes, selectedShape },
+  } = useRootStore()
   // 暂时屏蔽该state
   // const treeview = { treeData: [] }
-  const treeProps = useMemo<TreeProps>(() => {
-    console.log("recomputed")
-    return {
-      treeData: [
-        {
-          title: "画板 1",
-          key: "1",
-          expand: true,
-          renderButton: sketchButton,
-          children: (
-            <Box m="4px" backgroundColor="#f3f3f3">
-              <Tree {...treeview}></Tree>
-            </Box>
-          ),
-        },
-      ],
-    }
-  }, [treeview])
+  const shapeTreeData = computed(() => ({
+    treeData: shapes.map(shape => ({
+      title: shape.name,
+      active: shape === selectedShape,
+      key: shape.id,
+    })),
+  })).get()
+
+  const treeProps: TreeProps = {
+    treeData: [
+      {
+        title: "画板 1",
+        key: "1",
+        expand: true,
+        renderButton: sketchButton,
+        children: (
+          <Box m="4px" backgroundColor="#f3f3f3">
+            <Tree {...shapeTreeData}></Tree>
+          </Box>
+        ),
+      },
+    ],
+  }
   return (
     <Flex h="100%" direction="column">
       <PanelInfo
@@ -84,4 +92,4 @@ const TreeViewPanel: React.FC = () => {
   )
 }
 
-export default TreeViewPanel
+export default observer(TreeViewPanel)

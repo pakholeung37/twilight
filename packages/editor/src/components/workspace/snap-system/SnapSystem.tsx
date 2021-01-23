@@ -6,7 +6,7 @@ export const SnapSystem: React.FC = () => {
   const { guideLineH, guideLineV } = useGuideLine()
   return (
     <Group>
-      {guideLineH && (
+      {/* {guideLineH && (
         <Line
           points={[-6000, guideLineH.offset, 6000, guideLineH.offset]}
           strokeWidth={1}
@@ -19,7 +19,7 @@ export const SnapSystem: React.FC = () => {
           strokeWidth={1}
           stroke="red"
         ></Line>
-      )}
+      )} */}
     </Group>
   )
 }
@@ -28,7 +28,7 @@ export const SnapSystemRC: React.FC = () => {
   const { guideLineH, guideLineV } = useGuideLine()
   return (
     <>
-      <div
+      {/* <div
         style={{
           display: guideLineH ? "block" : "none",
           backgroundColor: "red",
@@ -49,7 +49,7 @@ export const SnapSystemRC: React.FC = () => {
           top: 0,
           bottom: 0,
         }}
-      ></div>
+      ></div> */}
     </>
   )
 }

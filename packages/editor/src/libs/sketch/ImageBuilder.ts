@@ -1,5 +1,4 @@
 import konva from "konva"
-import {ShapeOptions} from "../../states"
 import { ShapeCreator } from "../../store/model"
 const Stage = konva.Stage
 const Node = konva.Node

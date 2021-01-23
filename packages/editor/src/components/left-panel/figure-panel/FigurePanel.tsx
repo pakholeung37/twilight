@@ -4,7 +4,6 @@ import PanelInfo from "../PanelInfo"
 import Figure from "./Figure"
 import { figureList } from "./mock"
 import { ImageBuilder } from "../../../libs/sketch"
-import { useAddShape } from "../../../states/hooks"
 import { useRootStore } from "../../../store"
 import { observer } from "mobx-react-lite"
 
@@ -12,7 +11,7 @@ const FigurePanel: React.FC = () => {
   const [figures, updateFigures] = useState<string[]>([
     ...figureList.map(() => ""),
   ])
-  // const addShape = useAddShape()
+
   const {
     sketchStore: { addShape },
   } = useRootStore()

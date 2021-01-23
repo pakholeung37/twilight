@@ -1,6 +1,5 @@
 import React from "react"
 import { ChakraProvider, Button } from "@chakra-ui/react"
-import { RecoilRoot } from "recoil"
 import theme from "../packages/editor/src/styles/theme"
 
 export const parameters = {
@@ -8,11 +7,9 @@ export const parameters = {
 }
 
 const withChakra = (StoryFn: Function) => (
-  <RecoilRoot>
-    <ChakraProvider theme={theme}>
-      <StoryFn />
-    </ChakraProvider>
-  </RecoilRoot>
+  <ChakraProvider theme={theme}>
+    <StoryFn />
+  </ChakraProvider>
 )
 
 export const decorators = [withChakra]

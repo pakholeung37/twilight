@@ -18,6 +18,7 @@ export const figureList = [
     width: 100,
     height: 50,
     fill: "green",
+    name: "rect"
     // stroke: "black",
     // strokeWidth: 1,
   },
