@@ -9,10 +9,10 @@ export interface ShapeModelOptions {
   name?: string
 }
 export class ShapeModel {
-  @observable id: string = uniqueId()
+  id: string = uniqueId()
+  type: ShapeType = ""
   @observable x: number = 0
   @observable y: number = 0
-  @observable type: ShapeType = ""
   @observable name: string = ""
 
   constructor(options: ShapeModelOptions) {
