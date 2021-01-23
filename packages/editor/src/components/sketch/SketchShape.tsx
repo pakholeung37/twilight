@@ -5,13 +5,22 @@ import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
 import Konva from "konva"
 import { snapSystemManager, useGuideLine } from "../workspace/snap-system"
 import { useCompose } from "../../hooks"
-import { ShapeModel } from "../../store/model"
+import { ShapeModel, ShapeType } from "../../store/model"
 import { useRootStore } from "../../store"
 import { observer } from "mobx-react-lite"
-const Shape = {
+
+const ShapeComponent = {
   Rect,
-  // Circle,
-  // Ellipse,
+  Circle,
+  Ellipse,
+}
+
+function getShapeComponent(type: ShapeType) {
+  if (type) {
+    return ShapeComponent[type]
+  } else {
+    throw Error(`un acceptable shape Type ${type}`)
+  }
 }
 
 const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
@@ -114,11 +123,9 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
   // const composeDragEnd = useCompose(handleDragEnd, dragEndForSnap)
 
   // 动态获取shape组件
-  if (!shapeModel.type || !Shape[shapeModel.type])
-    throw Error(`un acceptable shape Type ${shapeModel.type}`)
 
   const ShapeComponent: any = useMemo(
-    () => Shape[shapeModel.type as keyof typeof Shape],
+    () => getShapeComponent(shapeModel.type),
     [shapeModel.type],
   )
   return (

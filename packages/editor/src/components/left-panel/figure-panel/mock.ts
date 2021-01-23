@@ -2,15 +2,16 @@
 import { ShapeCreator } from "../../../store/model"
 
 export const figureList = [
-  // {
-  //   type: "Circle",
-  //   radius: 30,
-  //   x: 30,
-  //   y: 30,
-  //   fill: "red",
-  //   stroke: "black",
-  //   strokeWidth: 1,
-  // },
+  {
+    type: "Circle",
+    radius: 30,
+    x: 30,
+    y: 30,
+    fill: "red",
+    name: "circle"
+    // stroke: "black",
+    // strokeWidth: 1,
+  },
   {
     type: "Rect",
     x: 20,
@@ -22,16 +23,16 @@ export const figureList = [
     // stroke: "black",
     // strokeWidth: 1,
   },
-  // {
-  //   type: "Ellipse",
-  //   x: 40,
-  //   y: 40,
-  //   radiusX: 40,
-  //   radiusY: 30,
-  //   fill: "blue",
-  //   stroke: "black",
-  //   strokeWidth: 1,
-  // },
+  {
+    type: "Ellipse",
+    x: 40,
+    y: 40,
+    radiusX: 40,
+    radiusY: 30,
+    fill: "blue",
+    // stroke: "black",
+    // strokeWidth: 1,
+  },
   // {
   //   attrs: {
   //     x: 400,

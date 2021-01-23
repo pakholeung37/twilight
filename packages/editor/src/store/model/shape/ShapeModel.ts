@@ -1,8 +1,7 @@
 import { uniqueId } from "lodash"
 import { action, makeObservable, observable } from "mobx"
 import { assign } from "../../utils"
-
-export type ShapeType = "Rect" | ""
+import {ShapeType} from "./def"
 export interface ShapeModelOptions {
   type?: ShapeType
   x?: number

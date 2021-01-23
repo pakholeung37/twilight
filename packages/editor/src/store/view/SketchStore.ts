@@ -12,16 +12,6 @@ export class SketchStore {
   @observable shapes: ShapeModel[] = []
   @observable selectedShape: ShapeModel | null = null
 
-  @computed get shapeTreeData(): TreeProps {
-    return {
-      treeData: this.shapes.map(shape => ({
-        title: shape.name,
-        active: shape === this.selectedShape,
-        key: shape.id
-      })),
-    }
-  }
-
   constructor(options: SketchStoreOptions) {
     makeObservable(this)
     assign(this, options)
