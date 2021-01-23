@@ -7,7 +7,6 @@
   "private": "true",
   "main": "lib/editor.js",
   "dependencies": {
-    "@blueprintjs/core": "^3.36.0",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
@@ -26,8 +25,7 @@
     "react-animate-height": "^2.0.23",
     "react-custom-scrollbars": "^4.2.1",
     "react-icons": "^3.11.0",
-    "react-router-dom": "^5.2.0",
-    "recoil": "^0.1.0"
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "craco start",
