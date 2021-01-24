@@ -3,7 +3,6 @@ import { KonvaEventObject } from "konva/types/Node"
 import { useDebounceFn } from "ahooks"
 import { Rect, Circle, Ellipse, Transformer } from "@twilight/react-konva"
 import Konva from "konva"
-import { snapSystemManager, useGuideLine } from "../workspace/snap-system"
 import { useCompose } from "../../hooks"
 import { ShapeModel, ShapeType } from "../../store/model"
 import { useRootStore } from "../../store"
@@ -26,18 +25,17 @@ function getShapeComponent(type: ShapeType) {
 const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
   const {
     sketchStore: { selectedShape, setSelectedShape },
+    snapSystemStore: { snapStart, snapMove, snapEnd },
   } = useRootStore()
   /**
    * handle drag
    *
    */
-  const [, setIsDragging] = useState(false)
   const handleClick = useCallback(() => {
     setSelectedShape(shapeModel)
   }, [shapeModel, setSelectedShape])
 
   const handleDragStart = useCallback(() => {
-    setIsDragging(true)
     setSelectedShape(shapeModel)
   }, [setSelectedShape, shapeModel])
 
@@ -55,18 +53,30 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
     ({ target }: KonvaEventObject<DragEvent>) => {
       const { x, y } = target.attrs
       shapeModel.setPosition({ x, y })
-      setIsDragging(false)
     },
     [shapeModel],
   )
-  /**
-   * transformer
-   *
-   */
+
   const isSelected = shapeModel === selectedShape
   const shapeRef = useRef<Konva.Node>(null)
   const trRef = useRef<Konva.Transformer>(null)
 
+  /**
+   * create binding with node and shapeModel
+   *
+   */
+  useEffect(() => {
+    if (shapeRef.current) {
+      shapeModel.setRef(shapeRef.current)
+      console.log(shapeModel)
+    }
+    return () => shapeModel.setRef(null)
+  }, [shapeModel])
+
+  /**
+   * transformer
+   *
+   */
   useEffect(() => {
     if (isSelected) {
       // we need to attach transformer manually
@@ -80,47 +90,32 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
    * snap system
    *
    */
-  // const { setGuideLineH, setGuideLineV } = useGuideLine()
-  // useEffect(() => {
-  //   if (!shapeRef.current) throw new Error("node not found")
-  //   const node = shapeRef.current
-  //   snapSystemManager.addNode(node)
-  //   return () => {
-  //     snapSystemManager.removeNode(node)
-  //   }
-  // })
 
-  // const dragStartForSnap = useCallback(() => {
-  //   if (shapeRef.current) {
-  //     snapSystemManager.freezeGuideLines({
-  //       filter: node => node === shapeRef.current,
-  //     })
-  //   }
-  // }, [])
+  const dragStartForSnap = useCallback(() => {
+    snapStart(shapeModel)
+  }, [snapStart, shapeModel])
 
-  // const dragEndForSnap = useCallback(() => {
-  //   if (shapeRef.current) {
-  //     snapSystemManager.cleanGuideLines()
-  //   }
-  // }, [])
+  const dragEndForSnap = useCallback(() => {
+    snapEnd()
+  }, [snapEnd])
 
-  // const dragBoundFunc = useCallback(
-  //   ({ x, y }: { x: number; y: number }) => {
-  //     if (shapeRef.current) {
-  //       const [
-  //         guideLineH,
-  //         guideLineV,
-  //       ] = snapSystemManager.computedGuideLines(shapeRef.current, { x, y })
-  //       setGuideLineH(guideLineH)
-  //       setGuideLineV(guideLineV)
-  //     }
-  //     return { x, y }
-  //   },
-  //   [setGuideLineH, setGuideLineV],
-  // )
-  // // 组装 drag 方法
-  // const composeDragStart = useCompose(handleDragStart, dragStartForSnap)
-  // const composeDragEnd = useCompose(handleDragEnd, dragEndForSnap)
+  const dragBoundFunc = useCallback(
+    ({ x, y }: { x: number; y: number }) => {
+      if (shapeRef.current) {
+        //         const position = shapeRef.current.getAbsolutePosition()
+        //         const clientRect = shapeRef.current.getClientRect()
+        //         console.log(`absolutePosition: ${JSON.stringify(position)}
+        // clientRect: ${JSON.stringify(clientRect)}
+        // x, y: ${x}, ${y}`)
+      }
+      snapMove(shapeModel)
+      return { x, y }
+    },
+    [snapMove, shapeModel],
+  )
+  // 组装 drag 方法
+  const composeDragStart = useCompose(handleDragStart, dragStartForSnap)
+  const composeDragEnd = useCompose(handleDragEnd, dragEndForSnap)
 
   // 动态获取shape组件
 
@@ -138,10 +133,10 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
         // y={isDragging ? 0 : shapeState.y}
         draggable
         onClick={handleClick}
-        onDragStart={handleDragStart}
+        onDragStart={composeDragStart}
         onDragMove={handleDragMove}
-        onDragEnd={handleDragEnd}
-        // dragBoundFunc={dragBoundFunc}
+        onDragEnd={composeDragEnd}
+        dragBoundFunc={dragBoundFunc}
       />
       {isSelected && (
         <Transformer

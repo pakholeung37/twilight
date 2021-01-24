@@ -1,4 +1,4 @@
-export * from "./GuideLineModel"
+export * from "./SnapLineModel"
 export * from "./shape/shapeFactory"
 export * from "./shape/ShapeModel"
 export * from "./shape/RectModel"

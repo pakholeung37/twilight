@@ -1,39 +1,43 @@
 import React from "react"
 import { Group, Line } from "@twilight/react-konva"
-import { useGuideLine } from "./useGuideLine"
-
-export const SnapSystem: React.FC = () => {
-  const { guideLineH, guideLineV } = useGuideLine()
+import { useRootStore } from "../../../store"
+import { observer } from "mobx-react-lite"
+export const SnapSystem: React.FC = observer(function SnapSystem() {
+  const {
+    snapSystemStore: { snapLineH, snapLineV },
+  } = useRootStore()
   return (
     <Group>
-      {/* {guideLineH && (
+      {snapLineH && (
         <Line
-          points={[-6000, guideLineH.offset, 6000, guideLineH.offset]}
+          points={[-6000, snapLineH.offset, 6000, snapLineH.offset]}
           strokeWidth={1}
           stroke="red"
         ></Line>
       )}
-      {guideLineV && (
+      {snapLineV && (
         <Line
-          points={[guideLineV.offset, -6000, guideLineV.offset, 6000]}
+          points={[snapLineV.offset, -6000, snapLineV.offset, 6000]}
           strokeWidth={1}
           stroke="red"
         ></Line>
-      )} */}
+      )}
     </Group>
   )
-}
+})
 
-export const SnapSystemRC: React.FC = () => {
-  const { guideLineH, guideLineV } = useGuideLine()
+export const SnapSystemRC: React.FC = observer(function SnapSystemRC() {
+  const {
+    snapSystemStore: { snapLineH, snapLineV },
+  } = useRootStore()
   return (
     <>
-      {/* <div
+      <div
         style={{
-          display: guideLineH ? "block" : "none",
+          display: snapLineH ? "block" : "none",
           backgroundColor: "red",
           position: "absolute",
-          top: guideLineH ? guideLineH.offset + "px" : 0,
+          top: snapLineH ? snapLineH.offset + "px" : 0,
           height: "1px",
           left: 0,
           right: 0,
@@ -41,15 +45,15 @@ export const SnapSystemRC: React.FC = () => {
       ></div>
       <div
         style={{
-          display: guideLineV ? "block" : "none",
+          display: snapLineV ? "block" : "none",
           backgroundColor: "red",
           position: "absolute",
-          left: guideLineV ? guideLineV.offset + "px" : 0,
+          left: snapLineV ? snapLineV.offset + "px" : 0,
           width: "1px",
           top: 0,
           bottom: 0,
         }}
-      ></div> */}
+      ></div>
     </>
   )
-}
+})

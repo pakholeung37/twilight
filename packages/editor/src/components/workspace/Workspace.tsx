@@ -5,7 +5,7 @@ import { Stage, Layer, Group } from "@twilight/react-konva"
 import Sketch from "../../components/sketch"
 import theme from "../../styles/theme"
 import { useSize } from "ahooks"
-// import { SnapSystem } from "./snap-system"
+import { SnapSystem, SnapSystemRC } from "./snap-system"
 import { rootStore, RootStoreProvider } from "../../store"
 
 const WorkSpace: React.FC = () => {
@@ -43,7 +43,7 @@ const WorkSpace: React.FC = () => {
           </RootStoreProvider>
         </Stage>
       </Box>
-      {/* <SnapSystemRC /> */}
+      <SnapSystemRC />
     </Box>
   )
 }

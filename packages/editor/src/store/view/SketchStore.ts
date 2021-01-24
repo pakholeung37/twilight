@@ -1,7 +1,6 @@
 import { action, makeObservable, observable, computed } from "mobx"
 import { assign } from "../utils"
 import { ShapeModel, shapeFactory, ShapeCreator } from "../model"
-import { TreeProps } from "../../components/tree/Tree"
 interface SketchStoreOptions {
   width?: number
   height?: number
