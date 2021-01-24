@@ -5,7 +5,7 @@ const HistoryButton: React.FC<IconButtonProps> = props => {
   return (
     <IconButton
       {...props}
-      as="div"
+      as="button"
       color="textlight"
       border="none"
       variant="outline"

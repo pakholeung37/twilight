@@ -44,8 +44,8 @@ const PostionInputY = observer(function PostionInputX() {
 
 const PositionPad: React.FC = () => {
   return (
-    <Box borderBottom="1px" px="15px" py="15px">
-      <SimpleGrid columns={2} spacing={3}>
+    <Box px="12px" py="12px">
+      <SimpleGrid columns={2} spacing={4}>
         <PostionInputX />
         <PostionInputY />
       </SimpleGrid>

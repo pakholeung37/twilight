@@ -1,15 +1,15 @@
-import React, { useState } from "react"
+import React from "react"
 import { Box, TabList, TabPanels, TabPanel, Tab, Tabs } from "@chakra-ui/react"
-import { RiPaintBrushFill } from "react-icons/ri"
-import { MdInsertPhoto } from "react-icons/md"
 import FigurePanel from "./figure-panel"
 import TreeviewPanel from "./treeview-panel"
+import { useRootStore } from "../../store"
+import { observer } from "mobx-react-lite"
 
 const menuItems = [
   // { icon: <RiPaletteFill />, name: "调色盘", tab: <PalettePanel key={0} /> },
-  { icon: <RiPaintBrushFill />, name: "画板", tab: <TreeviewPanel /> },
+  { name: "画板", tab: <TreeviewPanel /> },
   // { icon: <BiText />, name: "文本", tab: <TextPanel key={1} /> },
-  { icon: <MdInsertPhoto />, name: "素材", tab: <FigurePanel /> },
+  { name: "素材", tab: <FigurePanel /> },
   // {
   //   icon: <RiPaintBrushFill />,
   //   name: "背景",
@@ -19,9 +19,11 @@ const menuItems = [
 
 const LeftPanel: React.FC = () => {
   // setting initial tab state
-  const [activeIndex, setActiveIndex] = useState(0)
+  const {
+    leftPanelStore: { activePanelIndex, activatePanel },
+  } = useRootStore()
   const toggleActiveIndex = (index: number) => {
-    setActiveIndex(index)
+    activatePanel(index)
   }
   return (
     <Box as="aside" borderRight="1px" h="100%" bg="white" w="272px">
@@ -30,7 +32,7 @@ const LeftPanel: React.FC = () => {
         colorScheme="twilight"
         size="sm"
         h="100%"
-        index={activeIndex}
+        index={activePanelIndex}
         onChange={toggleActiveIndex}
       >
         <TabList borderBottom="none">
@@ -60,4 +62,4 @@ const LeftPanel: React.FC = () => {
   )
 }
 
-export default LeftPanel
+export default observer(LeftPanel)

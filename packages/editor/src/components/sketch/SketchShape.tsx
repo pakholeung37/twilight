@@ -31,9 +31,13 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
    * handle drag
    *
    */
-  const handleClick = useCallback(() => {
-    setSelectedShape(shapeModel)
-  }, [shapeModel, setSelectedShape])
+  const handleClick = useCallback(
+    evt => {
+      evt.cancelBubble = true
+      setSelectedShape(shapeModel)
+    },
+    [shapeModel, setSelectedShape],
+  )
 
   const handleDragStart = useCallback(() => {
     setSelectedShape(shapeModel)

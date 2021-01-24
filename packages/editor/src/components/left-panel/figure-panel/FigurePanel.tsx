@@ -14,6 +14,7 @@ const FigurePanel: React.FC = () => {
 
   const {
     sketchStore: { addShape },
+    leftPanelStore: { activatePanel },
   } = useRootStore()
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const FigurePanel: React.FC = () => {
   const createFigure = (index: number) => {
     const firgure = figureList[index]
     addShape(firgure)
+    activatePanel(0)
   }
 
   return (

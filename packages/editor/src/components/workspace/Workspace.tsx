@@ -6,13 +6,15 @@ import Sketch from "../../components/sketch"
 import theme from "../../styles/theme"
 import { useSize } from "ahooks"
 import { SnapSystem, SnapSystemRC } from "./snap-system"
-import { rootStore, RootStoreProvider } from "../../store"
+import { rootStore, RootStoreProvider, useRootStore } from "../../store"
 
 const WorkSpace: React.FC = () => {
   const workspaceRef = useRef<HTMLDivElement>(null)
 
   const { width, height } = useSize(workspaceRef)
-
+  const {
+    sketchStore: { setSelectedShape },
+  } = useRootStore()
   return (
     <Box
       bg="workspacebase"
@@ -30,20 +32,24 @@ const WorkSpace: React.FC = () => {
       >
     </Flex> */}
       <Box position="absolute">
-        <Stage width={width} height={height}>
+        <Stage
+          width={width}
+          height={height}
+          onClick={() => setSelectedShape(null)}
+        >
           <RootStoreProvider value={rootStore}>
             <ThemeProvider theme={theme}>
               <Layer>
                 <Group offsetX={-100} offsetY={-200}>
                   <Sketch />
                 </Group>
-                {/* <SnapSystem /> */}
+                <SnapSystem />
               </Layer>
             </ThemeProvider>
           </RootStoreProvider>
         </Stage>
       </Box>
-      <SnapSystemRC />
+      {/* <SnapSystemRC /> */}
     </Box>
   )
 }

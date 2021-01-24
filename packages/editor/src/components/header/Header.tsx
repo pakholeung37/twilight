@@ -20,7 +20,7 @@ const Header: React.FC = () => {
         <Logo></Logo>
         <Divider
           orientation="vertical"
-          mx="15px"
+          mx="12px"
           h="24px"
           borderColor="divider"
         ></Divider>
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           cursor="pointer"
           fontSize="md"
           size="sm"
-          ml="15px"
+          ml="12px"
         ></HistoryButton>
         <HistoryButton
           aria-label="go-back"
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
         ></HistoryButton>
         <Divider
           orientation="vertical"
-          mx="15px"
+          mx="12px"
           h="24px"
           borderColor="divider"
         ></Divider>
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
         >
           下一步
         </Button>
-        <Avatar ml="15px"></Avatar>
+        <Avatar ml="12px"></Avatar>
       </Flex>
     </Flex>
   )
