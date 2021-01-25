@@ -49,8 +49,8 @@ const AlignPad: React.FC = () => {
   return (
     <Box>
       <Flex px="12px" py="4px" align="center" justify="center">
-        {buttonDef.map(def => (
-          <AlignButton {...def} disabled={!selectedShape} />
+        {buttonDef.map((def, index) => (
+          <AlignButton {...def} disabled={!selectedShape} key={index} />
         ))}
       </Flex>
     </Box>

@@ -1,8 +1,10 @@
 import React, { useCallback } from "react"
-import { Box, IconButton, Flex, Collapse } from "@chakra-ui/react"
+import { Box, IconButton, Flex, VStack, Divider } from "@chakra-ui/react"
 import { observer } from "mobx-react-lite"
 import { useRootStore } from "../../../../store"
 import { ExpandButton } from "../ExpandButton"
+import { FillSection } from "./fill-section"
+import { Collapse } from "../../../collapse"
 
 const StylePad: React.FC = () => {
   const {
@@ -15,8 +17,12 @@ const StylePad: React.FC = () => {
         isExpanded={stylePadExpand}
         onClick={() => setStylePadExpand(!stylePadExpand)}
       />
-      <Collapse in={stylePadExpand} animateOpacity>
-        <Box p="4">helloworld</Box>
+      <Collapse isOpen={stylePadExpand}>
+        <VStack px="3" spacing="0" divider={<Divider />}>
+          <FillSection />
+          <FillSection />
+          <FillSection />
+        </VStack>
       </Collapse>
     </Box>
   )

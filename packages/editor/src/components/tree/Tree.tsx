@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, memo, useCallback } from "react"
 import { Box, Text, Button } from "@chakra-ui/react"
-import { Collapse } from "./Collapse"
+import { Collapse } from "../collapse/Collapse"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
 import { DropProps } from "ahooks/lib/useDrop/useDrop"

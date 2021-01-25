@@ -1,8 +1,23 @@
 import React, { useCallback } from "react"
-import { Box, SimpleGrid } from "@chakra-ui/react"
-import NumberInput from "./NumberInput"
+import { Box, SimpleGrid, Text, Flex } from "@chakra-ui/react"
+import { NumberInput } from "../../../number-input"
 import { observer } from "mobx-react-lite"
 import { useRootStore } from "../../../../store"
+
+const Suffix: React.FC<{ text: string }> = ({ text }) => {
+  return (
+    <Text
+      pr="1"
+      color="textbase"
+      fontSize="xs"
+      height="100%"
+      display="flex"
+      alignItems="center"
+    >
+      {text}
+    </Text>
+  )
+}
 
 const PostionInputX = observer(function PostionInputX() {
   const {
@@ -14,12 +29,16 @@ const PostionInputX = observer(function PostionInputX() {
   )
 
   return (
-    <NumberInput
-      isDisabled={!selectedShape}
-      value={(selectedShape?.x || 0).toFixed(2)}
-      onChange={handleChangeX}
-      suffix="X"
-    />
+    <Flex>
+      <Suffix text="X" />
+      <NumberInput
+        isDisabled={!selectedShape}
+        value={(selectedShape?.x || 0).toFixed(2)}
+        onChange={handleChangeX}
+        suffix="px"
+        pr="5"
+      />
+    </Flex>
   )
 })
 const PostionInputY = observer(function PostionInputX() {
@@ -33,19 +52,23 @@ const PostionInputY = observer(function PostionInputX() {
   )
 
   return (
-    <NumberInput
-      isDisabled={!selectedShape}
-      value={(selectedShape?.y || 0).toFixed(2)}
-      onChange={handleChangeY}
-      suffix="Y"
-    />
+    <Flex>
+      <Suffix text="Y" />
+      <NumberInput
+        isDisabled={!selectedShape}
+        value={(selectedShape?.y || 0).toFixed(2)}
+        onChange={handleChangeY}
+        suffix="px"
+        pr="5"
+      />
+    </Flex>
   )
 })
 
 const PositionPad: React.FC = () => {
   return (
     <Box px="12px" py="12px">
-      <SimpleGrid columns={2} spacing={4}>
+      <SimpleGrid columns={2} spacing={3}>
         <PostionInputX />
         <PostionInputY />
       </SimpleGrid>
