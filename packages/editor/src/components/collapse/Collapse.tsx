@@ -81,14 +81,6 @@ export const Collapse = forwardRef<CollapseProps, "div">(function Collapse(
       applyInlineTransitions={false}
       onAnimationStart={onAnimationStart}
       onAnimationEnd={onAnimationEnd}
-      css={{
-        transition:
-          "height 0.2s ease,opacity 0.2s ease-in-out,transform 0.2s ease-in-out",
-        "&.rah-animating--to-height-zero": {
-          opacity: 0,
-          transform: "translateY(-0.625rem)",
-        },
-      }}
     >
       <chakra.div ref={ref} {...rest} />
     </AnimateHeight>
