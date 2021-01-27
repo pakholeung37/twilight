@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { css } from "@emotion/react"
 import { Box, Flex, Text, Button, ButtonProps, HStack } from "@chakra-ui/react"
 import { Input } from "../../../../input"
 import { NumberInput } from "../../../../number-input"
@@ -29,17 +28,12 @@ export const ColorButton: React.FC<ButtonProps & { color: string }> = ({
   )
 }
 
-export const FillSection: React.FC = function FillSection() {
+export const ShadowSection: React.FC = function ShadowSection() {
   const [open, setOpen] = useState(false)
 
   return (
     <Box w="100%">
-      <div
-        css={css`
-          display: flex;
-        `}
-      ></div>
-      <Title text="填充" open={open} onChange={setOpen} />
+      <Title text="阴影" open={open} onChange={setOpen} />
       <Collapse isOpen={open}>
         <Box mb="3" mt="1">
           <HStack spacing="3" align="center">
@@ -50,15 +44,27 @@ export const FillSection: React.FC = function FillSection() {
               </Text>
             </Flex>
             <Flex justify="center" align="center" direction="column">
-              <Input prefix="#" pl="4" />
+              <NumberInput />
               <Text fontSize="xs" mt="1">
-                Hex
+                X
               </Text>
             </Flex>
-            <Flex width="20" justify="center" align="center" direction="column">
-              <NumberInput suffix="%" max={100} min={0} pr="4" />
+            <Flex justify="center" align="center" direction="column">
+              <NumberInput />
               <Text fontSize="xs" mt="1">
-                透明度
+                Y
+              </Text>
+            </Flex>
+            <Flex justify="center" align="center" direction="column">
+              <NumberInput />
+              <Text fontSize="xs" mt="1">
+                模糊
+              </Text>
+            </Flex>
+            <Flex justify="center" align="center" direction="column">
+              <NumberInput />
+              <Text fontSize="xs" mt="1">
+                扩展
               </Text>
             </Flex>
           </HStack>

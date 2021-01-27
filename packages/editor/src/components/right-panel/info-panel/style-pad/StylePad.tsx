@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite"
 import { useRootStore } from "../../../../store"
 import { ExpandButton } from "../ExpandButton"
 import { FillSection } from "./fill-section"
+import { ShadowSection } from "./shadow-section"
 import { Collapse } from "../../../collapse"
 
 const StylePad: React.FC = () => {
@@ -20,8 +21,7 @@ const StylePad: React.FC = () => {
       <Collapse isOpen={stylePadExpand}>
         <VStack px="3" spacing="0" divider={<Divider />}>
           <FillSection />
-          <FillSection />
-          <FillSection />
+          <ShadowSection />
         </VStack>
       </Collapse>
     </Box>

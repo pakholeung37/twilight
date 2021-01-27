@@ -3,17 +3,26 @@ import { Box } from "@chakra-ui/react"
 import { useThrottleFn } from "ahooks"
 import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
+
 const renderWindow = window
 
-export const Saturation: React.FC = () => {
+export const Alpha: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
-  const [pointerPosition, setPointerPosition] = useState({ x: 50, y: 50 })
+  const [pointerPosition, setPointerPosition] = useState({ x: 3 })
 
   const { run: setPositionThrottle } = useThrottleFn(
     (value: { x: number; y: number }) => {
-      setPointerPosition(value)
+      // 将x映射到margin为3的方框中, 可以将pointer框定在box中
+      if (containerRef.current) {
+        const x =
+          value.x *
+            ((containerRef.current.clientWidth - 6) /
+              containerRef.current.clientWidth) +
+          3
+        setPointerPosition({ x })
+      }
     },
     { wait: 0 },
   )
@@ -27,6 +36,7 @@ export const Saturation: React.FC = () => {
     },
     [setPositionThrottle],
   )
+
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
       handleChange(e.nativeEvent)
@@ -51,28 +61,23 @@ export const Saturation: React.FC = () => {
   return (
     <Box
       ref={containerRef}
-      h="150px"
-      position="relative"
-      overflow="hidden"
-      background="#ff0000"
+      h="8px"
+      w="100%"
       rounded="4px"
       boxShadow="0 0 0px 1px rgba(0,0,0, 0.4)"
+      position="relative"
+      background={`
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==") left center,
+        linear-gradient(
+          to right,
+          rgba(95, 143, 119, 0) 0%,
+        rgb(95, 143, 119) 100%
+        );
+      `}
       onMouseDown={handleMouseDown}
       onClick={handleClick}
     >
-      <Box
-        w="100%"
-        h="100%"
-        position="absolute"
-        background="linear-gradient(to right, #fff, rgba(255, 255, 255, 0));"
-      ></Box>
-      <Box
-        w="100%"
-        h="100%"
-        position="absolute"
-        background="linear-gradient(to top, #000, rgba(0, 0, 0, 0));"
-      ></Box>
-      <Pointer {...pointerPosition} />
+      <Pointer {...pointerPosition} y={3.5} />
     </Box>
   )
 }

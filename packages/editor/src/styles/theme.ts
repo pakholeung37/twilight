@@ -31,6 +31,7 @@ export default extendTheme({
     },
     disabled: "#E2E8F0",
     border: "#E2E8F0",
+    borderdark: "#A0AEC0",
     divider: "#A0AEC0",
     textdark: "#171923",
     textbase: "#2D3748",

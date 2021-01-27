@@ -11,7 +11,3 @@ export default {
 const Template: Story = args => <ColorPicker {...args}></ColorPicker>
 
 export const Base = Template.bind({})
-
-Base.parameters = {
-  layout: "fullscreen",
-}

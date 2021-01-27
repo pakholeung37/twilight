@@ -1,14 +1,18 @@
 import React from "react"
 import { Story, Meta } from "@storybook/react/types-6-0"
-
-import StylePad from "../index"
+import { createStore, RootStoreProvider } from "../../../../store"
+import StylePad from "./index"
 
 export default {
   title: "StylePad",
   component: StylePad,
 } as Meta
 
-const Template: Story = args => <StylePad {...args}></StylePad>
+const Template: Story = args => (
+  <RootStoreProvider value={createStore()}>
+    <StylePad {...args}></StylePad>
+  </RootStoreProvider>
+)
 
 export const Base = Template.bind({})
 
