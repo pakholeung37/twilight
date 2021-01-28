@@ -7,6 +7,7 @@ export interface ShapeModelOptions {
   x?: number
   y?: number
   name?: string
+  fill?: string
 }
 export abstract class ShapeModel {
   readonly id: string = uniqueId()
@@ -14,6 +15,7 @@ export abstract class ShapeModel {
   @observable x: number = 0
   @observable y: number = 0
   @observable name: string = ""
+  @observable fill: string = "#ffff00"
 
   ref: Konva.Node | null = null
 
