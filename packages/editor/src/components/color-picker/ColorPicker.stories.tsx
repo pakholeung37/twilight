@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback, useState } from "react"
 import { Story, Meta } from "@storybook/react/types-6-0"
 
 import { ColorPicker, ColorPickerProps } from "./index"
@@ -8,14 +8,26 @@ export default {
   component: ColorPicker,
 } as Meta
 
-const Template: Story = (args: ColorPickerProps) => (
-  <ColorPicker {...args}></ColorPicker>
-)
+const Template: Story<ColorPickerProps> = ({
+  hsv: initHsv,
+  alpha: initAlpha,
+}) => {
+  const [hsv, setHsv] = useState(initHsv)
+  const [alpha, setAlpha] = useState(initAlpha)
+
+  const onChange = useCallback(
+    (hsv: any, alpha: number) => {
+      setHsv(hsv)
+      setAlpha(alpha)
+    },
+    [setHsv, setAlpha],
+  )
+  return <ColorPicker hsv={hsv} alpha={alpha} onChange={onChange}></ColorPicker>
+}
 
 export const Base = Template.bind({})
 
 Base.args = {
-  onChange(color) {
-    console.log(color)
-  },
+  hsv: [180, 100, 100],
+  alpha: 80,
 } as ColorPickerProps

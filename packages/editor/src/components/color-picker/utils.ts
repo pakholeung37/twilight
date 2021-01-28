@@ -30,3 +30,7 @@ export function hsvToRgb(color: HSV): RGB {
 export function rgbToHsv(color: RGB): HSV {
   return rgb.hsv(color)
 }
+
+export function rgbToHex(color: RGB): string {
+  return rgb.hex(color)
+}

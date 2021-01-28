@@ -1,6 +1,5 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { memo, useCallback, useEffect, useRef, useState } from "react"
 import { Box } from "@chakra-ui/react"
-import { useThrottleFn } from "ahooks"
 import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
 
@@ -10,39 +9,34 @@ interface HuePorps {
   onChange?: (hue: number) => void
 }
 
-export const Hue: React.FC<HuePorps> = ({ onChange }) => {
+export const Hue: React.FC<HuePorps> = memo(function Hue({ onChange, value }) {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
-  const [pointerPosition, setPointerPosition] = useState({ x: 3 })
+  useEffect(() => {
+    if (containerRef.current) {
+      rectCache.current = containerRef.current.getClientRects()[0]
+    }
+  }, [])
+  // 将value映射到margin为3的方框中, 可以将pointer框定在box中
+  const [x, setX] = useState(3)
 
-  const { run: setPositionThrottle } = useThrottleFn(
-    (value: { x: number; y: number }) => {
-      // 将x映射到margin为3的方框中, 可以将pointer框定在box中
-      if (containerRef.current) {
-        const x =
-          value.x *
-            ((containerRef.current.clientWidth - 6) /
-              containerRef.current.clientWidth) +
-          3
-        setPointerPosition({ x })
-        onChange &&
-          onChange(
-            Math.round((value.x / containerRef.current.clientWidth) * 360),
-          )
-      }
-    },
-    { wait: 0 },
-  )
+  useEffect(() => {
+    if (rectCache.current) {
+      const width = rectCache.current.width
+      setX((value / 360) * (width - 6) + 3)
+    }
+  }, [setX, value])
+
   const handleChange = useCallback(
     (e: MouseEvent) => {
       if (rectCache.current) {
         const result = calculatePosition(e, rectCache.current)
-        console.log(calculatePosition(e, rectCache.current))
-        setPositionThrottle({ x: result.left, y: result.top })
+        const hue = Math.round((result.left / rectCache.current.width) * 360)
+        onChange && onChange(hue)
       }
     },
-    [setPositionThrottle],
+    [onChange],
   )
 
   const handleClick = useCallback(
@@ -85,7 +79,7 @@ export const Hue: React.FC<HuePorps> = ({ onChange }) => {
       onMouseDown={handleMouseDown}
       onClick={handleClick}
     >
-      <Pointer {...pointerPosition} y={3.5} />
+      <Pointer x={x} y={3.5} />
     </Box>
   )
-}
+})
