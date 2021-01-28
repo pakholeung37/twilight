@@ -3,9 +3,16 @@ import { Box } from "@chakra-ui/react"
 import { useThrottleFn } from "ahooks"
 import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
+import { HSV } from "color-convert/conversions"
+
 const renderWindow = window
 
-export const Saturation: React.FC = () => {
+interface SaturationProps {
+  onChange?: (color: HSV) => void
+  value: HSV
+}
+
+export const Saturation: React.FC<SaturationProps> = ({ onChange, value }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
@@ -23,9 +30,17 @@ export const Saturation: React.FC = () => {
         const result = calculatePosition(e, rectCache.current)
         console.log(calculatePosition(e, rectCache.current))
         setPositionThrottle({ x: result.left, y: result.top })
+        const {
+          width: containerWidth,
+          height: containerHeight,
+        } = rectCache.current
+        const saturation = (result.left / containerWidth) * 100
+        const bright = (1 - result.top / containerHeight) * 100
+
+        onChange && onChange([value[0], saturation, bright])
       }
     },
-    [setPositionThrottle],
+    [setPositionThrottle, onChange, value],
   )
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -52,6 +67,7 @@ export const Saturation: React.FC = () => {
     <Box
       ref={containerRef}
       h="150px"
+      w="100%"
       position="relative"
       overflow="hidden"
       background="#ff0000"

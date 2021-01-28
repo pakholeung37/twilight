@@ -1,3 +1,6 @@
+import { hsv, rgb } from "color-convert"
+import { HSV, RGB } from "color-convert/conversions"
+
 export const calculatePosition = (e: MouseEvent, container: DOMRect) => {
   const { width: containerWidth, height: containerHeight } = container
   const x = e.pageX
@@ -17,7 +20,13 @@ export const calculatePosition = (e: MouseEvent, container: DOMRect) => {
     top = containerHeight
   }
 
-  // const saturation = left / containerWidth
-  // const bright = 1 - top / containerHeight
   return { left, top }
+}
+
+export function hsvToRgb(color: HSV): RGB {
+  return hsv.rgb(color)
+}
+
+export function rgbToHsv(color: RGB): HSV {
+  return rgb.hsv(color)
 }

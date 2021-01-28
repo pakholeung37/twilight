@@ -32,7 +32,7 @@ export const NumberInput: React.FC<
           </Text>
         </InputLeftElement>
       )}
-      <ChaNumberInput size="xs" precision={2} {...props}>
+      <ChaNumberInput size="xs" {...props}>
         <NumberInputField
           fontSize="xs"
           py="1"

@@ -5,8 +5,12 @@ import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
 
 const renderWindow = window
+interface AlphaPorps {
+  value: number
+  onChange?: (alpha: number) => void
+}
 
-export const Alpha: React.FC = () => {
+export const Alpha: React.FC<AlphaPorps> = ({ value, onChange }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
@@ -22,6 +26,10 @@ export const Alpha: React.FC = () => {
               containerRef.current.clientWidth) +
           3
         setPointerPosition({ x })
+        onChange &&
+          onChange(
+            Math.round((value.x / containerRef.current.clientWidth) * 100),
+          )
       }
     },
     { wait: 0 },

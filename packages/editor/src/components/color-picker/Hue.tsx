@@ -5,8 +5,12 @@ import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
 
 const renderWindow = window
+interface HuePorps {
+  value: number
+  onChange?: (hue: number) => void
+}
 
-export const Hue: React.FC = () => {
+export const Hue: React.FC<HuePorps> = ({ onChange }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
@@ -22,6 +26,10 @@ export const Hue: React.FC = () => {
               containerRef.current.clientWidth) +
           3
         setPointerPosition({ x })
+        onChange &&
+          onChange(
+            Math.round((value.x / containerRef.current.clientWidth) * 360),
+          )
       }
     },
     { wait: 0 },

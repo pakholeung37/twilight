@@ -14,6 +14,7 @@ export const Pointer: React.FC<{ x: number; y: number }> = ({
        rgba(0, 0, 0, 0.3) 0px 0px 1px 1px inset,
        rgba(0, 0, 0, 0.4) 0px 0px 2px 3px"
       borderRadius="50%"
+      pointerEvents="none"
       transform="translate(-3px, -3px)"
       style={{
         left: `${x}px`,

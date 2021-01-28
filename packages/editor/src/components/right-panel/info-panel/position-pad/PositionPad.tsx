@@ -36,6 +36,7 @@ const PostionInputX = observer(function PostionInputX() {
         value={(selectedShape?.x || 0).toFixed(2)}
         onChange={handleChangeX}
         suffix="px"
+        precision={2}
         pr="5"
       />
     </Flex>
@@ -59,6 +60,7 @@ const PostionInputY = observer(function PostionInputX() {
         value={(selectedShape?.y || 0).toFixed(2)}
         onChange={handleChangeY}
         suffix="px"
+        precision={2}
         pr="5"
       />
     </Flex>
