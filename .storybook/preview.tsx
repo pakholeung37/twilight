@@ -9,8 +9,8 @@ export const parameters = {
 
 const withChakra = (StoryFn: Function) => (
   <Box>
-    <Global styles={normalize} />
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} resetCSS>
+      <Global styles={normalize} />
       <StoryFn />
     </ChakraProvider>
   </Box>
