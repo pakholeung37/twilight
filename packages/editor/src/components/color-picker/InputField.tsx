@@ -1,8 +1,8 @@
-import React, { useMemo } from "react"
+import React, { useCallback, useMemo } from "react"
 import { Flex, HStack, Text } from "@chakra-ui/react"
 import { Input } from "../input"
 import { NumberInput } from "../number-input"
-import { RGB } from "color-convert/conversions"
+import { HSV, RGB } from "color-convert/conversions"
 import { rgbToHex } from "./utils"
 
 const Title: React.FC = ({ children }) => {
@@ -15,10 +15,44 @@ const Title: React.FC = ({ children }) => {
 export interface InputFieldProps {
   rgb: RGB
   alpha: number
+  onChange: (rgb?: RGB, alpha?: number) => void
 }
-export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
+export const InputField: React.FC<InputFieldProps> = ({
+  rgb,
+  alpha,
+  onChange,
+}) => {
   const hex = rgbToHex(rgb)
   const [r, g, b] = rgb
+
+  const handleRChange = useCallback(
+    (_, v: number = 0) => {
+      onChange && onChange([v, g, b], undefined)
+    },
+    [b, g, onChange],
+  )
+
+  const handleGChange = useCallback(
+    (_, v: number = 0) => {
+      onChange && onChange([r, v, b], undefined)
+    },
+    [b, r, onChange],
+  )
+
+  const handleBChange = useCallback(
+    (_, v: number = 0) => {
+      onChange && onChange([r, g, v], undefined)
+    },
+    [r, g, onChange],
+  )
+
+  const handleAlphaChange = useCallback(
+    (_, v: number = 0) => {
+      onChange && onChange(undefined, v)
+    },
+    [onChange],
+  )
+
   return (
     <HStack w="100%" spacing="1">
       {useMemo(
@@ -43,13 +77,13 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               max={255}
               min={0}
               value={r}
-              onChange={() => {}}
+              onChange={handleRChange}
               inputMode="numeric"
             />
             <Title>R</Title>
           </Flex>
         ),
-        [r],
+        [handleRChange, r],
       )}
       {useMemo(
         () => (
@@ -58,13 +92,13 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               max={255}
               min={0}
               value={g}
-              onChange={() => {}}
+              onChange={handleGChange}
               inputMode="numeric"
             />
             <Title>G</Title>
           </Flex>
         ),
-        [g],
+        [handleGChange, g],
       )}
       {useMemo(
         () => (
@@ -73,22 +107,27 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               max={255}
               min={0}
               value={b}
-              onChange={() => {}}
+              onChange={handleBChange}
               inputMode="numeric"
             />
             <Title>B</Title>
           </Flex>
         ),
-        [b],
+        [handleBChange, b],
       )}
       {useMemo(
         () => (
           <Flex justify="center" align="center" direction="column">
-            <NumberInput max={255} min={0} value={alpha} onChange={() => {}} />
+            <NumberInput
+              max={100}
+              min={0}
+              value={alpha}
+              onChange={handleAlphaChange}
+            />
             <Title>Alpha</Title>
           </Flex>
         ),
-        [alpha],
+        [handleAlphaChange, alpha],
       )}
     </HStack>
   )

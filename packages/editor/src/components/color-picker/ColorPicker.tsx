@@ -6,8 +6,9 @@ import { Saturation } from "./Saturation"
 import { InputField } from "./InputField"
 import { CheckBoard } from "./CheckBoard"
 import { HSV, RGB } from "color-convert/conversions"
-import { hsvToRgb } from "./utils"
+import { hsvToRgb, rgbToHsv } from "./utils"
 import { useThrottleFn } from "ahooks"
+import { isUndefined } from "lodash"
 
 export interface ColorPickerProps {
   onChange?: (hsv: HSV, alpha: number) => void
@@ -24,7 +25,11 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   const [, s, v] = hsv
   const { run: handleChange } = useThrottleFn(
     (_hsv: HSV | undefined, _alpha: number | undefined) => {
-      onChange && onChange(_hsv || hsv, _alpha || alpha)
+      onChange &&
+        onChange(
+          isUndefined(_hsv) ? hsv : _hsv,
+          isUndefined(_alpha) ? alpha : _alpha,
+        )
     },
     { wait: 40 },
   )
@@ -49,6 +54,13 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
     [handleChange, s, v],
   )
 
+  const handleInputFieldChange = useCallback(
+    (rgb: RGB, alpha) => {
+      handleChange(rgbToHsv(rgb), alpha)
+    },
+    [handleChange],
+  )
+
   return (
     <VStack width="210px" spacing={2}>
       <Saturation onChange={handleSaturationChange} hsv={hsv} />
@@ -61,7 +73,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
           <CheckBoard rgb={rgb} alpha={alpha} />
         </Box>
       </Flex>
-      <InputField rgb={rgb} alpha={alpha} />
+      <InputField rgb={rgb} alpha={alpha} onChange={handleInputFieldChange} />
     </VStack>
   )
 }
