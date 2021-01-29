@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from "react"
 import { Flex, HStack, Text } from "@chakra-ui/react"
 import { Input } from "../input"
 import { NumberInput } from "../number-input"
-import { HSV, RGB } from "color-convert/conversions"
+import { RGB } from "color-convert/conversions"
 import { hexToRgb, isHex, rgbToHex } from "./utils"
 
 const Title: React.FC = ({ children }) => {
@@ -92,7 +92,10 @@ export const InputField: React.FC<InputFieldProps> = ({
               prefix="#"
               pl="3"
               value={isHexFocus ? hexInput : hex}
-              onFocus={() => setHexFocus(true)}
+              onFocus={() => {
+                setHexFocus(true)
+                setHexInput(hex)
+              }}
               onChange={({ target: { value } }) => setHexInput(value)}
               onKeyPress={e => {
                 e.key === "Enter" && handleHexConfirm(e)

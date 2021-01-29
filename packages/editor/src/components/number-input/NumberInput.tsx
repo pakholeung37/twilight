@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react"
+import React, { memo } from "react"
 import {
   InputGroup,
   InputRightElement,
@@ -7,7 +7,6 @@ import {
   NumberInputField,
   NumberInputProps,
   Text,
-  Box,
 } from "@chakra-ui/react"
 
 export const NumberInput: React.FC<
