@@ -55,8 +55,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   )
 
   const handleInputFieldChange = useCallback(
-    (rgb: RGB, alpha) => {
-      handleChange(rgbToHsv(rgb), alpha)
+    (rgb?: RGB, alpha?: number) => {
+      console.log(rgb, rgb && rgbToHsv(rgb))
+      handleChange(rgb ? rgbToHsv(rgb) : undefined, alpha)
     },
     [handleChange],
   )

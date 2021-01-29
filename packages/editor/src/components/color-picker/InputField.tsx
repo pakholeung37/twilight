@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import { Flex, HStack, Text } from "@chakra-ui/react"
 import { Input } from "../input"
 import { NumberInput } from "../number-input"
 import { HSV, RGB } from "color-convert/conversions"
-import { rgbToHex } from "./utils"
+import { hexToRgb, isHex, rgbToHex } from "./utils"
 
 const Title: React.FC = ({ children }) => {
   return (
@@ -23,29 +23,53 @@ export const InputField: React.FC<InputFieldProps> = ({
   onChange,
 }) => {
   const hex = rgbToHex(rgb)
-  const [r, g, b] = rgb
+  const [isHexFocus, setHexFocus] = useState(false)
+  const [hexInput, setHexInput] = useState(hex)
 
+  const handleHexConfirm = useCallback(
+    ({ target: { value } }) => {
+      const color = value
+      if (isHex(color)) {
+        onChange && onChange(hexToRgb(color))
+      } else {
+        setHexInput(hex)
+      }
+    },
+    [hex, onChange],
+  )
+
+  const handleHexBlur = useCallback(
+    e => {
+      setHexFocus(false)
+      handleHexConfirm(e)
+    },
+    [handleHexConfirm],
+  )
+
+  const [r, g, b] = rgb
+  // R
   const handleRChange = useCallback(
     (_, v: number = 0) => {
-      onChange && onChange([v, g, b], undefined)
+      onChange && onChange([isNaN(v) ? r : v, g, b])
     },
-    [b, g, onChange],
+    [r, g, b, onChange],
   )
 
+  // G
   const handleGChange = useCallback(
     (_, v: number = 0) => {
-      onChange && onChange([r, v, b], undefined)
+      onChange && onChange([r, isNaN(v) ? g : v, b])
     },
-    [b, r, onChange],
+    [r, g, b, onChange],
   )
-
+  // B
   const handleBChange = useCallback(
     (_, v: number = 0) => {
-      onChange && onChange([r, g, v], undefined)
+      onChange && onChange([r, g, isNaN(v) ? b : v])
     },
-    [r, g, onChange],
+    [r, g, b, onChange],
   )
-
+  // Alpha
   const handleAlphaChange = useCallback(
     (_, v: number = 0) => {
       onChange && onChange(undefined, v)
@@ -64,11 +88,21 @@ export const InputField: React.FC<InputFieldProps> = ({
             align="center"
             direction="column"
           >
-            <Input prefix="#" pl="3" value={hex} onChange={() => {}} />
+            <Input
+              prefix="#"
+              pl="3"
+              value={isHexFocus ? hexInput : hex}
+              onFocus={() => setHexFocus(true)}
+              onChange={({ target: { value } }) => setHexInput(value)}
+              onKeyPress={e => {
+                e.key === "Enter" && handleHexConfirm(e)
+              }}
+              onBlur={handleHexBlur}
+            />
             <Title>Hex</Title>
           </Flex>
         ),
-        [hex],
+        [handleHexConfirm, hex, hexInput, isHexFocus, handleHexBlur],
       )}
       {useMemo(
         () => (
