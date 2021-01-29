@@ -31,9 +31,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
 
   const handleSaturationChange = useCallback(
     (hsv: HSV) => {
-      handleChange(hsv, alpha)
+      handleChange(hsv, undefined)
     },
-    [handleChange, alpha],
+    [handleChange],
   )
   const handleAlphaChange = useCallback(
     (alpha: number) => {

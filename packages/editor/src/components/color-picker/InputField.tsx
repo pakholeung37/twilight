@@ -21,24 +21,24 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
   const [r, g, b] = rgb
   return (
     <HStack w="100%" spacing="1">
-      <Flex
-        w="16"
-        flexShrink={0}
-        justify="center"
-        align="center"
-        direction="column"
-      >
-        {useMemo(
-          () => (
+      {useMemo(
+        () => (
+          <Flex
+            w="16"
+            flexShrink={0}
+            justify="center"
+            align="center"
+            direction="column"
+          >
             <Input prefix="#" pl="3" value={hex} onChange={() => {}} />
-          ),
-          [hex],
-        )}
-        <Title>Hex</Title>
-      </Flex>
-      <Flex justify="center" align="center" direction="column">
-        {useMemo(
-          () => (
+            <Title>Hex</Title>
+          </Flex>
+        ),
+        [hex],
+      )}
+      {useMemo(
+        () => (
+          <Flex justify="center" align="center" direction="column">
             <NumberInput
               max={255}
               min={0}
@@ -46,14 +46,14 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               onChange={() => {}}
               inputMode="numeric"
             />
-          ),
-          [r],
-        )}
-        <Title>R</Title>
-      </Flex>
-      <Flex justify="center" align="center" direction="column">
-        {useMemo(
-          () => (
+            <Title>R</Title>
+          </Flex>
+        ),
+        [r],
+      )}
+      {useMemo(
+        () => (
+          <Flex justify="center" align="center" direction="column">
             <NumberInput
               max={255}
               min={0}
@@ -61,14 +61,14 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               onChange={() => {}}
               inputMode="numeric"
             />
-          ),
-          [g],
-        )}
-        <Title>G</Title>
-      </Flex>
-      <Flex justify="center" align="center" direction="column">
-        {useMemo(
-          () => (
+            <Title>G</Title>
+          </Flex>
+        ),
+        [g],
+      )}
+      {useMemo(
+        () => (
+          <Flex justify="center" align="center" direction="column">
             <NumberInput
               max={255}
               min={0}
@@ -76,20 +76,20 @@ export const InputField: React.FC<InputFieldProps> = ({ rgb, alpha }) => {
               onChange={() => {}}
               inputMode="numeric"
             />
-          ),
-          [b],
-        )}
-        <Title>B</Title>
-      </Flex>
-      <Flex justify="center" align="center" direction="column">
-        {useMemo(
-          () => (
+            <Title>B</Title>
+          </Flex>
+        ),
+        [b],
+      )}
+      {useMemo(
+        () => (
+          <Flex justify="center" align="center" direction="column">
             <NumberInput max={255} min={0} value={alpha} onChange={() => {}} />
-          ),
-          [alpha],
-        )}
-        <Title>Alpha</Title>
-      </Flex>
+            <Title>Alpha</Title>
+          </Flex>
+        ),
+        [alpha],
+      )}
     </HStack>
   )
 }
