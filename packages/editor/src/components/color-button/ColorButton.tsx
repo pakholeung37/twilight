@@ -28,7 +28,7 @@ const PickerPopover: React.FC<{
   placement?: UsePopoverProps["placement"]
 }> = memo(({ content, trigger, placement = "auto" }) => {
   return (
-    <Popover variant="responsive" placement={placement} isLazy>
+    <Popover variant="responsive" placement={placement}>
       <PopoverTrigger>{trigger}</PopoverTrigger>
       <PopoverContent w="232px">
         <PopoverArrow />
