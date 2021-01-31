@@ -2,15 +2,24 @@ import React, { memo, useCallback, useEffect, useRef, useState } from "react"
 import { Box } from "@chakra-ui/react"
 import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
+import {
+  compileColor,
+  HSV,
+  hsvToHsl,
+  transparentBgUrl,
+} from "../../utils/color"
+import { observer } from "mobx-react-lite"
 
 const renderWindow = window
 interface AlphaPorps {
-  value: number
+  hsv: HSV
+  alpha: number
   onChange?: (alpha: number) => void
 }
 
-export const Alpha: React.FC<AlphaPorps> = memo(function Alpha({
-  value,
+export const Alpha: React.FC<AlphaPorps> = observer(function Alpha({
+  hsv,
+  alpha,
   onChange,
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -26,11 +35,14 @@ export const Alpha: React.FC<AlphaPorps> = memo(function Alpha({
   const [x, setX] = useState(3)
 
   useEffect(() => {
+    if (!rectCache.current && containerRef.current) {
+      rectCache.current = containerRef.current.getClientRects()[0]
+    }
     if (rectCache.current) {
       const width = rectCache.current.width
-      setX((value / 100) * (width - 6) + 3)
+      setX((alpha / 100) * (width - 6) + 3)
     }
-  }, [setX, value])
+  }, [setX, alpha])
 
   const handleChange = useCallback(
     (e: MouseEvent) => {
@@ -64,6 +76,7 @@ export const Alpha: React.FC<AlphaPorps> = memo(function Alpha({
     renderWindow.addEventListener("mouseup", handleMouseUp)
   }, [handleChange, handleMouseUp])
 
+  const hsl = hsvToHsl(hsv)
   return (
     <Box
       ref={containerRef}
@@ -73,16 +86,24 @@ export const Alpha: React.FC<AlphaPorps> = memo(function Alpha({
       boxShadow="0 0 0px 1px rgba(0,0,0, 0.4)"
       position="relative"
       background={`
-        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==") left center,
-        linear-gradient(
-          to right,
-          rgba(95, 143, 119, 0) 0%,
-        rgb(95, 143, 119) 100%
-        );
+        url("${transparentBgUrl}") left center
       `}
       onMouseDown={handleMouseDown}
       onClick={handleClick}
     >
+      <Box
+        w="100%"
+        h="100%"
+        style={{
+          background: `
+            linear-gradient(
+              to right,
+              ${compileColor.hsl([...hsl, 0])},
+              ${compileColor.hsl([...hsl, 1])}
+            )
+          `,
+        }}
+      ></Box>
       <Pointer x={x} y={3.5} />
     </Box>
   )

@@ -11,6 +11,7 @@ import { calculatePosition } from "./utils"
 import { Pointer } from "./Pointer"
 import { HSV } from "color-convert/conversions"
 import { useThrottleFn } from "ahooks"
+import { observer } from "mobx-react-lite"
 
 const renderWindow = window
 
@@ -19,7 +20,7 @@ interface SaturationProps {
   hsv: HSV
 }
 
-export const Saturation: React.FC<SaturationProps> = memo(
+export const Saturation: React.FC<SaturationProps> = observer(
   function Saturation({ onChange, hsv }) {
     const containerRef = useRef<HTMLDivElement>(null)
     // useRef() will return a mutableRefObject, which current can assign
@@ -134,7 +135,4 @@ export const Saturation: React.FC<SaturationProps> = memo(
       </Box>
     )
   },
-  (prev, next) =>
-    prev.onChange === next.onChange &&
-    JSON.stringify(prev.hsv) === JSON.stringify(next.hsv),
 )

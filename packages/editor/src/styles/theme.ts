@@ -6,6 +6,12 @@ breakpoints.md = breakpoints[1]
 breakpoints.lg = breakpoints[2]
 breakpoints.xl = breakpoints[3]
 
+const baseStylePopper = {
+  w: "100%",
+  maxW: "xs",
+  zIndex: 10,
+}
+
 export default extendTheme({
   fontSizes: {
     xs: "12px",
@@ -66,6 +72,16 @@ export default extendTheme({
     NumberInput: {
       defaultProps: {
         size: "xs",
+      },
+    },
+    Popover: {
+      variants: {
+        responsive: {
+          popper: {
+            maxWidth: "unset",
+            width: "unset",
+          },
+        },
       },
     },
   },

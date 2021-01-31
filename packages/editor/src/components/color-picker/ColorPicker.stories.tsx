@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 import { Story, Meta } from "@storybook/react/types-6-0"
 
 import { ColorPicker, ColorPickerProps } from "./index"
+import { Box } from "@chakra-ui/react"
 
 export default {
   title: "ColorPicker",
@@ -22,7 +23,11 @@ const Template: Story<ColorPickerProps> = ({
     },
     [setHsv, setAlpha],
   )
-  return <ColorPicker hsv={hsv} alpha={alpha} onChange={onChange}></ColorPicker>
+  return (
+    <Box w="206px">
+      <ColorPicker hsv={hsv} alpha={alpha} onChange={onChange}></ColorPicker>
+    </Box>
+  )
 }
 
 export const Base = Template.bind({})

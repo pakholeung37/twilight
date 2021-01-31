@@ -14,6 +14,7 @@
     "@twilight/react-konva-portal": "^1.0.10",
     "ahooks": "^2.7.0",
     "axios": "^0.19.2",
+    "color-string": "^1.5.0",
     "color-convert": "^2.0.0",
     "emotion-normalize": "^10.1.0",
     "emotion-theming": "^10.0.27",

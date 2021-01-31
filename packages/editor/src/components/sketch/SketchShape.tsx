@@ -131,6 +131,7 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
     <>
       <ShapeComponent
         {...shapeModel}
+        fill={shapeModel.fill}
         ref={shapeRef}
         strokeScaleEnabled={false}
         // x={isDragging ? 0 : shapeState.x}

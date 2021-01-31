@@ -1,6 +1,3 @@
-import { hex,hsv, rgb } from "color-convert"
-import { HEX, HSV, RGB } from "color-convert/conversions"
-
 export const calculatePosition = (e: MouseEvent, container: DOMRect) => {
   const { width: containerWidth, height: containerHeight } = container
   const x = e.pageX
@@ -21,24 +18,4 @@ export const calculatePosition = (e: MouseEvent, container: DOMRect) => {
   }
 
   return { left, top }
-}
-
-export function hsvToRgb(color: HSV): RGB {
-  return hsv.rgb(color)
-}
-
-export function rgbToHsv(color: RGB): HSV {
-  return rgb.hsv.raw(color)
-}
-
-export function rgbToHex(color: RGB): string {
-  return rgb.hex(color)
-}
-
-export function hexToRgb(color: HEX): RGB {
-  return hex.rgb(color)
-}
-
-export function isHex(color: string) {
-  return /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(color)
 }

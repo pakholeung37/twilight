@@ -5,11 +5,11 @@ import { Pointer } from "./Pointer"
 
 const renderWindow = window
 interface HuePorps {
-  value: number
+  h: number
   onChange?: (hue: number) => void
 }
 
-export const Hue: React.FC<HuePorps> = memo(function Hue({ onChange, value }) {
+export const Hue: React.FC<HuePorps> = memo(function Hue({ onChange, h }) {
   const containerRef = useRef<HTMLDivElement>(null)
   // useRef() will return a mutableRefObject, which current can assign
   const rectCache = useRef<DOMRect>()
@@ -24,9 +24,9 @@ export const Hue: React.FC<HuePorps> = memo(function Hue({ onChange, value }) {
   useEffect(() => {
     if (rectCache.current) {
       const width = rectCache.current.width
-      setX((value / 360) * (width - 6) + 3)
+      setX((h / 360) * (width - 6) + 3)
     }
-  }, [setX, value])
+  }, [setX, h])
 
   const handleChange = useCallback(
     (e: MouseEvent) => {
