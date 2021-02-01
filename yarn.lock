@@ -15836,15 +15836,15 @@ mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.4, mkdirp
   dependencies:
     minimist "^1.2.5"
 
-mobx-react-lite@^3.1.6:
-  version "3.1.6"
-  resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-3.1.6.tgz?cache=0&sync_timestamp=1605204427198&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmobx-react-lite%2Fdownload%2Fmobx-react-lite-3.1.6.tgz#e7f4809ab66edd1acca5adb00c6b88c600ae1952"
-  integrity sha1-5/SAmrZu3RrMpa2wDGuIxgCuGVI=
+mobx-react-lite@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.2.0.tgz#331d7365a6b053378dfe9c087315b4e41c5df69f"
+  integrity sha512-q5+UHIqYCOpBoFm/PElDuOhbcatvTllgRp3M1s+Hp5j0Z6XNgDbgqxawJ0ZAUEyKM8X1zs70PCuhAIzX1f4Q/g==
 
-mobx@^6.0.4:
-  version "6.0.4"
-  resolved "https://registry.npm.taobao.org/mobx/download/mobx-6.0.4.tgz#8fc3e3629a3346f8afddf5bd954411974744dad1"
-  integrity sha1-j8PjYpozRviv3fW9lUQRl0dE2tE=
+mobx@^6.1.4:
+  version "6.1.4"
+  resolved "https://registry.npmjs.org/mobx/-/mobx-6.1.4.tgz#6ba17f4e291146a3a26605a9c3a0c3ff8aea1e0b"
+  integrity sha512-DorvGl+ssJ9i5Sef90XzcIuOBMa2kWSC+PidTLHtgBX4f1bXOd+NKtujSjaRnQMDLTRkCzfJEFcC08hEjzCVaA==
 
 mocha@5.2.0:
   version "5.2.0"
