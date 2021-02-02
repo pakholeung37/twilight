@@ -9,6 +9,7 @@ import { Collapse } from "../../../collapse"
 
 const StylePad: React.FC = () => {
   const {
+    sketchStore: { selectedShape },
     rightPanelStore: { stylePadExpand, setStylePadExpand },
   } = useRootStore()
   return (
@@ -20,7 +21,7 @@ const StylePad: React.FC = () => {
       />
       <Collapse isOpen={stylePadExpand}>
         <VStack px="3" spacing="0" divider={<Divider />}>
-          <FillSection />
+          {selectedShape && <FillSection />}
           <ShadowSection />
         </VStack>
       </Collapse>

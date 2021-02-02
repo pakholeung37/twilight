@@ -42,18 +42,39 @@ export abstract class ShapeModel {
   abstract readonly type: ShapeType
   @observable x: number = 0
   @observable y: number = 0
+  @observable width: number = 0
+  @observable height: number = 0
+  @observable visible: boolean = true
+  @observable rotation: number = 0
   @observable name: string = ""
   @observable fillColor: Color = new Color([0, 0, 0], 0)
 
   ref: Konva.Node | null = null
-
-  @action setPosition = ({ x, y }: { x: number; y: number }) => {
-    this.x = x
-    this.y = y
-  }
-
   setRef = (ref: Konva.Node | null) => {
     this.ref = ref
+  }
+
+  @computed get _x() {
+    return this.x
+  }
+
+  set _x(v) {
+    this.x = v
+  }
+
+  @computed get _y() {
+    return this.y
+  }
+
+  set _y(v) {
+    this.y = v
+  }
+
+  @action setPosition = ({ x, y, _x, _y }: { x?: number; y?: number; _x?: number; _y?: number }) => {
+    if(x !== undefined) this.x = x
+    if(y !== undefined) this.y = y
+    if(_x !== undefined) this._x = _x
+    if(_y !== undefined) this._y = _y
   }
 
   @computed get fill() {

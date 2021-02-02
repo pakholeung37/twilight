@@ -26,7 +26,7 @@ const LeftPanel: React.FC = () => {
     activatePanel(index)
   }
   return (
-    <Box as="aside" borderRight="1px" h="100%" bg="white" w="272px">
+    <Box as="aside" borderRight="1px" h="100%" bg="white" w="64">
       <Tabs
         variant="line"
         colorScheme="twilight"

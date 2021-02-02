@@ -48,7 +48,7 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
   >(
     ({ target }) => {
       const { x, y } = target.attrs
-      shapeModel.setPosition({ x, y })
+      shapeModel.setPosition({ _x: x, _y: y })
     },
     { wait: 4 },
   )
@@ -56,7 +56,7 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
   const handleDragEnd = useCallback(
     ({ target }: KonvaEventObject<DragEvent>) => {
       const { x, y } = target.attrs
-      shapeModel.setPosition({ x, y })
+      shapeModel.setPosition({ _x: x, _y: y })
     },
     [shapeModel],
   )
@@ -131,6 +131,8 @@ const SketchShape: React.FC<{ shapeModel: ShapeModel }> = ({ shapeModel }) => {
     <>
       <ShapeComponent
         {...shapeModel}
+        x={shapeModel._x}
+        y={shapeModel._y}
         fill={shapeModel.fill}
         ref={shapeRef}
         strokeScaleEnabled={false}

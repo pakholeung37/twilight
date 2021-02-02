@@ -5,8 +5,8 @@ export const figureList = [
   {
     type: "Circle",
     radius: 30,
-    x: 30,
-    y: 30,
+    x: 0,
+    y: 0,
     fill: "hsla(0, 100%, 50%, 1)",
     name: "circle"
     // stroke: "black",
@@ -14,8 +14,8 @@ export const figureList = [
   },
   {
     type: "Rect",
-    x: 20,
-    y: 20,
+    x: 0,
+    y: 0,
     width: 100,
     height: 50,
     fill: "hsla(180, 100%, 50%, .2)",
@@ -25,8 +25,8 @@ export const figureList = [
   },
   {
     type: "Ellipse",
-    x: 40,
-    y: 40,
+    x: 0,
+    y: 0,
     radiusX: 40,
     radiusY: 30,
     fill: "blue",

@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx"
+import { action, computed, makeObservable, observable, override } from "mobx"
 import { assign } from "../../utils"
 import { ShapeModel, ShapeModelOptions } from "./ShapeModel"
 
@@ -15,5 +15,21 @@ export class EllipseModel extends ShapeModel {
     super()
     makeObservable(this)
     assign(this, options)
+  }
+
+  @override get _x() {
+    return this.x + this.radiusX
+  }
+
+  set _x(v) {
+    this.x = v - this.radiusX
+  }
+
+  @override get _y() {
+    return this.y + this.radiusY
+  }
+
+  set _y(v) {
+    this.y = v - this.radiusY
   }
 }
