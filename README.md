@@ -1,6 +1,6 @@
 # twilight
 
-Build canvas editor with coooooool staff. Proof of concept.Great performance, strict structure and easy to use in mind.
+Build canvas editor with react + mobx + typescript + chakra-ui. Proof of concept.Great performance, strict structure and easy to use in mind.
 
 ## goal/done
 
