@@ -8,7 +8,7 @@ export const figureList = [
     x: 0,
     y: 0,
     fill: "hsla(0, 100%, 50%, 1)",
-    name: "circle"
+    name: "circle",
     // stroke: "black",
     // strokeWidth: 1,
   },
@@ -19,7 +19,7 @@ export const figureList = [
     width: 100,
     height: 50,
     fill: "hsla(180, 100%, 50%, .2)",
-    name: "rect"
+    name: "rect",
     // stroke: "black",
     // strokeWidth: 1,
   },
@@ -30,7 +30,7 @@ export const figureList = [
     radiusX: 40,
     radiusY: 30,
     fill: "blue",
-    name: "custom ellipse"
+    name: "custom ellipse",
     // stroke: "black",
     // strokeWidth: 1,
   },

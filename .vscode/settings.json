@@ -1,6 +1,5 @@
 {
   "workbench.settings.editor": "json",
-  "editor.formatOnSave": true,
   "javascript.format.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.packageManager": "yarn",
@@ -15,15 +14,6 @@
       "mode": "auto"
     }
   ],
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "[typescript]": {
-    "editor.formatOnSave": false
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
   "editor.codeActionsOnSaveTimeout": 4000,
   "compile-hero.disable-compile-files-on-did-save-code": true
 }

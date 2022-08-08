@@ -1,7 +1,7 @@
 import RootStore from "./RootStore"
 
 export const createStore = () => {
-  const rootStore = new RootStore();
+  const rootStore = new RootStore()
   return rootStore
 }
 

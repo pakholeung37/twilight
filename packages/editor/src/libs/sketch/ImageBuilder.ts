@@ -7,8 +7,8 @@ export function adapter(options: ShapeCreator) {
   return {
     className: options.type,
     attrs: {
-      ...options
-    }
+      ...options,
+    },
   }
 }
 export default class ImageBuilder {
@@ -16,7 +16,10 @@ export default class ImageBuilder {
 
   public static toImageURL(options: ShapeCreator): Promise<string> {
     const el = document.createElement("div")
-    this._stage = Node.create(JSON.stringify(adapter(options)), el) as InstanceType<typeof Stage>
+    this._stage = Node.create(
+      JSON.stringify(adapter(options)),
+      el,
+    ) as InstanceType<typeof Stage>
     return new Promise((res, rej) => {
       this._stage.toDataURL({
         callback: img => {

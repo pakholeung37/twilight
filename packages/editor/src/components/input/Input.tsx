@@ -13,7 +13,7 @@ export const Input: React.FC<
     prefix?: string
     suffix?: string
   }
-> = memo(({ prefix, suffix, ...props }) => {
+> = memo(function Input({ prefix, suffix, ...props }) {
   return (
     <InputGroup>
       {prefix && (
@@ -23,7 +23,7 @@ export const Input: React.FC<
           fontWeight="400"
           pl="1"
         >
-          <Text position="relative" top="2px" userSelect="none">
+          <Text position="relative" userSelect="none">
             {prefix}
           </Text>
         </InputLeftElement>
@@ -43,7 +43,7 @@ export const Input: React.FC<
           fontWeight="400"
           pr="1"
         >
-          <Text position="relative" top="2px" userSelect="none">
+          <Text position="relative" userSelect="none">
             {suffix}
           </Text>
         </InputRightElement>

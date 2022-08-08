@@ -16,9 +16,8 @@
     "axios": "^0.19.2",
     "color-string": "^1.5.0",
     "color-convert": "^2.0.0",
-    "emotion-normalize": "^10.1.0",
     "emotion-theming": "^10.0.27",
-    "framer-motion": "^2.9.4",
+    "framer-motion": "^7.0.0",
     "immer": "^8.0.0",
     "lodash": "^4.17.20",
     "mobx": "^6.1.4",
@@ -27,21 +26,19 @@
     "react-animate-height": "^2.0.23",
     "react-custom-scrollbars": "^4.2.1",
     "react-icons": "^3.11.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "tailwindcss": "^3.0.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "cracoeject",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "test:coverage": "yarn test --watchAll false --coverage",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "yarn lint --quiet --fix",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "resolutions": {
     "styled-components": "^5"
@@ -76,6 +73,6 @@
     "url": "https://github.com/pakholeung37/twilight/issues"
   },
   "devDependencies": {
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^5.0.0"
   }
 }

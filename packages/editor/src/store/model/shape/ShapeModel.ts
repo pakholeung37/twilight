@@ -70,11 +70,21 @@ export abstract class ShapeModel {
     this.y = v
   }
 
-  @action setPosition = ({ x, y, _x, _y }: { x?: number; y?: number; _x?: number; _y?: number }) => {
-    if(x !== undefined) this.x = x
-    if(y !== undefined) this.y = y
-    if(_x !== undefined) this._x = _x
-    if(_y !== undefined) this._y = _y
+  @action setPosition = ({
+    x,
+    y,
+    _x,
+    _y,
+  }: {
+    x?: number
+    y?: number
+    _x?: number
+    _y?: number
+  }) => {
+    if (x !== undefined) this.x = x
+    if (y !== undefined) this.y = y
+    if (_x !== undefined) this._x = _x
+    if (_y !== undefined) this._y = _y
   }
 
   @computed get fill() {

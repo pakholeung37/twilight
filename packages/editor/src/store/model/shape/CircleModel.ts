@@ -30,5 +30,4 @@ export class CircleModel extends ShapeModel {
   set _y(v) {
     this.y = v - this.radius
   }
-
 }

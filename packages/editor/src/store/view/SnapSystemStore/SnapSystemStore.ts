@@ -1,5 +1,4 @@
-
-import { action, makeObservable, observable } from "mobx"
+import { makeObservable, observable } from "mobx"
 import { SnapLineModel, ShapeModel } from "../../model"
 import RootStore from "../../RootStore"
 
@@ -7,13 +6,17 @@ export type SnapLine = { start?: number; end?: number; offset: number }
 
 export class SnapSystemStore {
   readonly rootStore: RootStore
-  toolerance: number = 4
+  toolerance = 4
   private reserveSnapLinesV: SnapLine[] = []
   private reserveSnapLinesH: SnapLine[] = []
 
-  @observable snapLineV: SnapLineModel = new SnapLineModel({ direction: "vertical"})
-  @observable snapLineH: SnapLineModel = new SnapLineModel({ direction: "horizontal" })
-  @observable isSnapping: boolean = false
+  @observable snapLineV: SnapLineModel = new SnapLineModel({
+    direction: "vertical",
+  })
+  @observable snapLineH: SnapLineModel = new SnapLineModel({
+    direction: "horizontal",
+  })
+  @observable isSnapping = false
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore
@@ -21,7 +24,7 @@ export class SnapSystemStore {
   }
 
   snapStart = (target: ShapeModel) => {
-    let { shapes } = this.rootStore.sketchStore
+    const { shapes } = this.rootStore.sketchStore
     // 构造所有可能的对齐线
     shapes.forEach(shape => {
       if (shape === target) return
@@ -53,7 +56,7 @@ export class SnapSystemStore {
       return
     }
     const { x, y, width, height } = node.getClientRect()
-    const reserveSnapLinesH: SnapLine[]  = [
+    const reserveSnapLinesH: SnapLine[] = [
       { start: x, end: x + width, offset: y },
       { start: x, end: x + width, offset: y + height / 2 },
       { start: x, end: x + width, offset: y + height },
@@ -66,8 +69,11 @@ export class SnapSystemStore {
 
     let resultV: SnapLine | null = null
     this.reserveSnapLinesV.some(snapLine => {
-      for(let i = 0; i < reserveSnapLinesV.length; i++) {
-        if(Math.abs(reserveSnapLinesV[i].offset - snapLine.offset) < this.toolerance) {
+      for (let i = 0; i < reserveSnapLinesV.length; i++) {
+        if (
+          Math.abs(reserveSnapLinesV[i].offset - snapLine.offset) <
+          this.toolerance
+        ) {
           resultV = snapLine
           return true
         }
@@ -77,8 +83,11 @@ export class SnapSystemStore {
 
     let resultH: SnapLine | null = null
     this.reserveSnapLinesH.some(snapLine => {
-      for(let i = 0; i < reserveSnapLinesH.length; i++) {
-        if(Math.abs(reserveSnapLinesH[i].offset - snapLine.offset) < this.toolerance) {
+      for (let i = 0; i < reserveSnapLinesH.length; i++) {
+        if (
+          Math.abs(reserveSnapLinesH[i].offset - snapLine.offset) <
+          this.toolerance
+        ) {
           resultH = snapLine
           return true
         }
@@ -98,14 +107,14 @@ export class SnapSystemStore {
   }
 
   setSnapLineV = (options: SnapLine | null) => {
-    if(options) {
+    if (options) {
       this.snapLineV.update(options)
     } else {
       this.snapLineV.update({ offset: -1000 })
     }
   }
-  setSnapLineH = (options: SnapLine| null) => {
-    if(options) {
+  setSnapLineH = (options: SnapLine | null) => {
+    if (options) {
       this.snapLineH.update(options)
     } else {
       this.snapLineH.update({ offset: -1000 })

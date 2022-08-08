@@ -73,6 +73,7 @@ export const Collapse = forwardRef<CollapseProps, "div">(function Collapse(
   } = props
 
   return (
+    // @ts-ignore
     <AnimateHeight
       duration={duration}
       easing={easing}

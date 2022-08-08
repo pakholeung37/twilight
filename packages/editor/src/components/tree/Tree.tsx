@@ -3,7 +3,6 @@ import { Box, Text, Button } from "@chakra-ui/react"
 import { Collapse } from "../collapse/Collapse"
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai"
 import { useClickAway, useDrag, useDrop } from "ahooks"
-import { DropProps } from "ahooks/lib/useDrop/useDrop"
 import DropZone from "./DropZone"
 
 type DragProps = ReturnType<ReturnType<typeof useDrag>>
@@ -16,7 +15,7 @@ export interface RenderButton {
     isHovering: boolean
     isExpanded: boolean
     onClick: () => void
-    dragDropProps: Partial<DropProps & DragProps>
+    dragDropProps: Partial<any & DragProps>
   }): React.ReactNode
 }
 
@@ -52,7 +51,7 @@ export interface TreeProps {
 }
 
 const TreeNodeComponent: React.FC<TreeNodeProps> = memo(
-  ({
+  function TreeNodeComponent({
     treeData,
     activeNode,
     depth,
@@ -64,7 +63,7 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = memo(
     nodeClick,
     nodeDragStart,
     nodeDragEnd,
-  }) => {
+  }) {
     const node = treeData
 
     // drag event
@@ -205,47 +204,49 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = memo(
   },
 )
 
-const TreeRoot: React.FC<TreeProps> = memo(
-  ({ treeData, draggable, renderButton }) => {
-    const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
-    const nodeClick = useCallback(
-      ({ key }: TreeNode) => {
-        setActiveNode(key)
-      },
-      [setActiveNode],
-    )
-    const [isNodeDragging, setNodeDragging] = useState<boolean>(false)
-    const nodeDragStart = useCallback(() => {
-      setNodeDragging(true)
-    }, [setNodeDragging])
-    const nodeDragEnd = useCallback(() => {
-      setNodeDragging(false)
-    }, [setNodeDragging])
-    const ref = useRef<HTMLDivElement>(null)
-    useClickAway(() => {
-      setActiveNode("")
-    }, ref)
+const TreeRoot: React.FC<TreeProps> = memo(function TreeRoot({
+  treeData,
+  draggable,
+  renderButton,
+}) {
+  const [activeNode, setActiveNode] = useState<TreeNode["key"]>("")
+  const nodeClick = useCallback(
+    ({ key }: TreeNode) => {
+      setActiveNode(key)
+    },
+    [setActiveNode],
+  )
+  const [isNodeDragging, setNodeDragging] = useState<boolean>(false)
+  const nodeDragStart = useCallback(() => {
+    setNodeDragging(true)
+  }, [setNodeDragging])
+  const nodeDragEnd = useCallback(() => {
+    setNodeDragging(false)
+  }, [setNodeDragging])
+  const ref = useRef<HTMLDivElement>(null)
+  useClickAway(() => {
+    setActiveNode("")
+  }, ref)
 
-    return (
-      <div ref={ref}>
-        {(Array.isArray(treeData) ? treeData : [treeData]).map(node => (
-          <TreeNodeComponent
-            key={node.key}
-            treeData={node}
-            depth={1}
-            expand={node.expand}
-            active={node.active}
-            nodeClick={nodeClick}
-            nodeDragStart={nodeDragStart}
-            nodeDragEnd={nodeDragEnd}
-            activeNode={activeNode}
-            isDragging={isNodeDragging}
-            draggable={draggable || false}
-            renderButton={node.renderButton || renderButton}
-          ></TreeNodeComponent>
-        ))}
-      </div>
-    )
-  },
-)
+  return (
+    <div ref={ref}>
+      {(Array.isArray(treeData) ? treeData : [treeData]).map(node => (
+        <TreeNodeComponent
+          key={node.key}
+          treeData={node}
+          depth={1}
+          expand={node.expand}
+          active={node.active}
+          nodeClick={nodeClick}
+          nodeDragStart={nodeDragStart}
+          nodeDragEnd={nodeDragEnd}
+          activeNode={activeNode}
+          isDragging={isNodeDragging}
+          draggable={draggable || false}
+          renderButton={node.renderButton || renderButton}
+        ></TreeNodeComponent>
+      ))}
+    </div>
+  )
+})
 export default TreeRoot

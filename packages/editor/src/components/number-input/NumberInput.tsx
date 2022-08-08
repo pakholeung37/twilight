@@ -16,7 +16,7 @@ export const NumberInput: React.FC<
     pl?: number | string
     pr?: number | string
   }
-> = memo(({ prefix, suffix, pl = 1, pr = 1, ...props }) => {
+> = memo(function NumberInput({ prefix, suffix, pl = 1, pr = 1, ...props }) {
   return (
     <InputGroup>
       {prefix && (
@@ -26,7 +26,7 @@ export const NumberInput: React.FC<
           fontWeight="400"
           pl="1"
         >
-          <Text position="relative" top="2px" userSelect="none">
+          <Text position="relative" userSelect="none">
             {prefix}
           </Text>
         </InputLeftElement>
@@ -47,7 +47,7 @@ export const NumberInput: React.FC<
           fontWeight="400"
           pr="1"
         >
-          <Text position="relative" top="2px" userSelect="none">
+          <Text position="relative" userSelect="none">
             {suffix}
           </Text>
         </InputRightElement>

@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react"
-import { css } from "@emotion/react"
 import { Box, Flex, Text, HStack } from "@chakra-ui/react"
 import { Input } from "../../../../input"
 import { NumberInput } from "../../../../number-input"
@@ -82,7 +81,7 @@ const AlphaField: React.FC = observer(function AlphaField() {
   } = useRootStore()
 
   const handleAlphaChange = useCallback(
-    (_, v: number = 0) => {
+    (_, v = 0) => {
       selectedShape?.fillColor.setAlpha(v)
     },
     [selectedShape],
@@ -110,11 +109,6 @@ export const FillSection: React.FC = observer(function FillSection() {
   return (
     selectedShape && (
       <Box w="100%">
-        <div
-          css={css`
-            display: flex;
-          `}
-        ></div>
         <Title text="填充" open={open} />
         <Collapse isOpen={open}>
           <Box mb="3" mt="1">

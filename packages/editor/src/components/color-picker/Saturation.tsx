@@ -58,10 +58,8 @@ export const Saturation: React.FC<SaturationProps> = observer(
         if (rectCache.current) {
           const result = calculatePosition(e, rectCache.current)
 
-          const {
-            width: containerWidth,
-            height: containerHeight,
-          } = rectCache.current
+          const { width: containerWidth, height: containerHeight } =
+            rectCache.current
 
           const _s = (result.left / containerWidth) * 100
           const _v = (1 - result.top / containerHeight) * 100
