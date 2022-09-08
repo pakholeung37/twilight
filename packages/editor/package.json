@@ -7,7 +7,6 @@
   "private": "true",
   "main": "lib/editor.js",
   "dependencies": {
-    "@blueprintjs/core": "^3.36.0",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
@@ -15,13 +14,12 @@
     "@twilight/react-konva-portal": "^1.0.10",
     "ahooks": "^2.7.0",
     "axios": "^0.19.2",
-    "emotion-normalize": "^10.1.0",
+    "color-string": "^1.5.0",
+    "color-convert": "^2.0.0",
     "emotion-theming": "^10.0.27",
-    "framer-motion": "^2.9.4",
+    "framer-motion": "^7.0.0",
     "immer": "^8.0.0",
     "lodash": "^4.17.20",
-    "mobx": "^6.0.4",
-    "mobx-react-lite": "^3.1.6",
     "randomcolor": "^0.6.2",
     "react-animate-height": "^2.0.23",
     "react-custom-scrollbars": "^4.2.1",
@@ -30,18 +28,15 @@
     "recoil": "^0.1.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "cracoeject",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "test:coverage": "yarn test --watchAll false --coverage",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "yarn lint --quiet --fix",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "resolutions": {
     "styled-components": "^5"
@@ -76,6 +71,6 @@
     "url": "https://github.com/pakholeung37/twilight/issues"
   },
   "devDependencies": {
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^5.0.0"
   }
 }
